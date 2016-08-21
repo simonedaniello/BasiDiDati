@@ -3,19 +3,21 @@ import java.sql.*;
 
 public class SelectorItems {
    // JDBC driver name and database URL
-   static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
-   static final String DB_URL = "jdbc:mysql://localhost/LOCATIONS";
+	 // JDBC driver name and database URL
+	   static final String JDBC_DRIVER = "org.postgresql.Driver";  
+	   //static final String DB_URL = "jdbc:mysql://localhost/LOCATIONS";
+	   static final String DB_URL = "jdbc:postgresql://localhost:5432/testdb";
 
    //  Database credentials
-   static final String USER = "root";
-   static final String PASS = "";
+   static final String USER = "superuser";
+   static final String PASS = "password";
    
    public static void main(String[] args) {
    Connection conn = null;
    Statement stmt = null;
    try{
       //STEP 2: Register JDBC driver
-      Class.forName("com.mysql.jdbc.Driver");
+	   Class.forName("org.postgresql.Driver");
 
       //STEP 3: Open a connection
       System.out.println("Connecting to a selected database...");

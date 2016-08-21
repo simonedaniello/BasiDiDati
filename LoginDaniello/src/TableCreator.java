@@ -11,7 +11,7 @@ public class TableCreator {
    static final String DB_URL = "jdbc:postgresql://localhost:5432/testdb";
    
    //  Database credentials
-   static final String USER = "dandi";
+   static final String USER = "superuser";
    static final String PASS = "password";
    
    public static void main(String[] args) {
@@ -31,8 +31,9 @@ public class TableCreator {
       stmt = conn.createStatement();
       
       String sql = "CREATE TABLE UTENTI " +
-                   "(user VARCHAR(255) not NULL, " +
-                   "pwd VARCHAR(255) not NULL)"; 
+                   "( USERNAME VARCHAR(255) NOT NULL," +
+                   "PWD VARCHAR(255) NOT NULL," +
+                   "PRIMARY KEY(USERNAME, PWD))"; 
 
       stmt.executeUpdate(sql);
       System.out.println("Created table in given database...");
@@ -46,7 +47,7 @@ public class TableCreator {
       //finally block used to close resources
       try{
          if(stmt!=null)
-            conn.close();
+            stmt.close();
       }catch(SQLException se){
       }// do nothing
       try{

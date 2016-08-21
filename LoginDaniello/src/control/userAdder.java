@@ -13,7 +13,7 @@ public class userAdder {
 	   static final String DB_URL = "jdbc:postgresql://localhost:5432/testdb";
 	   
 	   //  Database credentials
-	   static final String USER = "dandi";
+	   static final String USER = "superuser";
 	   static final String PASS = "password";
 	   
 	   public void adder(String user, String pwd) {
@@ -28,7 +28,7 @@ public class userAdder {
 		      //STEP 4: Execute a query
 		      stmt = conn.createStatement();
 		      
-		      String sql = "SELECT user, pwd  FROM UTENTI WHERE user='" + user + "' AND pwd='" + pwd +"'" ;
+		      String sql = "SELECT USERNAME, PWD FROM UTENTI WHERE USERNAME='" + user + "' AND PWD='" + pwd +"'" ;
 		      ResultSet rs = stmt.executeQuery(sql);
 		      
 		      //STEP 5: Extract data from result set

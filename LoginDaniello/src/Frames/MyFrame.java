@@ -37,7 +37,7 @@ public class MyFrame extends JFrame {
 		    	GuiController.listenC(nome, password);
 		    }
 		});
-		
+		//co
 		buttonR.addActionListener(new EventListeners() {
 			public void actionPerformed(ActionEvent e)
 			{

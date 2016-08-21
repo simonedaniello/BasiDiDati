@@ -8,8 +8,8 @@ public class ItemAdder {
    static final String DB_URL = "jdbc:mysql://localhost/LOCATIONS";
 
    //  Database credentials
-   static final String USER = "root";
-   static final String PASS = "";
+   static final String USER = "dandi";
+   static final String PASS = "password";
    
    public static void main(String[] args) {
    Connection conn = null;

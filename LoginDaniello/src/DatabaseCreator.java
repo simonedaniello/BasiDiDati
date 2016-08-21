@@ -3,32 +3,36 @@
 //STEP 1. Import required packages
 import java.sql.*;
 
+/*
+ * creating database GALAXYSYSTEM*/
 public class DatabaseCreator {
    // JDBC driver name and database URL
-   static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
-   static final String DB_URL = "jdbc:mysql://localhost/";
+   //static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
+   static final String JDBC_DRIVER = "org.postgresql.Driver";  
+   //static final String DB_URL = "jdbc:mysql://localhost/";
+   static final String DB_URL = "jdbc:postgresql://localhost:5432/testdb";
 
    //  Database credentials
    static final String USER = "root";
-   static final String PASS = ""; //little comment
+   static final String PASS = ""; 
    
    public static void main(String[] args) {
    Connection conn = null;
    Statement stmt = null;
    try{
       //STEP 2: Register JDBC driver
-      Class.forName("com.mysql.jdbc.Driver");
+      Class.forName("com.mysql.jdbc.Driver"); //Class.forName("org.postgresql.Driver");
 
       //STEP 3: Open a connection
       System.out.println("Connecting to database...");
-      conn = DriverManager.getConnection(DB_URL, USER, PASS);
+      conn = DriverManager.getConnection(DB_URL, USER, PASS); //DriverManager.getConnection("jdbc:postgresql://localhost:5432/testdb","postgres", "123");
 
       //STEP 4: Execute a query
       System.out.println("Creating database...");
       stmt = conn.createStatement();
       
       //CAMBIA QUI IL NOME DELLA TABELLA 
-      String sql = "CREATE DATABASE LOCATIONS";
+      String sql = "CREATE DATABASE GALAXYSYSTEM";
       stmt.executeUpdate(sql);
       System.out.println("Database created successfully...");
    }catch(SQLException se){

@@ -48,6 +48,7 @@ public class userAdder {
 		    	  frame = new JFrame("JOptionPane showMessageDialog component example");
 		    	  JOptionPane.showMessageDialog(frame, panel, "Stop!", 0);
 		      }
+		      /**/
 
 
 		   }catch(SQLException se){

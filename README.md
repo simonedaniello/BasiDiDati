@@ -1,10 +1,21 @@
 # BasiDiDati
 
 #how to :
+
+###postgres
+
   download postgresql 
   
-  create superuser : username
+  connect to postgresql using command  **su - postgresql**
   
-  with password : 'password'
+  create superuser using command **createuser -P -s -e username**
   
-  create database testdb
+  1. "username" must be **"superuser"**
+  
+  2. "password" must be **"password"**
+
+now you have to create a database. You can do it typing **psql** in postgresql shell and **CREATE DATABASE testdb OWNER superuser**
+
+###eclipse
+open the project and go to SQLfile (**tableCreator.sql**). It may works but if it doesn't you have to connect it to testdb database.
+

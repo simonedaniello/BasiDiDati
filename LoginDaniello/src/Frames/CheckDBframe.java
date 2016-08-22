@@ -57,4 +57,28 @@ public class CheckDBframe extends JFrame{
 	private static final JTextField tfrr = new JTextField(20);
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

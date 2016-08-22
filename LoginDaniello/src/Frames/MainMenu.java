@@ -12,8 +12,11 @@ public class MainMenu extends JFrame {
 	
 	private static final String titolo = "Welcome!";
 	private static final JButton buttonCheck= new JButton("Check Database");
+
+	private static final JButton buttonCsv= new JButton("Import .CSV file");
+	
 	private static final JButton buttonExit= new JButton("Exit");
-	private static final JButton buttonInsertLocation= new JButton("Insert Location");
+	
 	
 	public MainMenu(){
 		super(titolo); //piccolo cambio per il commit
@@ -30,10 +33,10 @@ public class MainMenu extends JFrame {
 			
 		gbc.gridy = 4;
 		gbc.anchor = GridBagConstraints.LINE_END;
-		this.add(this.buttonInsertLocation, gbc);
+		this.add(this.buttonCsv, gbc);
 		
 		gbc.gridy = 5;
-		gbc.anchor = GridBagConstraints.LINE_END;
+		gbc.anchor = GridBagConstraints.LINE_START;
 		this.add(this.buttonExit, gbc);		
 		
 		
@@ -44,7 +47,7 @@ public class MainMenu extends JFrame {
 		    }
 		});
 		
-		buttonInsertLocation.addActionListener(new EventListeners() {
+		buttonCsv.addActionListener(new EventListeners() {
 		    public void actionPerformed(ActionEvent e)
 		    {
 		    	NewLocationFrame inserisci = new NewLocationFrame();

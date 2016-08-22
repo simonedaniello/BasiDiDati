@@ -16,7 +16,10 @@ public class userAdder {
 	   static final String USER = "superuser";
 	   static final String PASS = "password";
 	   
-	   public void adder(String user, String pwd) {
+	   JLabel panel;
+	   JFrame frame;
+	   
+	   public void adder(String user, String pwd, String nome, String cognome, String email) {
 		   Connection conn = null;
 		   Statement stmt = null;
 		   try{
@@ -28,18 +31,21 @@ public class userAdder {
 		      //STEP 4: Execute a query
 		      stmt = conn.createStatement();
 		      
-		      String sql = "SELECT USERNAME, PWD FROM UTENTI WHERE USERNAME='" + user + "' AND PWD='" + pwd +"'" ;
+		      String sql = "SELECT USERID FROM SISTEMADIGALASSIE.User WHERE USERID='" + user +"'";
 		      ResultSet rs = stmt.executeQuery(sql);
 		      
 		      //STEP 5: Extract data from result set
 		      if (!rs.next() ) {    
-			      String sql2 = "INSERT INTO UTENTI " +
-		                   		"VALUES ('" + user + "', '" + pwd + "' )";
+			      String sql2 = "INSERT INTO SISTEMADIGALASSIE.User " +
+		                   		"VALUES ('"+ nome +"', '" +cognome + "', '"+ user + "', '" + pwd + "', '"+ email + "', FALSE )";
 			      stmt.executeUpdate(sql2);
+		    	  panel = new JLabel("You have been registered !!");
+		    	  frame = new JFrame("JOptionPane showMessageDialog component example");
+		    	  JOptionPane.showMessageDialog(frame, "it's all right");
 		      }
 		      else {
-		    	  JLabel panel = new JLabel("User Already Exists");
-		    	  JFrame frame = new JFrame("JOptionPane showMessageDialog component example");
+		    	  panel = new JLabel("User Already Exists");
+		    	  frame = new JFrame("JOptionPane showMessageDialog component example");
 		    	  JOptionPane.showMessageDialog(frame, panel, "Stop!", 0);
 		      }
 

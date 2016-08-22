@@ -36,14 +36,14 @@ public class GuiController {
 		      //STEP 4: Execute a query
 		      stmt = conn.createStatement();
 
-		      String sql = "SELECT USERNAME, PWD  FROM UTENTI WHERE USERNAME='" + User + "' AND PWD='" + Pwd +"'" ;
+		      String sql = "SELECT USERID, PASSWORD  FROM SISTEMADIGALASSIE.User WHERE USERID='" + User + "' AND PASSWORD='" + Pwd +"'" ;
 		      ResultSet rs = stmt.executeQuery(sql);
 		      //STEP 5: Extract data from result set
 		      if (!rs.next() ) {    
 		    	  JLabel panel = new JLabel("User Not Found");
 		    	  JFrame frame = new JFrame("JOptionPane showMessageDialog component example");
 		    	  JOptionPane.showMessageDialog(frame, panel, "Ops!", 0);
-		    	  MyFrame myFrm = new MyFrame();
+		    	  //MyFrame myFrm = new MyFrame();
 		    	}
 		      else {
 		    	  MainMenu benvenuto = new MainMenu();

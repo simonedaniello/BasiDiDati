@@ -22,6 +22,10 @@ public class RegisInterface extends JFrame implements ActionListener {
 	private JLabel lLastName;
 	private JTextField tfLastName;
 	private JLabel lLastNameError;
+	
+	private JLabel lemail;
+	private JTextField tfemail;
+	private JLabel lemailError;
 
 	private JLabel lUser;
 	private JTextField tfUser;
@@ -30,6 +34,11 @@ public class RegisInterface extends JFrame implements ActionListener {
 	private JLabel lpwdCode;
 	private JTextField tfpwdCode;
 	private JLabel lpwdCodeError;
+	
+	private JLabel lrepwdCode;
+	private JTextField tfrepwdCode;
+	private JLabel lrepwdCodeError;
+	private JLabel lrepwdCodeError2;
 
 	private JButton submitButton;
 	private JButton backButton;
@@ -40,7 +49,8 @@ public class RegisInterface extends JFrame implements ActionListener {
 		this.setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
 
-
+/*---------------------------------------------------------------------------*/
+		
 		this.lName = new JLabel("First Name:");
 		gbc.gridx = 0;
 		gbc.gridy = 2;
@@ -65,11 +75,13 @@ public class RegisInterface extends JFrame implements ActionListener {
 		this.add(this.lNameError, gbc);
 
 
+/*---------------------------------------------------------------------------*/
+
 		this.lLastName = new JLabel("Last Name:");
 		gbc.gridx = 0;
 		gbc.gridy = 3;
 		gbc.anchor = GridBagConstraints.LINE_END;
-		gbc.insets = new Insets(5, 0, 0, 10);
+		gbc.insets = new Insets(10, 0, 0, 10);
 		this.add(this.lLastName, gbc);
 
 
@@ -88,18 +100,44 @@ public class RegisInterface extends JFrame implements ActionListener {
 		gbc.anchor = GridBagConstraints.LINE_START;
 		this.add(this.lLastNameError, gbc);
 
-
-		this.lUser = new JLabel("Username:");
+/*---------------------------------------------------------------------------*/
+	
+		this.lemail = new JLabel("e-mail:");
 		gbc.gridx = 0;
 		gbc.gridy = 4;
 		gbc.anchor = GridBagConstraints.LINE_END;
-		gbc.insets = new Insets(15, 0, 0, 10);
+		gbc.insets = new Insets(10, 0, 0, 10);;
+		this.add(this.lemail, gbc);
+		
+		this.tfemail = new JTextField(15);
+		gbc.gridx = 1;
+		gbc.gridy = 4;
+		gbc.anchor = GridBagConstraints.LINE_START;
+		this.add(this.tfemail, gbc);
+
+
+		this.lemailError = new JLabel("Please insert your email.");
+		this.lemailError.setForeground(Color.RED);
+		this.lemailError.setVisible(false);
+		gbc.gridx = 2;
+		gbc.gridy = 4;
+		gbc.anchor = GridBagConstraints.LINE_START;
+		this.add(this.lemailError, gbc);
+
+/*---------------------------------------------------------------------------*/
+
+
+		this.lUser = new JLabel("Username:");
+		gbc.gridx = 0;
+		gbc.gridy = 5;
+		gbc.anchor = GridBagConstraints.LINE_END;
+		gbc.insets = new Insets(10, 0, 0, 10);
 		this.add(this.lUser, gbc);
 
 
 		this.tfUser= new JTextField(15);
 		gbc.gridx = 1;
-		gbc.gridy = 4;
+		gbc.gridy = 5;
 		gbc.anchor = GridBagConstraints.LINE_START;
 		this.add(this.tfUser, gbc);
 
@@ -108,22 +146,24 @@ public class RegisInterface extends JFrame implements ActionListener {
 		this.lUserError.setForeground(Color.RED);
 		this.lUserError.setVisible(false);
 		gbc.gridx = 2;
-		gbc.gridy = 4;
+		gbc.gridy = 5;
 		gbc.anchor = GridBagConstraints.LINE_START;
 		this.add(this.lUserError, gbc);
 
 
+/*---------------------------------------------------------------------------*/
+
 		this.lpwdCode = new JLabel("Password");
 		gbc.gridx = 0;
-		gbc.gridy = 5;
+		gbc.gridy = 6;
 		gbc.anchor = GridBagConstraints.LINE_END;
-		gbc.insets = new Insets(5, 0, 0, 10);
+		gbc.insets = new Insets(10, 0, 0, 10);
 		this.add(this.lpwdCode, gbc);
 
 
 		this.tfpwdCode = new JTextField(15);
 		gbc.gridx = 1;
-		gbc.gridy = 5;
+		gbc.gridy = 6;
 		gbc.anchor = GridBagConstraints.LINE_START;
 		this.add(this.tfpwdCode, gbc);
 
@@ -132,11 +172,48 @@ public class RegisInterface extends JFrame implements ActionListener {
 		this.lpwdCodeError.setForeground(Color.RED);
 		this.lpwdCodeError.setVisible(false);
 		gbc.gridx = 2;
-		gbc.gridy = 5;
+		gbc.gridy = 6;
 		gbc.anchor = GridBagConstraints.LINE_START;
 		this.add(this.lpwdCodeError, gbc);
 
 
+/*---------------------------------------------------------------------------*/
+		
+
+		this.lpwdCode = new JLabel("re-insert password");
+		gbc.gridx = 0;
+		gbc.gridy = 7;
+		gbc.anchor = GridBagConstraints.LINE_END;
+		gbc.insets = new Insets(10, 0, 0, 10);
+		this.add(this.lpwdCode, gbc);
+
+
+		this.tfrepwdCode = new JTextField(15);
+		gbc.gridx = 1;
+		gbc.gridy = 7;
+		gbc.anchor = GridBagConstraints.LINE_START;
+		this.add(this.tfrepwdCode, gbc);
+
+
+		this.lrepwdCodeError = new JLabel("Please re-insert your password");
+		this.lrepwdCodeError.setForeground(Color.RED);
+		this.lrepwdCodeError.setVisible(false);
+		gbc.gridx = 2;
+		gbc.gridy = 7;
+		gbc.anchor = GridBagConstraints.LINE_START;
+		this.add(this.lrepwdCodeError, gbc);
+		
+		this.lrepwdCodeError2 = new JLabel("the password seems different");
+		this.lrepwdCodeError2.setForeground(Color.RED);
+		this.lrepwdCodeError2.setVisible(false);
+		gbc.gridx = 2;
+		gbc.gridy = 7;
+		gbc.anchor = GridBagConstraints.LINE_START;
+		this.add(this.lrepwdCodeError2, gbc);
+
+/*---------------------------------------------------------------------------*/
+		
+		
 		this.submitButton = new JButton("Submit");
 		gbc.gridx = 1;
 		gbc.gridy = 9;
@@ -146,6 +223,9 @@ public class RegisInterface extends JFrame implements ActionListener {
 		this.add(this.submitButton, gbc);
 		
 		submitButton.addActionListener(this);
+
+/*---------------------------------------------------------------------------*/
+		
 		
 		this.backButton = new JButton("Back");
 		gbc.gridx = 1;
@@ -168,6 +248,9 @@ public class RegisInterface extends JFrame implements ActionListener {
 		this.setVisible(true);
 	}
 	
+
+/*---------------------------------------------------------------------------*/
+	
 	public void actionPerformed(ActionEvent e){
 		int control = 0;
 		
@@ -175,6 +258,9 @@ public class RegisInterface extends JFrame implements ActionListener {
 		lLastNameError.setVisible(false);
 		lpwdCodeError.setVisible(false);
 		lUserError.setVisible(false);
+		lrepwdCodeError.setVisible(false);
+		lrepwdCodeError2.setVisible(false);
+		lemailError.setVisible(false);
 		
 		if (tfName.getText().equals(""))
 		{
@@ -186,6 +272,13 @@ public class RegisInterface extends JFrame implements ActionListener {
 			lLastNameError.setVisible(true);
 			control = 1;
 		}
+		
+		if (tfemail.getText().equals(""))
+		{
+			lemailError.setVisible(true);
+			control = 1;
+		}
+		
 		if (tfUser.getText().equals(""))
 		{
 			lUserError.setVisible(true);
@@ -196,10 +289,24 @@ public class RegisInterface extends JFrame implements ActionListener {
 			lpwdCodeError.setVisible(true);
 			control = 1;
 		}
+		
+		if (tfrepwdCode.getText().equals(""))
+		{
+			lrepwdCodeError.setVisible(true);
+			control = 1;
+		}
+		
+		if (!tfrepwdCode.getText().equals(tfpwdCode.getText()) && !tfrepwdCode.getText().equals(""))
+		{
+			lrepwdCodeError2.setVisible(true);
+			control = 1;
+		}
+		
+		
 	
 		if (control == 0){
 			userAdder costruttore = new userAdder();
-			costruttore.adder(tfUser.getText(), tfpwdCode.getText());
+			costruttore.adder(tfUser.getText(), tfpwdCode.getText(), tfName.getText(), tfLastName.getText(), tfemail.getText());
 			dispose();
 			MyFrame newframe2 = new MyFrame();
 		}

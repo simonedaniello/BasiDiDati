@@ -9,12 +9,14 @@ import Frames.RegisInterface;
 public class GuiController {
 	
 	// JDBC driver name and database URL
-	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
-	static final String DB_URL = "jdbc:mysql://localhost/LOCATIONS";
+	 // JDBC driver name and database URL
+	   static final String JDBC_DRIVER = "org.postgresql.Driver";  
+	   //static final String DB_URL = "jdbc:mysql://localhost/LOCATIONS";
+	   static final String DB_URL = "jdbc:postgresql://localhost:5432/testdb";
 
 	//  Database credentials
-	static final String USER = "root";
-	static final String PASS = "";
+	static final String USER = "superuser";
+	static final String PASS = "password";
 	   
 	   
 	public static void main(String[] args) {
@@ -26,7 +28,7 @@ public class GuiController {
 		   Statement stmt = null;
 		   try{
 		      //STEP 2: Register JDBC driver
-		      Class.forName("com.mysql.jdbc.Driver");
+			  Class.forName("org.postgresql.Driver");
 
 		      //STEP 3: Open a connection
 		      conn = DriverManager.getConnection(DB_URL, USER, PASS);
@@ -34,7 +36,7 @@ public class GuiController {
 		      //STEP 4: Execute a query
 		      stmt = conn.createStatement();
 
-		      String sql = "SELECT user, pwd  FROM UTENTI WHERE user='" + User + "' AND pwd='" + Pwd +"'" ;
+		      String sql = "SELECT USERNAME, PWD  FROM UTENTI WHERE USERNAME='" + User + "' AND PWD='" + Pwd +"'" ;
 		      ResultSet rs = stmt.executeQuery(sql);
 		      //STEP 5: Extract data from result set
 		      if (!rs.next() ) {    

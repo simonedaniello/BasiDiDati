@@ -45,7 +45,7 @@ public class CheckDBframe extends JFrame{
 	private static final JLabel rshn = new JLabel("value of redshift");
 	private static final JTextField tfrsh = new JTextField(5);
 	private static final String[] alternatives = {"lower than", "more than", "equals"};
-	private static final JComboBox redshiftvalue = new JComboBox(alternatives);
+	private static final JComboBox<String> redshiftvalue = new JComboBox<String>(alternatives);
 	
 	/*------------------------------------------------------------------------------------------------FN8*/
 	
@@ -74,11 +74,10 @@ public class CheckDBframe extends JFrame{
 	public CheckDBframe(){
 		
 		super(titolo);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		
 		JPanel fgns = new JPanel();
-		JPanel fray = new JPanel();
 	
 		/*--------------------------------------------------------------------------------------------------*/
 		
@@ -91,23 +90,23 @@ public class CheckDBframe extends JFrame{
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		gbc.anchor = GridBagConstraints.PAGE_START;
-		fgns.add(this.hgns, gbc);
+		fgns.add(hgns, gbc);
 		
 
 		gbc.gridx = 0;
 		gbc.gridy = 1;
 		gbc.anchor = GridBagConstraints.FIRST_LINE_START;
-		fgns.add(this.gns, gbc);
+		fgns.add(gns, gbc);
 		
 		gbc.gridx = 1;
 		gbc.gridy = 1;
 		gbc.anchor = GridBagConstraints.PAGE_START;
-		fgns.add(this.tfgns, gbc);
+		fgns.add(tfgns, gbc);
 
 		gbc.gridx = 1;
 		gbc.gridy = 2;
 		gbc.anchor = GridBagConstraints.FIRST_LINE_START;
-		fgns.add(this.buttongns, gbc);
+		fgns.add(buttongns, gbc);
 		
 		
 		
@@ -119,89 +118,89 @@ public class CheckDBframe extends JFrame{
 		gbc.gridx = 0;
 		gbc.gridy = 4;
 		gbc.anchor = GridBagConstraints.PAGE_START;
-		fgns.add(this.ray, gbc);
+		fgns.add(ray, gbc);
 		
 		gbc.gridx = 0;
 		gbc.gridy = 5;
 		gbc.anchor = GridBagConstraints.FIRST_LINE_START;
-		fgns.add(this.rayn, gbc);
+		fgns.add(rayn, gbc);
 		
 		gbc.gridx = 0;
 		gbc.gridy = 5;
 		gbc.anchor = GridBagConstraints.PAGE_START;
-		fgns.add(this.tfrayn, gbc);
+		fgns.add(tfrayn, gbc);
 		
 		gbc.gridx = 0;
 		gbc.gridy = 6;
 		gbc.anchor = GridBagConstraints.FIRST_LINE_START;
-		fgns.add(this.rayrasch, gbc);
+		fgns.add(rayrasch, gbc);
 		
 		gbc.gridx = 0;
 		gbc.gridy = 6;
 		gbc.anchor = GridBagConstraints.PAGE_START;
-		fgns.add(this.tfrayrasch, gbc);
+		fgns.add(tfrayrasch, gbc);
 		
 		gbc.gridx = 0;
 		gbc.gridy = 7;
 		gbc.anchor = GridBagConstraints.FIRST_LINE_START;
-		fgns.add(this.rayrascm, gbc);
+		fgns.add(rayrascm, gbc);
 		
 		gbc.gridx = 0;
 		gbc.gridy = 7;
 		gbc.anchor = GridBagConstraints.PAGE_START;
-		fgns.add(this.tfrayrascm, gbc);
+		fgns.add(tfrayrascm, gbc);
 		
 		gbc.gridx = 0;
 		gbc.gridy = 8;
 		gbc.anchor = GridBagConstraints.FIRST_LINE_START;
-		fgns.add(this.rayrascs, gbc);
+		fgns.add(rayrascs, gbc);
 		
 		gbc.gridx = 0;
 		gbc.gridy = 8;
 		gbc.anchor = GridBagConstraints.PAGE_START;
-		fgns.add(this.tfrayrascs, gbc);
+		fgns.add(tfrayrascs, gbc);
 		
 												/*--           --              --              --           --*/
 		
 		gbc.gridx = 1;
 		gbc.gridy = 5;
 		gbc.anchor = GridBagConstraints.FIRST_LINE_START;
-		fgns.add(this.raydecsign, gbc);
+		fgns.add(raydecsign, gbc);
 		
 		gbc.gridx = 1;
 		gbc.gridy = 5;
 		gbc.anchor = GridBagConstraints.PAGE_START;
-		fgns.add(this.tfraydecsign, gbc);
+		fgns.add(tfraydecsign, gbc);
 		
 		gbc.gridx = 1;
 		gbc.gridy = 6;
 		gbc.anchor = GridBagConstraints.FIRST_LINE_START;
-		fgns.add(this.raydecmin, gbc);
+		fgns.add(raydecmin, gbc);
 		
 		gbc.gridx = 1;
 		gbc.gridy = 6;
 		gbc.anchor = GridBagConstraints.PAGE_START;
-		fgns.add(this.tfraydecmin, gbc);
+		fgns.add(tfraydecmin, gbc);
 		
 		gbc.gridx = 1;
 		gbc.gridy = 7;
 		gbc.anchor = GridBagConstraints.FIRST_LINE_START;
-		fgns.add(this.raydecsec, gbc);
+		fgns.add(raydecsec, gbc);
 		
 		gbc.gridx = 1;
 		gbc.gridy = 7;
 		gbc.anchor = GridBagConstraints.PAGE_START;
-		fgns.add(this.tfraydecsec, gbc);
+		fgns.add(tfraydecsec, gbc);
 		
 		gbc.gridx = 1;
 		gbc.gridy = 8;
 		gbc.anchor = GridBagConstraints.FIRST_LINE_START;
-		fgns.add(this.raydecdeg, gbc);
+		fgns.add(raydecdeg, gbc);
 		
 		gbc.gridx = 1;
 		gbc.gridy = 8;
 		gbc.anchor = GridBagConstraints.PAGE_START;
-		fgns.add(this.tfraydecdeg, gbc);
+		fgns.add(tfraydecdeg, gbc);
 		
 		gbc.gridx = 1;
 		gbc.gridy = 9;
@@ -210,8 +209,105 @@ public class CheckDBframe extends JFrame{
 		
 		/*-------------------------------------------------------------------------------------------------------*/
 		
+		rsh.setForeground(Color.BLUE);
+
+		gbc.gridx = 0;
+		gbc.gridy = 10;
+		gbc.anchor = GridBagConstraints.PAGE_START;
+		fgns.add(rsh, gbc);
 		
 
+		gbc.gridx = 0;
+		gbc.gridy = 11;
+		gbc.anchor = GridBagConstraints.FIRST_LINE_START;
+		fgns.add(rshn, gbc);
+		
+		gbc.gridx = 0;
+		gbc.gridy = 11;
+		gbc.anchor = GridBagConstraints.FIRST_LINE_END;
+		fgns.add(redshiftvalue, gbc);
+		
+		gbc.gridx = 1;
+		gbc.gridy = 11;
+		gbc.anchor = GridBagConstraints.FIRST_LINE_START;
+		fgns.add(tfrsh, gbc);
+
+		gbc.gridx = 1;
+		gbc.gridy = 12;
+		gbc.anchor = GridBagConstraints.FIRST_LINE_START;
+		fgns.add(buttonrsh, gbc);
+
+		/*-------------------------------------------------------------------------------------------------------*/
+		
+		flx.setForeground(Color.BLUE);
+
+		gbc.gridx = 0;
+		gbc.gridy = 13;
+		gbc.anchor = GridBagConstraints.PAGE_START;
+		fgns.add(flx, gbc);
+		
+		gbc.gridx = 0;
+		gbc.gridy = 14;
+		gbc.anchor = GridBagConstraints.FIRST_LINE_START;
+		fgns.add(hflx, gbc);
+		
+		gbc.gridx = 1;
+		gbc.gridy = 14;
+		gbc.anchor = GridBagConstraints.FIRST_LINE_START;
+		fgns.add(tfflx, gbc);
+
+		gbc.gridx = 1;
+		gbc.gridy = 15;
+		gbc.anchor = GridBagConstraints.FIRST_LINE_START;
+		fgns.add(buttonflx, gbc);
+
+		/*-------------------------------------------------------------------------------------------------------*/
+		
+		hr.setForeground(Color.BLUE);
+
+		gbc.gridx = 0;
+		gbc.gridy = 16;
+		gbc.anchor = GridBagConstraints.PAGE_START;
+		fgns.add(hr, gbc);
+		
+		gbc.gridx = 0;
+		gbc.gridy = 17;
+		gbc.anchor = GridBagConstraints.FIRST_LINE_START;
+		fgns.add(rrgn, gbc);
+		
+		gbc.gridx = 1;
+		gbc.gridy = 17;
+		gbc.anchor = GridBagConstraints.FIRST_LINE_START;
+		fgns.add(tfrrgr, gbc);
+		
+		gbc.gridx = 0;
+		gbc.gridy = 18;
+		gbc.anchor = GridBagConstraints.FIRST_LINE_START;
+		fgns.add(rr1, gbc);
+		
+		gbc.gridx = 1;
+		gbc.gridy = 18;
+		gbc.anchor = GridBagConstraints.FIRST_LINE_START;
+		fgns.add(tfrr1, gbc);
+
+		gbc.gridx = 0;
+		gbc.gridy = 19;
+		gbc.anchor = GridBagConstraints.FIRST_LINE_START;
+		fgns.add(rr2, gbc);
+		
+		gbc.gridx = 1;
+		gbc.gridy = 19;
+		gbc.anchor = GridBagConstraints.FIRST_LINE_START;
+		fgns.add(tfrr2, gbc);
+		
+		gbc.gridx = 1;
+		gbc.gridy = 20;
+		gbc.anchor = GridBagConstraints.FIRST_LINE_START;
+		fgns.add(buttonflx, gbc);
+
+		/*-------------------------------------------------------------------------------------------------------*/
+		
+		
 		
 		this.add(fgns);
 		this.pack();

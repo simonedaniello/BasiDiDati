@@ -7,6 +7,8 @@ import control.GuiController;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
 
 public class MainMenu extends JFrame {
 	
@@ -19,7 +21,7 @@ public class MainMenu extends JFrame {
 	
 	
 	public MainMenu(){
-		super(titolo); //piccolo cambio per il commit
+		super(titolo); 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		this.setLayout(new GridBagLayout());
@@ -50,14 +52,30 @@ public class MainMenu extends JFrame {
 		buttonCsv.addActionListener(new EventListeners() {
 		    public void actionPerformed(ActionEvent e)
 		    {
-		    	NewLocationFrame inserisci = new NewLocationFrame();
-		    	dispose();
+	            JFileChooser fileChooser = new JFileChooser();
+	            int returnValue = fileChooser.showOpenDialog(null);
+	            if (returnValue == JFileChooser.APPROVE_OPTION) 
+	            {
+	              File selectedFile = fileChooser.getSelectedFile();
+	              System.out.println(selectedFile.getAbsolutePath());
+		    	  JLabel panel = new JLabel("File imported");
+		    	  JFrame frame = new JFrame("JOptionPane showMessageDialog component example");
+		    	  JOptionPane.showMessageDialog(frame, panel, "It's all right", 1);
+	            }
+	            else
+	            {
+	            /*QUI VA PARSATO IL FILE*/
+		    	  JLabel panel = new JLabel("error");
+		    	  JFrame frame = new JFrame("JOptionPane showMessageDialog component example");
+		    	  JOptionPane.showMessageDialog(frame, panel, "Hey!", 0);
+	            }
 		    }
 		});
 		
 		buttonCheck.addActionListener(new EventListeners() {
 		    public void actionPerformed(ActionEvent e)
 		    {
+		    	CheckDBframe comandi = new CheckDBframe();
 		    	dispose();
 		    }
 		});

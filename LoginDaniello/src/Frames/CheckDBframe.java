@@ -1,14 +1,21 @@
 package Frames;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
 
 import javax.swing.*;
 
+import control.EventListeners;
+
 public class CheckDBframe extends JFrame{
+	
 	private static final String titolo = "DATABASE";
+	
+	private static final JButton buttonBack = new JButton("Back");
 	
 	/*------------------------------------------------------------------------------------------------FN5*/
 	
@@ -21,7 +28,7 @@ public class CheckDBframe extends JFrame{
 	
 	private static final JButton buttonray= new JButton("Search");
 	private static final JLabel ray = new JLabel("Search n galaxies by coordinate");
-	private static final JLabel rayn = new JLabel("n = ");
+	private static final JLabel rayn = new JLabel("n = ");;
 	private static final JLabel rayrasch = new JLabel("rash = ");
 	private static final JLabel rayrascm = new JLabel("rasm = ");
 	private static final JLabel rayrascs = new JLabel("rascs = ");
@@ -67,10 +74,11 @@ public class CheckDBframe extends JFrame{
 
 	/*--------------------------------------------------------------------------------------------------*/
 	
+	/*
 	public static void main(String[] args) {
-	CheckDBframe frame  = new CheckDBframe();
+	CheckDBframe myFrm = new CheckDBframe();
 	}
-	
+	*/
 	public CheckDBframe(){
 		
 		super(titolo);
@@ -303,17 +311,120 @@ public class CheckDBframe extends JFrame{
 		gbc.gridx = 1;
 		gbc.gridy = 20;
 		gbc.anchor = GridBagConstraints.FIRST_LINE_START;
-		fgns.add(buttonflx, gbc);
+		fgns.add(buttonrr, gbc);
+		
+		gbc.gridx = 4;
+		gbc.gridy = 20;
+		gbc.anchor = GridBagConstraints.FIRST_LINE_END;
+		fgns.add(buttonBack, gbc);
+
 
 		/*-------------------------------------------------------------------------------------------------------*/
 		
+        JScrollPane scrollPane = new JScrollPane(fgns);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setBounds(50, 30, 300, 50);
+        this.setPreferredSize(new Dimension(700,500));
+		this.add(scrollPane);
+
+		/*-------------------------------------------------------------------------------------------------------*/
+		
+		buttongns.addActionListener(new EventListeners() {
+			public void actionPerformed(ActionEvent e)
+			{
+				if (tfgns.getText().equals(""))
+				{
+			    	  JLabel panel = new JLabel("You have to insert a String");
+			    	  JFrame frame = new JFrame("JOptionPane showMessageDialog component example");
+			    	  JOptionPane.showMessageDialog(frame, panel, "Hey!", 0);
+				}
+				else 
+				{
+					
+				}
+			}
+		});
+		
+		buttonray.addActionListener(new EventListeners() {
+			public void actionPerformed(ActionEvent e)
+			{
+				if (tfrayn.getText().equals("") || tfrayrasch.getText().equals("") || tfrayrascm.getText().equals("") || tfrayrascs.getText().equals("") || 
+						tfraydecsign.getText().equals("") || tfraydecmin.getText().equals("") || tfraydecsec.getText().equals("") || tfraydecdeg.getText().equals(""))
+				{
+			    	  JLabel panel = new JLabel("You have to insert a String");
+			    	  JFrame frame = new JFrame("JOptionPane showMessageDialog component example");
+			    	  JOptionPane.showMessageDialog(frame, panel, "Hey!", 0);
+				}
+				else 
+				{
+					
+				}	
+			}
+		});
+		
+		buttonrsh.addActionListener(new EventListeners() {
+			public void actionPerformed(ActionEvent e)
+			{
+				if (tfrsh.getText().equals(""))
+				{
+			    	  JLabel panel = new JLabel("You have to insert a String");
+			    	  JFrame frame = new JFrame("JOptionPane showMessageDialog component example");
+			    	  JOptionPane.showMessageDialog(frame, panel, "Hey!", 0);
+				}
+				else 
+				{
+					
+				}
+			}
+		});
+		
+		buttonflx.addActionListener(new EventListeners() {
+			public void actionPerformed(ActionEvent e)
+			{
+				if (tfflx.getText().equals(""))
+				{
+			    	  JLabel panel = new JLabel("You have to insert a String");
+			    	  JFrame frame = new JFrame("JOptionPane showMessageDialog component example");
+			    	  JOptionPane.showMessageDialog(frame, panel, "Hey!", 0);
+				}
+				else 
+				{
+					
+				}
+			}
+		});
+		
+		buttonrr.addActionListener(new EventListeners() {
+			public void actionPerformed(ActionEvent e)
+			{
+				if (tfrr1.getText().equals("") || tfrr2.getText().equals("") || tfrrgr.getText().equals(""))
+				{
+			    	  JLabel panel = new JLabel("You have to insert a String");
+			    	  JFrame frame = new JFrame("JOptionPane showMessageDialog component example");
+			    	  JOptionPane.showMessageDialog(frame, panel, "Hey!", 0);
+				}
+				else 
+				{
+					
+				}
+			}
+		});
+		
+		buttonBack.addActionListener(new EventListeners() {
+			public void actionPerformed(ActionEvent e)
+			{
+				dispose();
+				MainMenu back = new MainMenu();
+			}
+		});
 		
 		
-		this.add(fgns);
+
+		/*-------------------------------------------------------------------------------------------------------*/
+		
 		this.pack();
 		this.setVisible(true);
-		
-		
 		
 
 		

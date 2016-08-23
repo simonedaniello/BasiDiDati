@@ -1,5 +1,6 @@
 package Frames;
 
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -74,66 +75,151 @@ public class CheckDBframe extends JFrame{
 		
 		super(titolo);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		
+		JPanel fgns = new JPanel();
+		JPanel fray = new JPanel();
 	
 		/*--------------------------------------------------------------------------------------------------*/
 		
-		JPanel mainpanel = new JPanel();
-		mainpanel.setLayout(new GridBagLayout());
+		hgns.setForeground(Color.BLUE);
+		
+		fgns.setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
+		gbc.insets = new Insets(10, 10, 10, 10);
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		gbc.anchor = GridBagConstraints.PAGE_START;
-		gbc.insets = new Insets(10, 0, 0, 10);
-		mainpanel.add(hgns, gbc);
+		fgns.add(this.hgns, gbc);
 		
+
+		gbc.gridx = 0;
+		gbc.gridy = 1;
+		gbc.anchor = GridBagConstraints.FIRST_LINE_START;
+		fgns.add(this.gns, gbc);
 		
-		//mainpanel.setLayout(new BoxLayout(mainpanel, BoxLayout.LINE_AXIS));		
-		
-		gbc.gridx = 3;
+		gbc.gridx = 1;
+		gbc.gridy = 1;
+		gbc.anchor = GridBagConstraints.PAGE_START;
+		fgns.add(this.tfgns, gbc);
+
+		gbc.gridx = 1;
 		gbc.gridy = 2;
-		gbc.anchor = GridBagConstraints.LINE_START;
-		gbc.insets = new Insets(10, 0, 0, 10);
-		mainpanel.add(gns, gbc);
-		
-		gbc.gridx = 3;
-		gbc.gridy = 2;
-		gbc.anchor = GridBagConstraints.PAGE_END;
-		gbc.insets = new Insets(10, 0, 0, 10);
-		mainpanel.add(tfgns, gbc);
-		
-		gbc.gridx = 3;
-		gbc.gridy = 2;
-		gbc.anchor = GridBagConstraints.LINE_END;
-		gbc.insets = new Insets(10, 0, 0, 10);
-		mainpanel.add(buttongns);
-		
-		mainpanel.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
-		
-		/*--------------------------------------------------------------------------------------------------*/
-		
-		JPanel coordinate = new JPanel();
+		gbc.anchor = GridBagConstraints.FIRST_LINE_START;
+		fgns.add(this.buttongns, gbc);
 		
 		
 		
+		/*-------------------------------------------------------------------------------------------------------*/
+		
+		ray.setForeground(Color.BLUE);
 		
 		
+		gbc.gridx = 0;
+		gbc.gridy = 4;
+		gbc.anchor = GridBagConstraints.PAGE_START;
+		fgns.add(this.ray, gbc);
+		
+		gbc.gridx = 0;
+		gbc.gridy = 5;
+		gbc.anchor = GridBagConstraints.FIRST_LINE_START;
+		fgns.add(this.rayn, gbc);
+		
+		gbc.gridx = 0;
+		gbc.gridy = 5;
+		gbc.anchor = GridBagConstraints.PAGE_START;
+		fgns.add(this.tfrayn, gbc);
+		
+		gbc.gridx = 0;
+		gbc.gridy = 6;
+		gbc.anchor = GridBagConstraints.FIRST_LINE_START;
+		fgns.add(this.rayrasch, gbc);
+		
+		gbc.gridx = 0;
+		gbc.gridy = 6;
+		gbc.anchor = GridBagConstraints.PAGE_START;
+		fgns.add(this.tfrayrasch, gbc);
+		
+		gbc.gridx = 0;
+		gbc.gridy = 7;
+		gbc.anchor = GridBagConstraints.FIRST_LINE_START;
+		fgns.add(this.rayrascm, gbc);
+		
+		gbc.gridx = 0;
+		gbc.gridy = 7;
+		gbc.anchor = GridBagConstraints.PAGE_START;
+		fgns.add(this.tfrayrascm, gbc);
+		
+		gbc.gridx = 0;
+		gbc.gridy = 8;
+		gbc.anchor = GridBagConstraints.FIRST_LINE_START;
+		fgns.add(this.rayrascs, gbc);
+		
+		gbc.gridx = 0;
+		gbc.gridy = 8;
+		gbc.anchor = GridBagConstraints.PAGE_START;
+		fgns.add(this.tfrayrascs, gbc);
+		
+												/*--           --              --              --           --*/
+		
+		gbc.gridx = 1;
+		gbc.gridy = 5;
+		gbc.anchor = GridBagConstraints.FIRST_LINE_START;
+		fgns.add(this.raydecsign, gbc);
+		
+		gbc.gridx = 1;
+		gbc.gridy = 5;
+		gbc.anchor = GridBagConstraints.PAGE_START;
+		fgns.add(this.tfraydecsign, gbc);
+		
+		gbc.gridx = 1;
+		gbc.gridy = 6;
+		gbc.anchor = GridBagConstraints.FIRST_LINE_START;
+		fgns.add(this.raydecmin, gbc);
+		
+		gbc.gridx = 1;
+		gbc.gridy = 6;
+		gbc.anchor = GridBagConstraints.PAGE_START;
+		fgns.add(this.tfraydecmin, gbc);
+		
+		gbc.gridx = 1;
+		gbc.gridy = 7;
+		gbc.anchor = GridBagConstraints.FIRST_LINE_START;
+		fgns.add(this.raydecsec, gbc);
+		
+		gbc.gridx = 1;
+		gbc.gridy = 7;
+		gbc.anchor = GridBagConstraints.PAGE_START;
+		fgns.add(this.tfraydecsec, gbc);
+		
+		gbc.gridx = 1;
+		gbc.gridy = 8;
+		gbc.anchor = GridBagConstraints.FIRST_LINE_START;
+		fgns.add(this.raydecdeg, gbc);
+		
+		gbc.gridx = 1;
+		gbc.gridy = 8;
+		gbc.anchor = GridBagConstraints.PAGE_START;
+		fgns.add(this.tfraydecdeg, gbc);
+		
+		gbc.gridx = 1;
+		gbc.gridy = 9;
+		gbc.anchor = GridBagConstraints.FIRST_LINE_START;
+		fgns.add(buttonray, gbc);
+		
+		/*-------------------------------------------------------------------------------------------------------*/
 		
 		
+
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		this.add(mainpanel);
+		this.add(fgns);
+		this.pack();
 		this.setVisible(true);
+		
+		
+		
+
 		
 	}
 	

@@ -1,5 +1,9 @@
 package Frames;
 
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+
 import javax.swing.*;
 
 public class CheckDBframe extends JFrame{
@@ -8,8 +12,8 @@ public class CheckDBframe extends JFrame{
 	/*------------------------------------------------------------------------------------------------FN5*/
 	
 	private static final JButton buttongns= new JButton("Search");
-	private static final JLabel gns = new JLabel("Search by name of galaxy");
-	private static final JLabel hgns = new JLabel("Name of galaxy");
+	private static final JLabel hgns = new JLabel("Search by name of galaxy");
+	private static final JLabel gns = new JLabel("Name of galaxy");
 	private static final JTextField tfgns = new JTextField(20);
 
 	/*------------------------------------------------------------------------------------------------FN6*/
@@ -49,36 +53,89 @@ public class CheckDBframe extends JFrame{
 	private static final JLabel hflx = new JLabel("name of galaxy");
 	private static final JTextField tfflx = new JTextField(20);	
 	
-	/*------------------------------------------------------------------------------------------------FN8*/
+	/*------------------------------------------------------------------------------------------------FN9*/
 	
-	private static final JButton buttonrr= new JButton("Ratio between fluxes");
-	private static final JLabel rr = new JLabel("Search flux");
-	private static final JLabel hr = new JLabel("name of galaxy");
-	private static final JTextField tfrr = new JTextField(20);
+	private static final JButton buttonrr= new JButton("Calculate");
+	private static final JLabel rr1 = new JLabel("first flux");
+	private static final JLabel rr2 = new JLabel("second flux");
+	private static final JLabel rrgn = new JLabel("Galaxy name");
+	private static final JLabel hr = new JLabel("Ratio between fluxes");
+	private static final JTextField tfrr1 = new JTextField(5);
+	private static final JTextField tfrr2 = new JTextField(5);
+	private static final JTextField tfrrgr = new JTextField(20);
+
+	/*--------------------------------------------------------------------------------------------------*/
 	
+	public static void main(String[] args) {
+	CheckDBframe frame  = new CheckDBframe();
+	}
 	
+	public CheckDBframe(){
+		
+		super(titolo);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+		/*--------------------------------------------------------------------------------------------------*/
+		
+		JPanel mainpanel = new JPanel();
+		mainpanel.setLayout(new GridBagLayout());
+		GridBagConstraints gbc = new GridBagConstraints();
+
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		gbc.anchor = GridBagConstraints.PAGE_START;
+		gbc.insets = new Insets(10, 0, 0, 10);
+		mainpanel.add(hgns, gbc);
+		
+		
+		//mainpanel.setLayout(new BoxLayout(mainpanel, BoxLayout.LINE_AXIS));		
+		
+		gbc.gridx = 3;
+		gbc.gridy = 2;
+		gbc.anchor = GridBagConstraints.LINE_START;
+		gbc.insets = new Insets(10, 0, 0, 10);
+		mainpanel.add(gns, gbc);
+		
+		gbc.gridx = 3;
+		gbc.gridy = 2;
+		gbc.anchor = GridBagConstraints.PAGE_END;
+		gbc.insets = new Insets(10, 0, 0, 10);
+		mainpanel.add(tfgns, gbc);
+		
+		gbc.gridx = 3;
+		gbc.gridy = 2;
+		gbc.anchor = GridBagConstraints.LINE_END;
+		gbc.insets = new Insets(10, 0, 0, 10);
+		mainpanel.add(buttongns);
+		
+		mainpanel.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
+		
+		/*--------------------------------------------------------------------------------------------------*/
+		
+		JPanel coordinate = new JPanel();
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		this.add(mainpanel);
+		this.setVisible(true);
+		
+	}
 	
 	
 }

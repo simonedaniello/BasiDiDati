@@ -81,7 +81,7 @@ CREATE TABLE SISTEMADIGALASSIE.HPfluxC(
 	PRIMARY KEY(NAMEHPC, PIXELc, GALAXYNAMEHPC)
 );
 
-/*-----------------------------HPSpitzerflux------------------------*/
+/*-----------------------------Spitzerflux------------------------*/
 CREATE TABLE SISTEMADIGALASSIE.Spitzerflux(
 	NAMES			VARCHAR(20),
 	VALUESP			INT,

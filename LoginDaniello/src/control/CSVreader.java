@@ -282,7 +282,7 @@ public class CSVreader {
 					      //STEP 5: Extract data from result set
 					      if (!rs.next() ) {    
 						      String sql2 = "INSERT INTO SISTEMADIGALASSIE.HPfluxR " +
-					                   		"VALUES ('"	+ "OIII-52" 		+ "' '" 
+					                   		"VALUES ('"	+ "OIII-52" 		+ "', '" 
 					                   					+ "3x3" 			+ "', '"
 					                   					+ elements.get(2*j) + "', '"
 					                   					+ elements.get(3*j) + "', '"
@@ -447,7 +447,7 @@ public class CSVreader {
 					      //STEP 5: Extract data from result set
 					      if (!rs.next() ) {    
 						      String sql2 = "INSERT INTO SISTEMADIGALASSIE.HPfluxC " +
-					                   		"VALUES ('"	+ "OIII-52" 		+ "' '" 
+					                   		"VALUES ('"	+ "OIII-52" 		+ "', '" 
 					                   					+ "3x3" 			+ "', '"
 					                   					+ elements.get(1*j) + "', '"
 					                   					+ elements.get(2*j) + "', '"
@@ -587,7 +587,7 @@ public class CSVreader {
 		        Scanner scanner = new Scanner(new File(csvFile));
 		        while (scanner.hasNext()) {
 		            List<String> line = parseLine(scanner.nextLine());
-		            while(i <= 21)
+		            while(i <= 29)
 		            {
 
 		            		elements.add(line.get(i));
@@ -610,76 +610,258 @@ public class CSVreader {
 					      int j = 0;
 					      
 					      
-					  while (j < elements.size()/23){
+					  while (j < elements.size()/30){
 					      String sql = "SELECT NAME FROM SISTEMADIGALASSIE.Spitzerflux WHERE GALAXYNAMES='" + elements.get(0*j) +"'";
 					      ResultSet rs = stmt.executeQuery(sql);
 					      
 					      //STEP 5: Extract data from result set
 					      if (!rs.next() ) {    
-						      String sql2 = "INSERT INTO SISTEMADIGALASSIE.HPfluxC " +
-					                   		"VALUES ('"	+ "OIII-52" 		+ "' '" 
-					                   					+ "3x3" 			+ "', '"
+						      String sql2 = "INSERT INTO SISTEMADIGALASSIE.Spitzerflux " +
+					                   		"VALUES ('"	+ "SIV-10.5" 		+ "', '" 
+					                   					+ elements.get(2*j)	+ "', '"
 					                   					+ elements.get(1*j) + "', '"
-					                   					+ elements.get(2*j) + "', '"
-							                   			+ ""				+ "', '"
+					                   					+ elements.get(3*j) + "', '"
+							                   			+ elements.get(28*j)+ "', '"
 					                   					+ elements.get(0*j) +  "')";
 						      stmt.executeUpdate(sql2);
 						      
-						      sql2 = "INSERT INTO SISTEMADIGALASSIE.HPfluxC " +
-				                   		"VALUES ('"	+ "NIII-57" 		+"', '" 
-				                   					+ "3x3" 			+ "', '"
-				                   					+ elements.get(3*j) + "', '"
+						   sql2 = "INSERT INTO SISTEMADIGALASSIE.Spitzerflux " +
+				                   		"VALUES ('"	+ "NeII-12.8" 		+ "', '" 
+				                   					+ elements.get(5*j)	+ "', '"
+				                   					+ elements.get(6*j) + "', '"
 				                   					+ elements.get(4*j) + "', '"
-						                   			+ ""				+ "', '"
+						                   			+ elements.get(28*j)+ "', '"
 				                   					+ elements.get(0*j) +  "')";
 					      stmt.executeUpdate(sql2);
 						      
 						      
-					      sql2 = "INSERT INTO SISTEMADIGALASSIE.HPfluxC " +
-			                   		"VALUES ('"	+ "OI-63" 			+ "', '" 
-			                   					+ "3x3" 			+ "', '"
-			                   					+ elements.get(6*j) + "', '"
-			                   					+ elements.get(7*j) + "', '"
-					                   			+ elements.get(5*j) + "', '"
-			                   					+ elements.get(0*j) +  "')";
-					      stmt.executeUpdate(sql2);
-				      
-				      
-					      sql2 = "INSERT INTO SISTEMADIGALASSIE.HPfluxC " +
-			                   		"VALUES ('"	+ "OIII-88" 		+ "', '" 
-			                   					+ "3x3" 			+ "', '"
+					      sql2 = "INSERT INTO SISTEMADIGALASSIE.Spitzerflux " +
+			                   		"VALUES ('"	+ "NeV-14.3" 		+ "', '" 
+			                   					+ elements.get(8*j)	+ "', '"
 			                   					+ elements.get(9*j) + "', '"
-			                   					+ elements.get(10*j) + "', '"
-					                   			+ elements.get(8*j) + "', '"
+			                   					+ elements.get(7*j) + "', '"
+					                   			+ elements.get(28*j) + "', '"
 			                   					+ elements.get(0*j) +  "')";
 					      stmt.executeUpdate(sql2);
-						      
-					      sql2 = "INSERT INTO SISTEMADIGALASSIE.HPfluxC " +
-			                   		"VALUES ('"	+ "NII-122" 		+ "', '" 
-			                   					+ "3x3" 			+ "', '"
+				      
+					      sql2 = "INSERT INTO SISTEMADIGALASSIE.Spitzerflux " +
+			                   		"VALUES ('"	+ "NeIII-15.6" 		+ "', '" 
+			                   					+ elements.get(11*j)+ "', '"
 			                   					+ elements.get(12*j) + "', '"
-			                   					+ elements.get(13*j) + "', '"
-					                   			+ elements.get(11*j) + "', '"
+			                   					+ elements.get(10*j) + "', '"
+					                   			+ elements.get(28*j) + "', '"
 			                   					+ elements.get(0*j) +  "')";
 					      stmt.executeUpdate(sql2);
 						      
-					      sql2 = "INSERT INTO SISTEMADIGALASSIE.HPfluxC " +
-			                   		"VALUES ('"	+ "OI-145" 			+ "', '" 
-			                   					+ "3x3" 			+ "', '"
+					      sql2 = "INSERT INTO SISTEMADIGALASSIE.Spitzerflux " +
+			                   		"VALUES ('"	+ "SIII-18.7" 		 + "', '" 
+			                   					+ elements.get(14*j) + "', '"
 			                   					+ elements.get(15*j) + "', '"
+			                   					+ elements.get(13*j) + "', '"
+					                   			+ elements.get(28*j) + "', '"
+			                   					+ elements.get(0*j)  +  "')";
+					      stmt.executeUpdate(sql2);
+						      
+					      sql2 = "INSERT INTO SISTEMADIGALASSIE.Spitzerflux " +
+			                   		"VALUES ('"	+ "NeV-24.3" 		 + "', '" 
+			                   					+ elements.get(17*j) + "', '"
+			                   					+ elements.get(18*j) + "', '"
 			                   					+ elements.get(16*j) + "', '"
-					                   			+ elements.get(14*j) + "', '"
+					                   			+ elements.get(28*j) + "', '"
+			                   					+ elements.get(0*j)  +  "')";
+					      stmt.executeUpdate(sql2);
+						      
+					      sql2 = "INSERT INTO SISTEMADIGALASSIE.Spitzerflux " +
+			                   		"VALUES ('"	+ "OIV-25.9" 		 + "', '" 
+			                   					+ elements.get(20*j) + "', '"
+			                   					+ elements.get(21*j) + "', '"
+			                   					+ elements.get(19*j) + "', '"
+					                   			+ elements.get(28*j) + "', '"
+			                   					+ elements.get(0*j)  +  "')";
+					      stmt.executeUpdate(sql2);
+					      
+					      sql2 = "INSERT INTO SISTEMADIGALASSIE.Spitzerflux " +
+			                   		"VALUES ('"	+ "SIII-33.5" 		 + "', '" 
+			                   					+ elements.get(23*j) + "', '"
+			                   					+ elements.get(24*j) + "', '"
+			                   					+ elements.get(22*j) + "', '"
+					                   			+ elements.get(28*j) + "', '"
+			                   					+ elements.get(0*j)  +  "')";
+					      stmt.executeUpdate(sql2);
+					      
+					      sql2 = "INSERT INTO SISTEMADIGALASSIE.Spitzerflux " +
+			                   		"VALUES ('"	+ "SiII-34.8" 		 + "', '" 
+			                   					+ elements.get(26*j) + "', '"
+			                   					+ elements.get(27*j) + "', '"
+			                   					+ elements.get(25*j) + "', '"
+					                   			+ elements.get(28*j) + "', '"
+			                   					+ elements.get(0*j)  +  "')";
+					      stmt.executeUpdate(sql2);
+						      
+					      }
+					      
+					      j++;
+
+					  }
+				   }
+
+				   
+					catch(SQLException se){
+					      //Handle errors for JDBC
+					      se.printStackTrace();
+					   }catch(Exception e){
+					      //Handle errors for Class.forName
+					      e.printStackTrace();
+					   }finally{
+					      //finally block used to close resources
+					      try{
+					         if(stmt!=null)
+					            stmt.close();
+					      }catch(SQLException se){
+					      }// do nothing
+					      try{
+					         if(conn!=null)
+					            conn.close();
+					      }catch(SQLException se){
+					         se.printStackTrace();
+					      }//end finally try
+					   }//end try
+				   }
+        
+
+        /*--------------------------------------------------------------------------------------------------FILE N*/
+        
+        
+        /*--------------------------------------------------------------------------------------------------FILE HPR different spaxel*/
+        
+        
+        else if (Operation == 4)
+        {
+		        /*
+				0-						   5- 19 A15    --          Name     Galaxy Name
+				1-						  21- 21 A1     --        l_Foiii52  Limit flag on [OIII]52 line flux
+				2-						  23- 29 F7.2   10-17W/m2   Foiii52  Flux of the [OIII]52 line from Herschel/PACS
+				3-						  31- 36 F6.2   10-17W/m2 e_Foiii52  Flux error for [OIII]52
+				4-						  38- 38 A1     --        l_Fniii57  Limit flag on [NIII]57 line flux
+				5-						  40- 46 F7.2   10-17W/m2   Fniii57  Flux of the [NIII]57 line from Herschel/PACS
+				6-						  48- 53 F6.2   10-17W/m2 e_Fniii57  Flux error for [NIII]57
+				7-						  55- 55 A1     --        l_Foi63    Limit flag on [OI]63 line flux
+				8-						  57- 64 F8.2   10-17W/m2   Foi63    Flux of the [OI]63 line from Herschel/PACS
+				9-						  66- 71 F6.2   10-17W/m2 e_Foi63    Flux error for [OI]63
+				10-						  73- 73 A1     --        l_Foiii88  Limit flag on [OIII]88 line flux
+				11-						  75- 81 F7.2   10-17W/m2   Foiii88  Flux of the [OIII]88 line from Herschel/PACS
+				12-						  83- 88 F6.2   10-17W/m2 e_Foiii88  Flux error for [OIII]88
+				13-						  90- 90 A1     --        l_Fnii122  Limit flag on [NII]122 line flux
+				14-						  92- 98 F7.2   10-17W/m2   Fnii122  Flux of the [NII]122 line from Herschel/PACS
+				15-						 100-104 F5.2   10-17W/m2 e_Fnii122  Flux error for [NII]122
+				16-						 106-106 A1     --        l_Foi145   Limit flag on [OI]145 line flux
+				17-						 108-114 F7.2   10-17W/m2   Foi145   Flux of the [OI]145 line from Herschel/PACS
+				18-						 116-121 F6.2   10-17W/m2 e_Foi145   Flux error for [OI]145
+				19-						 123-123 A1     --        l_Fcii158  Limit flag on [CII]158 line flux
+				20-						 125-132 F8.2   10-17W/m2   Fcii158  Flux of the [CII]158 line from Herschel/PACS
+				21-						 134-139 F6.2   10-17W/m2 e_Fcii158  Flux error for [CII]158
+				22-						 141-143 A3     --          Aper     Aperture: 'c' central spaxel, '3x3' spaxel array, and '5x5' spaxel array
+		         */
+		        
+		        int i = 0;
+		
+		        Scanner scanner = new Scanner(new File(csvFile));
+		        while (scanner.hasNext()) {
+		            List<String> line = parseLine(scanner.nextLine());
+		            while(i <= 22)
+		            {
+
+		            		elements.add(line.get(i));
+		            		i++;
+		            	
+		            }
+		            i = 0;
+		        }
+		        scanner.close();
+		        
+				   try{
+					      //STEP 2: Register JDBC driver
+					      Class.forName("org.postgresql.Driver");
+				
+					      //STEP 3: Open a connection
+					      conn = DriverManager.getConnection(DB_URL, USER, PASS);
+					      //STEP 4: Execute a query
+					      stmt = conn.createStatement();
+					      
+					      int j = 0;
+					      
+					      
+					  while (j < elements.size()/21){
+					      String sql = "SELECT NAME FROM SISTEMADIGALASSIE.HPfluxR WHERE GALAXYNAMEHPR='" + elements.get(0*j) +"'";
+					      ResultSet rs = stmt.executeQuery(sql);
+					      
+					      //STEP 5: Extract data from result set
+					      if (!rs.next() ) {    
+						      String sql2 = "INSERT INTO SISTEMADIGALASSIE.Spitzerflux " +
+					                   		"VALUES ('"	+ "OIII-52" 		+ "', '" 
+					                   					+ elements.get(2*j)	+ "', '"
+					                   					+ elements.get(1*j) + "', '"
+					                   					+ elements.get(3*j) + "', '"
+							                   			+ elements.get(22*j)+ "', '"
+					                   					+ elements.get(0*j) +  "')";
+						      stmt.executeUpdate(sql2);
+						      
+						   sql2 = "INSERT INTO SISTEMADIGALASSIE.Spitzerflux " +
+				                   		"VALUES ('"	+ "NIII-57" 		+ "', '" 
+				                   					+ elements.get(5*j)	+ "', '"
+				                   					+ elements.get(6*j) + "', '"
+				                   					+ elements.get(4*j) + "', '"
+						                   			+ elements.get(22*j)+ "', '"
+				                   					+ elements.get(0*j) +  "')";
+					      stmt.executeUpdate(sql2);
+						      
+						      
+					      sql2 = "INSERT INTO SISTEMADIGALASSIE.Spitzerflux " +
+			                   		"VALUES ('"	+ "OI-63"	 		+ "', '" 
+			                   					+ elements.get(8*j)	+ "', '"
+			                   					+ elements.get(9*j) + "', '"
+			                   					+ elements.get(7*j) + "', '"
+					                   			+ elements.get(22*j) + "', '"
+			                   					+ elements.get(0*j) +  "')";
+					      stmt.executeUpdate(sql2);
+				      
+					      sql2 = "INSERT INTO SISTEMADIGALASSIE.Spitzerflux " +
+			                   		"VALUES ('"	+ "OIII-88" 		+ "', '" 
+			                   					+ elements.get(11*j)+ "', '"
+			                   					+ elements.get(12*j) + "', '"
+			                   					+ elements.get(10*j) + "', '"
+					                   			+ elements.get(22*j) + "', '"
 			                   					+ elements.get(0*j) +  "')";
 					      stmt.executeUpdate(sql2);
 						      
-					      sql2 = "INSERT INTO SISTEMADIGALASSIE.HPfluxC " +
-			                   		"VALUES ('"	+ "CII-158" 		+ "', '" 
-			                   					+ "3x3" 			+ "', '"
-			                   					+ elements.get(18*j) + "', '"
-			                   					+ elements.get(19*j) + "', '"
-					                   			+ elements.get(17*j) + "', '"
-			                   					+ elements.get(0*j) +  "')";
+					      sql2 = "INSERT INTO SISTEMADIGALASSIE.Spitzerflux " +
+			                   		"VALUES ('"	+ "NII-122" 		 + "', '" 
+			                   					+ elements.get(14*j) + "', '"
+			                   					+ elements.get(15*j) + "', '"
+			                   					+ elements.get(13*j) + "', '"
+					                   			+ elements.get(22*j) + "', '"
+			                   					+ elements.get(0*j)  +  "')";
 					      stmt.executeUpdate(sql2);
+						      
+					      sql2 = "INSERT INTO SISTEMADIGALASSIE.Spitzerflux " +
+			                   		"VALUES ('"	+ "OI-145"	 		 + "', '" 
+			                   					+ elements.get(17*j) + "', '"
+			                   					+ elements.get(18*j) + "', '"
+			                   					+ elements.get(16*j) + "', '"
+					                   			+ elements.get(22*j) + "', '"
+			                   					+ elements.get(0*j)  +  "')";
+					      stmt.executeUpdate(sql2);
+						      
+					      sql2 = "INSERT INTO SISTEMADIGALASSIE.Spitzerflux " +
+			                   		"VALUES ('"	+ "CII-158" 		 + "', '" 
+			                   					+ elements.get(20*j) + "', '"
+			                   					+ elements.get(21*j) + "', '"
+			                   					+ elements.get(19*j) + "', '"
+					                   			+ elements.get(22*j) + "', '"
+			                   					+ elements.get(0*j)  +  "')";
+					      stmt.executeUpdate(sql2);
+					      
+
 						      
 					      }
 					      

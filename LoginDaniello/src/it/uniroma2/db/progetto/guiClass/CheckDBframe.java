@@ -1,4 +1,4 @@
-package Frames;
+package it.uniroma2.db.progetto.guiClass;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -9,7 +9,7 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.*;
 
-import control.EventListeners;
+import it.uniroma2.db.progetto.guiClass.EventListeners;
 
 public class CheckDBframe extends JFrame{
 	

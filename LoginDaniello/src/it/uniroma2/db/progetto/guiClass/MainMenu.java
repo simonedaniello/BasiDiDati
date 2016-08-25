@@ -1,9 +1,9 @@
-package Frames;
+package it.uniroma2.db.progetto.guiClass;
 
 import javax.swing.*;
 
-import control.EventListeners;
-import control.GuiController;
+import it.uniroma2.db.progetto.guiClass.EventListeners;
+import it.uniroma2.db.appStart.*;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;

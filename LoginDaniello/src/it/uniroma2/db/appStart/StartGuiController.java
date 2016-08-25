@@ -1,12 +1,10 @@
-package control;
+package it.uniroma2.db.appStart;
 import java.sql.*;
-import Frames.MainMenu;
+import it.uniroma2.db.progetto.guiClass.*;
 import javax.swing.*;
 
-import Frames.MyFrame;
-import Frames.RegisInterface;
 
-public class GuiController {
+public class StartGuiController {
 	
 	// JDBC driver name and database URL
 	 // JDBC driver name and database URL

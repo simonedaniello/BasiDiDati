@@ -1,4 +1,4 @@
-package control;
+package it.uniroma2.db.progetto.guiClass;
 //STEP 1. Import required packages
 import java.sql.*;
 

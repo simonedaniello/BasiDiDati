@@ -1,4 +1,4 @@
-package control;
+package it.uniroma2.db.progetto.guiClass;
 import java.sql.*;
 
 import javax.swing.JFrame;

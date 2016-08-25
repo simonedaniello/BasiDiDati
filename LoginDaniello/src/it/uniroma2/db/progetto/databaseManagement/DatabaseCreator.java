@@ -1,3 +1,5 @@
+package it.uniroma2.db.progetto.databaseManagement;
+
 //METODO PER CREARE UNA NUOVA TABELLA NEL DATABASE
 
 //STEP 1. Import required packages

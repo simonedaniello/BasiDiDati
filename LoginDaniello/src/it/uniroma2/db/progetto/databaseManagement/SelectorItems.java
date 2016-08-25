@@ -1,3 +1,5 @@
+package it.uniroma2.db.progetto.databaseManagement;
+
 //STEP 1. Import required packages
 import java.sql.*;
 

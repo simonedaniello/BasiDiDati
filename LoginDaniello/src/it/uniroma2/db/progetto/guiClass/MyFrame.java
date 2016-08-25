@@ -1,4 +1,4 @@
-package Frames;
+package it.uniroma2.db.progetto.guiClass;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -10,8 +10,8 @@ import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import control.EventListeners;
-import control.GuiController; 
+import it.uniroma2.db.progetto.guiClass.EventListeners;
+import it.uniroma2.db.appStart.StartGuiController; 
 
 
 public class MyFrame extends JFrame {
@@ -34,7 +34,7 @@ public class MyFrame extends JFrame {
 		    	String nome = insNome.getText();
 		    	String password = insCognome.getText();
 		    	dispose();
-		    	GuiController.listenC(nome, password);
+		    	StartGuiController.listenC(nome, password);
 		    }
 		});
 		
@@ -42,7 +42,7 @@ public class MyFrame extends JFrame {
 			public void actionPerformed(ActionEvent e)
 			{
 				dispose();
-				GuiController.listenR();
+				StartGuiController.listenR();
 			}
 		});
 		

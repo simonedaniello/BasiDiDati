@@ -1,4 +1,4 @@
-package Frames;
+package it.uniroma2.db.progetto.guiClass;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -8,8 +8,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
-import control.EventListeners;
-import control.userAdder; 
+import it.uniroma2.db.progetto.guiClass.EventListeners;
+import it.uniroma2.db.progetto.guiClass.userAdder; 
 
 
 public class RegisInterface extends JFrame implements ActionListener {

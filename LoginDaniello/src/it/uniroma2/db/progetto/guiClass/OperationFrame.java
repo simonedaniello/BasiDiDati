@@ -1,4 +1,4 @@
-package Frames;
+package it.uniroma2.db.progetto.guiClass;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.event.*;
 
-import control.EventListeners;
+import it.uniroma2.db.progetto.guiClass.EventListeners;
  
 /* ListDemo.java requires no other files. */
 public class OperationFrame extends JPanel implements ListSelectionListener 

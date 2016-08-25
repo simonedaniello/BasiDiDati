@@ -1,4 +1,4 @@
-package control;
+package it.uniroma2.db.progetto.CSVManagement;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -15,7 +15,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-import Frames.MyFrame;
+import it.uniroma2.db.progetto.guiClass.MyFrame;
 
 public class CSVreader {
 	

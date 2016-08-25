@@ -18,42 +18,42 @@ CREATE SCHEMA SISTEMADIGALASSIE;
 
 /*-----------------------------Galaxy------------------------*/
 CREATE TABLE SISTEMADIGALASSIE.Galaxy (
-	DISTANCE				INT,
-	NAME					VARCHAR(20)		PRIMARY KEY,
-	ALTNAME					VARCHAR(20),
-	SPECTRALCLASSIFICATION	VARCHAR(20),
-	REDSHIFT				INT
+	DISTANCE				VARCHAR,
+	NAME					VARCHAR		PRIMARY KEY,
+	ALTNAME					VARCHAR,
+	SPECTRALCLASSIFICATION	VARCHAR,
+	REDSHIFT				VARCHAR
 );
 
 /*-----------------------------Metallicity------------------------*/
 CREATE TABLE SISTEMADIGALASSIE.Metallicity(
-	VALUE	INT ,
-	ERRORM	INT ,
-	GALAXYNAMEMET 	VARCHAR(20)
-					REFERENCES Galaxy(NAME),
-	PRIMARY KEY (VALUE, ERRORM)
+	VALUEMET	VARCHAR ,
+	ERRORM		VARCHAR ,
+	GALAXYNAMEMET 	VARCHAR
+					REFERENCES SISTEMADIGALASSIE.Galaxy(NAME),
+	PRIMARY KEY (VALUEMET, ERRORM, GALAXYNAMEMET)
 );
 
 /*-----------------------------Luminosity------------------------*/
 CREATE TABLE SISTEMADIGALASSIE.Luminosity(
 	LFLAG 		BOOLEAN , 
-	ABSORPTION	INT ,
-	GALAXYNAMELUM 	VARCHAR(20)
-					REFERENCES Galaxy(NAME),
+	ABSORPTION	VARCHAR ,
+	GALAXYNAMELUM 	VARCHAR
+					REFERENCES SISTEMADIGALASSIE.Galaxy(NAME),
 	PRIMARY KEY(LFLAG, ABSORPTION)
 );
 
 /*-----------------------------Coordinate------------------------*/
 CREATE TABLE SISTEMADIGALASSIE.Coordinate(
-	RASCH 	INT	, 
-	RASCM	INT	,
-	RASCS	INT	,
-	DECSIGN	INT	,
-	DECMIN	INT	,
-	DECSEC	INT	,
-	DECDEG	INT	,
-	GALAXYNAMECOO 	VARCHAR(20)
-					REFERENCES Galaxy(NAME),
+	RASCH 	VARCHAR	, 
+	RASCM	VARCHAR	,
+	RASCS	VARCHAR	,
+	DECSIGN	VARCHAR	,
+	DECMIN	VARCHAR	,
+	DECSEC	VARCHAR	,
+	DECDEG	VARCHAR	,
+	GALAXYNAMECOO 	VARCHAR
+					REFERENCES SISTEMADIGALASSIE.Galaxy(NAME),
 	PRIMARY KEY (GALAXYNAMECOO)
 );
 
@@ -61,11 +61,11 @@ CREATE TABLE SISTEMADIGALASSIE.Coordinate(
 CREATE TABLE SISTEMADIGALASSIE.HPfluxR(
 	NAMEHPR			VARCHAR, 
 	PIXELR 			VARCHAR,
-	VALUER			INT,
-	ERRORR			INT,
+	VALUER			VARCHAR,
+	ERRORR			VARCHAR,
 	FLAGULR			BOOLEAN,
-	GALAXYNAMEHPR 	VARCHAR(20)
-					REFERENCES Galaxy(NAME),
+	GALAXYNAMEHPR 	VARCHAR
+					REFERENCES SISTEMADIGALASSIE.Galaxy(NAME),
 	PRIMARY KEY(NAMEHPR, PIXELR, GALAXYNAMEHPR)
 );
 
@@ -73,23 +73,23 @@ CREATE TABLE SISTEMADIGALASSIE.HPfluxR(
 CREATE TABLE SISTEMADIGALASSIE.HPfluxC(
 	NAMEHPC			VARCHAR, 
 	PIXELC 			VARCHAR,
-	VALUEC			INT,
-	ERRORC			INT,
+	VALUEC			VARCHAR,
+	ERRORC			VARCHAR,
 	FLAGULC			BOOLEAN,
-	GALAXYNAMEHPC 	VARCHAR(20)
-					REFERENCES Galaxy(NAME),
+	GALAXYNAMEHPC 	VARCHAR
+					REFERENCES SISTEMADIGALASSIE.Galaxy(NAME),
 	PRIMARY KEY(NAMEHPC, PIXELc, GALAXYNAMEHPC)
 );
 
 /*-----------------------------Spitzerflux------------------------*/
 CREATE TABLE SISTEMADIGALASSIE.Spitzerflux(
-	NAMES			VARCHAR(20),
-	VALUESP			INT,
+	NAMES			VARCHAR,
+	VALUESP			VARCHAR,
 	FLAG 			BOOLEAN,
-	ERRORS			INT,
-	IRS				INT,
-	GALAXYNAMES 	VARCHAR(20)
-					REFERENCES Galaxy(NAME),
+	ERRORS			VARCHAR,
+	IRS				VARCHAR,
+	GALAXYNAMES 	VARCHAR
+					REFERENCES SISTEMADIGALASSIE.Galaxy(NAME),
 	PRIMARY KEY(NAMES, GALAXYNAMES)
 );
 
@@ -97,10 +97,10 @@ CREATE TABLE SISTEMADIGALASSIE.Spitzerflux(
 
 /*-----------------------------User------------------------*/
 CREATE TABLE SISTEMADIGALASSIE.User(
-	NOME			VARCHAR(20)		NOT NULL,
-	COGNOME			VARCHAR(20)		NOT NULL,
-	USERID			VARCHAR(20)		NOT NULL,
-	PASSWORD		VARCHAR(20)				,
+	NOME			VARCHAR		NOT NULL,
+	COGNOME			VARCHAR		NOT NULL,
+	USERID			VARCHAR		NOT NULL,
+	PASSWORD		VARCHAR				,
 	EMAIL			VARCHAR					,
 	AMMINISTRATORE	BOOLEAN					,
 	PRIMARY KEY (USERID, PASSWORD)
@@ -115,28 +115,28 @@ le nostre relazioni sono tutte 1-n oppure 1-1 quindi credo queste tabelle non se
 /*
 /*-----------------------------GLocation------------------------galaxy-coordinate*/
 CREATE TABLE GLocation(
-	GALAXYNAMELOC 	VARCHAR(20)
-					REFERENCES Galaxy(NAME),
+	GALAXYNAMELOC 	VARCHAR
+					REFERENCES SISTEMADIGALASSIE.Galaxy(NAME),
 	GALAXYLOC 		
 	PRIMARY KEY(GALAXYNAMELOC)
 );
 
 /*-----------------------------GMetallicity------------------------Galaxy-Metallicity*/
 CREATE TABLE GMetallicity(
-	GALAXYNAMEMET 	VARCHAR(20)
-					REFERENCES Galaxy(NAME),
+	GALAXYNAMEMET 	VARCHAR
+					REFERENCES SISTEMADIGALASSIE.Galaxy(NAME),
 );
 
 /*-----------------------------GLuminosity------------------------Galaxy-Luminosity*/
 CREATE TABLE GLuminosity(
-	GALAXYNAMELUM 	VARCHAR(20)
-					REFERENCES Galaxy(NAME),
+	GALAXYNAMELUM 	VARCHAR
+					REFERENCES SISTEMADIGALASSIE.Galaxy(NAME),
 );
 
 /*-----------------------------GHPR------------------------Galaxy-HPfluxR*/
 CREATE TABLE GHPR(
-	GALAXYNAMEHPR 	VARCHAR(20)
-					REFERENCES Galaxy(NAME),
+	GALAXYNAMEHPR 	VARCHAR
+					REFERENCES SISTEMADIGALASSIE.Galaxy(NAME),
 	ATOMNAMER		VARCHAR
 					REFERENCES HPfluxR(NAMEHPR),
 	PIXELRR			VARCHAR
@@ -146,8 +146,8 @@ CREATE TABLE GHPR(
 
 /*-----------------------------GHPC------------------------Galaxy-HPfluxC*/
 CREATE TABLE GHPC(
-	GALAXYNAMEHPC 	VARCHAR(20)
-					REFERENCES Galaxy(NAME),
+	GALAXYNAMEHPC 	VARCHAR
+					REFERENCES SISTEMADIGALASSIE.Galaxy(NAME),
 	ATOMNAMEC		VARCHAR
 					REFERENCES HPfluxC(NAMEHPR),
 	PIXELCR			VARCHAR
@@ -157,8 +157,8 @@ CREATE TABLE GHPC(
 
 /*-----------------------------GSpitzer------------------------Galaxy-Spitzerflux*/							
 CREATE TABLE GSpitzer(																						
-	GALAXYNAMESPITZER 	VARCHAR(20)																			
-						REFERENCES Galaxy(NAME),															
+	GALAXYNAMESPITZER 	VARCHAR																			
+						REFERENCES SISTEMADIGALASSIE.Galaxy(NAME),															
 	ATOMNAME			VARCHAR																				
 						REFERENCES HPfluxC(NAMEHPR),														
 	PIXELSPITZER			VARCHAR																			
@@ -218,14 +218,14 @@ The two alternatives to look at first are to embed b_id in the A table or embed 
 
 The other alternative is to put the a_ids in the B table. By embedding the a_id in the B table, we are associating one and only one A entity with a particular B entity. By the ER diagram, for any B entity there is one and only one A entity. Thus, the embedded a_id column must have a value in it.
 
-Given the above discussion, the table structure is as follows (see this page for how this should be interpreted):
+Given the above discussion, the table structure is as follows (see this page for how this should be VARCHARerpreted):
 
 A(__a_id__, a_name, <a_other>)
 B(__b_id__, b_name, fk_b_a*, <b_other>)
 
-Since this is the first one of these, I will interpret it for you: The A table has a primary key a_id and another field a_name. If A has any other attributes, they would be stored in this table as well (a_other). The B table has a primary key b_id and another field b_name. A third field (fk_b_a) is a foreign key that references the A table. If B has any other attributes, they would be stored in this table as well (b_other).
+Since this is the first one of these, I will VARCHARerpret it for you: The A table has a primary key a_id and another field a_name. If A has any other attributes, they would be stored in this table as well (a_other). The B table has a primary key b_id and another field b_name. A third field (fk_b_a) is a foreign key that references the A table. If B has any other attributes, they would be stored in this table as well (b_other).
 
-Given this table structure, we must only determine which foreign keys can be null and which are unique. The column fk_b_a is the only foreign key in these two tables. By looking at the ER diagram we can see that it cannot be null: for every B entity there must be one associated A entity. Since fk_b_a represents the associated A entity, it cannot be null. The value in fk_b_a cannot be unique since there are possibly many B entities associated with the same A entity; thus, the same a_id would be repeated in the fk_b_a column of many rows of B. Given this information, we have the following SQL create statements (see this page for how this should be interpreted):
+Given this table structure, we must only determine which foreign keys can be null and which are unique. The column fk_b_a is the only foreign key in these two tables. By looking at the ER diagram we can see that it cannot be null: for every B entity there must be one associated A entity. Since fk_b_a represents the associated A entity, it cannot be null. The value in fk_b_a cannot be unique since there are possibly many B entities associated with the same A entity; thus, the same a_id would be repeated in the fk_b_a column of many rows of B. Given this information, we have the following SQL create statements (see this page for how this should be VARCHARerpreted):
 
 create table A
   (a_id type primary key,
@@ -245,7 +245,7 @@ create table B (
 REQ-­‐FN-­‐3
 registrazione nuovo utente 
 */
-INSERT INTO User (NOME, COGNOME, USERID, PASSWORD, EMAIL, AMMINISTRATORE)
+INSERT VARCHARO User (NOME, COGNOME, USERID, PASSWORD, EMAIL, AMMINISTRATORE)
 VALUES (?, ?, ?, ?, ?, 0);
 
 /*
@@ -263,7 +263,7 @@ WHERE Galaxy.NOME = Luminosity.GALAXYNAMELUM AND Galaxy.NOME = Metallicity.GALAX
 
 /*
 REQ-­‐FN-­‐6
-ricercare le prime n galassie all'interno di un raggio ordinandole rispetto al centro del raggio
+ricercare le prime n galassie all'VARCHARerno di un raggio ordinandole rispetto al centro del raggio
 
 d = arccos(sin(ra1)*sin(ra2) + cos(ra1)*cos(ra2)*cos(dec1-dec2))
 
@@ -275,23 +275,23 @@ Dec(decimal degrees) = +or- (DD + MM/60 + SS(3600))
 
 
 	/*reggio dato dal problema*/
-	int raggio; /*da istanziare*/
-	int RA1; /*da istanziare*/
-	int DEC1; /*da istanziare*/
+	VARCHAR raggio; /*da istanziare*/
+	VARCHAR RA1; /*da istanziare*/
+	VARCHAR DEC1; /*da istanziare*/
 	ArrayList<String> heapGalassie = new ArrayList<String>();
 	
-	int rasch;
-	int rascm;
-	int rascs;
-	int decsign;
-	int decmin;
-	int decsec;
-	int decdeg;
+	VARCHAR rasch;
+	VARCHAR rascm;
+	VARCHAR rascs;
+	VARCHAR decsign;
+	VARCHAR decmin;
+	VARCHAR decsec;
+	VARCHAR decdeg;
 
 	/*declarations of distance*/
-	int distance;
-	int RA;
-	int DEC;
+	VARCHAR distance;
+	VARCHAR RA;
+	VARCHAR DEC;
 	String gal;
 
 	String sql = "	SELECT 	GALAXYNAMECOO, RASCH, RASCM, RASCS,
@@ -301,13 +301,13 @@ Dec(decimal degrees) = +or- (DD + MM/60 + SS(3600))
 	while(re.next())
 	{
 		gal = rs.getString("GALAXYNAMECOO");
-		rasch = rs.getInt("RASCH");
-		rascm = rs.getInt("RASCM");
-		rascs = rs.getInt("RASCS");
-		decsign = rs.getInt("DECSIGN");
-		decmin = rs.getInt("DECMIN");
-		decsec = rs.getInt("DECSEC");
-		decdeg = rs.getInt("DECDEG");
+		rasch = rs.getVARCHAR("RASCH");
+		rascm = rs.getVARCHAR("RASCM");
+		rascs = rs.getVARCHAR("RASCS");
+		decsign = rs.getVARCHAR("DECSIGN");
+		decmin = rs.getVARCHAR("DECMIN");
+		decsec = rs.getVARCHAR("DECSEC");
+		decdeg = rs.getVARCHAR("DECDEG");
 
 		RA = 15*(rasch+rascm/60+rascs/3600);
 		DEC =(decdeg + decmin/60 + decsec(3600)); /*non ci importa del segno*/

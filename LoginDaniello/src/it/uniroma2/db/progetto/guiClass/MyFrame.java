@@ -14,6 +14,7 @@ import it.uniroma2.db.progetto.guiClass.EventListeners;
 import it.uniroma2.db.appStart.StartGuiController; 
 
 
+@SuppressWarnings("serial")
 public class MyFrame extends JFrame {
 	
 	private static final String titolo = "Login";
@@ -53,13 +54,13 @@ public class MyFrame extends JFrame {
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		gbc.anchor = GridBagConstraints.FIRST_LINE_START;
-		this.add(this.user, gbc);
+		this.add(user, gbc);
 		
 
 		gbc.gridx = 1;
 		gbc.gridy = 0;
 		gbc.anchor = GridBagConstraints.CENTER;
-		this.add(this.insNome, gbc);
+		this.add(insNome, gbc);
 		
 		gbc.gridx = 0;
 		gbc.gridy = 2;
@@ -68,20 +69,20 @@ public class MyFrame extends JFrame {
 		gbc.gridx = 0;
 		gbc.gridy = 3;
 		gbc.anchor = GridBagConstraints.FIRST_LINE_START;
-		this.add(this.pwd, gbc);
+		this.add(pwd, gbc);
 		
 		gbc.gridx = 1;
 		gbc.gridy = 3;
 		gbc.anchor = GridBagConstraints.CENTER;
-		this.add(this.insCognome, gbc);
+		this.add(insCognome, gbc);
 		
 		gbc.gridy = 4;
 		gbc.anchor = GridBagConstraints.CENTER;
-		this.add(this.button, gbc);
+		this.add(button, gbc);
 			
 		gbc.gridy = 5;
 		gbc.anchor = GridBagConstraints.CENTER;
-		this.add(this.buttonR, gbc);
+		this.add(buttonR, gbc);
 		
 		this.pack();
 		this.setVisible(true);

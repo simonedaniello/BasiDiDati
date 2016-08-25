@@ -12,6 +12,7 @@ import it.uniroma2.db.progetto.guiClass.EventListeners;
 import it.uniroma2.db.progetto.guiClass.userAdder; 
 
 
+@SuppressWarnings("serial")
 public class RegisInterface extends JFrame implements ActionListener {
 	
 
@@ -35,7 +36,6 @@ public class RegisInterface extends JFrame implements ActionListener {
 	private JTextField tfpwdCode;
 	private JLabel lpwdCodeError;
 	
-	private JLabel lrepwdCode;
 	private JTextField tfrepwdCode;
 	private JLabel lrepwdCodeError;
 	private JLabel lrepwdCodeError2;
@@ -239,7 +239,7 @@ public class RegisInterface extends JFrame implements ActionListener {
 			public void actionPerformed(ActionEvent e)
 			{
 				dispose();
-				MyFrame newframe = new MyFrame();
+				new MyFrame();
 			}
 		});
 		
@@ -308,7 +308,7 @@ public class RegisInterface extends JFrame implements ActionListener {
 			userAdder costruttore = new userAdder();
 			costruttore.adder(tfUser.getText(), tfpwdCode.getText(), tfName.getText(), tfLastName.getText(), tfemail.getText());
 			dispose();
-			MyFrame newframe2 = new MyFrame();
+			new MyFrame();
 		}
 	}
 

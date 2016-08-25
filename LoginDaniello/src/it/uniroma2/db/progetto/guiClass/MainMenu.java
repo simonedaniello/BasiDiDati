@@ -3,13 +3,11 @@ package it.uniroma2.db.progetto.guiClass;
 import javax.swing.*;
 
 import it.uniroma2.db.progetto.guiClass.EventListeners;
-import it.uniroma2.db.appStart.*;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 
+@SuppressWarnings("serial")
 public class MainMenu extends JFrame {
 	
 	private static final String titolo = "Welcome!";
@@ -31,15 +29,15 @@ public class MainMenu extends JFrame {
 		
 		gbc.gridy = 4;
 		gbc.anchor = GridBagConstraints.LINE_START;
-		this.add(this.buttonCheck, gbc);
+		this.add(buttonCheck, gbc);
 			
 		gbc.gridy = 4;
 		gbc.anchor = GridBagConstraints.LINE_END;
-		this.add(this.buttonCsv, gbc);
+		this.add(buttonCsv, gbc);
 		
 		gbc.gridy = 5;
 		gbc.anchor = GridBagConstraints.LINE_START;
-		this.add(this.buttonExit, gbc);		
+		this.add(buttonExit, gbc);		
 		
 		
 		buttonExit.addActionListener(new EventListeners() {
@@ -75,7 +73,7 @@ public class MainMenu extends JFrame {
 		buttonCheck.addActionListener(new EventListeners() {
 		    public void actionPerformed(ActionEvent e)
 		    {
-		    	CheckDBframe comandi = new CheckDBframe();
+		    	new CheckDBframe();
 		    	dispose();
 		    }
 		});

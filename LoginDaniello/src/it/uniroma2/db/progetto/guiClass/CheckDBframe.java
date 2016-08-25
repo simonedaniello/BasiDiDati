@@ -11,6 +11,7 @@ import javax.swing.*;
 
 import it.uniroma2.db.progetto.guiClass.EventListeners;
 
+@SuppressWarnings("serial")
 public class CheckDBframe extends JFrame{
 	
 	private static final String titolo = "DATABASE";
@@ -415,7 +416,7 @@ public class CheckDBframe extends JFrame{
 			public void actionPerformed(ActionEvent e)
 			{
 				dispose();
-				MainMenu back = new MainMenu();
+				new MainMenu();
 			}
 		});
 		

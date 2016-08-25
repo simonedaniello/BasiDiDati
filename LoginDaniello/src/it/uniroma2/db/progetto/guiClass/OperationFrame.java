@@ -10,6 +10,7 @@ import javax.swing.event.*;
 import it.uniroma2.db.progetto.guiClass.EventListeners;
  
 /* ListDemo.java requires no other files. */
+@SuppressWarnings("serial")
 public class OperationFrame extends JPanel implements ListSelectionListener 
 {
     

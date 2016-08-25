@@ -11,12 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
-import it.uniroma2.db.progetto.guiClass.MyFrame;
-
 public class CSVreader {
 	
 	// JDBC driver name and database URL
@@ -74,7 +68,9 @@ public class CSVreader {
 		         * 24- reference for the metallicity
 		         * 25- Alternative Galaxy
 		         * */
-		        
+        	
+        		System.out.println("start operation");
+        		
 		        int i = 0;
 		
 		        Scanner scanner = new Scanner(new File(csvFile));
@@ -84,6 +80,7 @@ public class CSVreader {
 		            {
 
 		            		elements.add(line.get(i));
+		            		System.out.println(elements.get(i)+ ";");
 		            		i++;
 		            	
 		            }
@@ -100,20 +97,67 @@ public class CSVreader {
 					      //STEP 4: Execute a query
 					      stmt = conn.createStatement();
 					      
-					      int j = 0;
+					      String sql2;
+					      String sql;
+					      ResultSet rs;
+					      
+					      int j = 1;
 					  while (j < elements.size()/26){
-					      String sql = "SELECT NAME FROM SISTEMADIGALASSIE.Galaxy WHERE NAME='" + elements.get(0*j) +"'";
-					      ResultSet rs = stmt.executeQuery(sql);
+					      sql = "SELECT NAME FROM SISTEMADIGALASSIE.Galaxy WHERE NAME='" + elements.get(26*(j-1)) +"'";
+					      rs = stmt.executeQuery(sql);
 					      
 					      //STEP 5: Extract data from result set
 					      if (!rs.next() ) {    
-						      String sql2 = "INSERT INTO SISTEMADIGALASSIE.Galaxy " +
+						      sql2 = "INSERT INTO SISTEMADIGALASSIE.Galaxy " +
 					                   		"VALUES ('"	+ elements.get(9*j) +"', '" 
-					                   					+ elements.get(0*j) + "', '"
+					                   					+ elements.get(26*(j-1)) + "', '"
 					                   					+ elements.get(25*j) + "', '"
 					                   					+ elements.get(11*j) + "', '"
-					                   					+ elements.get(8*j) +  "')";
+					                   					+ elements.get(8*j) +  "')";	
 						      stmt.executeUpdate(sql2);
+						      
+						      System.out.println("inserted galaxy : "+ elements.get(26*(j-1))+ ";");
+					      }
+					      
+
+						  if (elements.get(14*j).equals("Y"))
+						  {
+						      sql = "SELECT LFLAG, ABSORPTION FROM SISTEMADIGALASSIE.Luminosity "
+						      		+ "WHERE LFLAG='TRUE' AND ABSORPTION ='" + elements.get(13*j) +"'";
+						      rs = stmt.executeQuery(sql);
+						      
+						      //STEP 5: Extract data from result set
+						      if (!rs.next() ) {   
+						    	  
+	
+								      sql2 = "INSERT INTO SISTEMADIGALASSIE.Luminosity " +
+						                   		"VALUES ('"	+ "TRUE" + "', '" 
+						                   					+ elements.get(13*j) + "', '"
+						                   					+ elements.get(26*(j-1)) +  "')";
+						      }
+						  }
+						  else
+						  {
+						      sql = "SELECT LFLAG, ABSORPTION FROM SISTEMADIGALASSIE.Luminosity "
+							      		+ "WHERE LFLAG='FALSE' AND ABSORPTION ='" + elements.get(13*j) +"'";
+							      rs = stmt.executeQuery(sql);
+							      
+							      //STEP 5: Extract data from result set
+							      if (!rs.next() ) {   
+							    	  
+								      sql2 = "INSERT INTO SISTEMADIGALASSIE.Luminosity " +
+						                   		"VALUES ('"	+ "FALSE" + "', '" 
+						                   					+ elements.get(13*j) + "', '"
+						                   					+ elements.get(26*(j-1)) +  "')";
+						    	  
+						      }						      
+					      }
+						  
+					      sql = "SELECT GALAXYNAMECOO FROM SISTEMADIGALASSIE.Coordinate WHERE GALAXYNAMECOO='" + elements.get(26*(j-1)) +"'";
+					      rs = stmt.executeQuery(sql);
+					      
+					      //STEP 5: Extract data from result set
+					      if (!rs.next() ) {   
 						      
 						      sql2 = "INSERT INTO SISTEMADIGALASSIE.Coordinate " +
 				                   		"VALUES ('"	+ elements.get(1*j) + "', '" 
@@ -122,70 +166,74 @@ public class CSVreader {
 				                   					+ elements.get(4*j) + "', '"
 						                   			+ elements.get(6*j) + "', '"
 								                   	+ elements.get(7*j) + "', '"
-				                   					+ elements.get(5*j) +  "')";
+								                   	+ elements.get(5*j) + "', '"
+				                   					+ elements.get(26*(j-1)) +  "')";
 						      
 						      stmt.executeUpdate(sql2);
 						      
-						      
-							  if (elements.get(14*j).equals("Y")){
-							      sql2 = "INSERT INTO SISTEMADIGALASSIE.Luminosity " +
-					                   		"VALUES ('"	+ "TRUE" + "', '" 
-					                   					+ elements.get(13*j) + "', '"
-					                   					+ elements.get(0*j) +  "')";
-						      }
-						      else{
-							      sql2 = "INSERT INTO SISTEMADIGALASSIE.Luminosity " +
-					                   		"VALUES ('"	+ "FALSE" + "', '" 
-					                   					+ elements.get(13*j) + "', '"
-					                   					+ elements.get(0*j) +  "')";
-						    	  
-						      }
-						      stmt.executeUpdate(sql2);
-						      
+					      }
+					      
+					      sql = "SELECT GALAXYNAMES FROM SISTEMADIGALASSIE.Spitzerflux WHERE GALAXYNAMES='" + elements.get(26*(j-1)) +"'";
+					      rs = stmt.executeQuery(sql);
+					      
+					      //STEP 5: Extract data from result set
+					      if (!rs.next() ) {  
+					    	  
 						      sql2 = "INSERT INTO SISTEMADIGALASSIE.Spitzerflux " +
 				                   		"VALUES ('"	+ "NeV14.3" + "', '" 
 				                   					+ "" 				+ "', '"
-				                   					+ ""				+ "', '"
+				                   					+ "FALSE"			+ "', '"
 				                   					+ ""				+ "', '"
 						                   			+ elements.get(17*j) + "', '"
-				                   					+ elements.get(0*j) +  "')";
+				                   					+ elements.get(26*(j-1)) +  "')";
 						      
 						      stmt.executeUpdate(sql2);
 						      
+					      
+					      
 						      sql2 = "INSERT INTO SISTEMADIGALASSIE.Spitzerflux " +
 				                   		"VALUES ('"	+ "NeV24.3" + "', '" 
 				                   					+ "" 				+ "', '"
-				                   					+ ""				+ "', '"
+				                   					+ "FALSE"			+ "', '"
 				                   					+ ""				+ "', '"
 						                   			+ elements.get(19*j) + "', '"
-				                   					+ elements.get(0*j) +  "')";
+				                   					+ elements.get(26*(j-1)) +  "')";
 						      
 						      stmt.executeUpdate(sql2);
 						      
 						      sql2 = "INSERT INTO SISTEMADIGALASSIE.Spitzerflux " +
 				                   		"VALUES ('"	+ "NeV25.9" + "', '" 
 				                   					+ "" 				+ "', '"
-				                   					+ ""				+ "', '"
+				                   					+ "FALSE"			+ "', '"
 				                   					+ ""				+ "', '"
 						                   			+ elements.get(21*j) + "', '"
-				                   					+ elements.get(0*j) +  "')";
+				                   					+ elements.get(26*(j-1)) +  "')";
 						      
 						      stmt.executeUpdate(sql2);
 						      
+					      }
+					      
+					      sql = "SELECT GALAXYNAMEMET FROM SISTEMADIGALASSIE.Metallicity WHERE GALAXYNAMEMET='" + elements.get(26*(j-1)) +"'";
+					      rs = stmt.executeQuery(sql);
+					      
+					      //STEP 5: Extract data from result set
+					      if (!rs.next() ) {  
+					      
 						      sql2 = "INSERT INTO SISTEMADIGALASSIE.Metallicity " +
 				                   		"VALUES ('"	+ elements.get(22*j) + "', '" 
 				                   					+ elements.get(23*j) + "', '"
-				                   					+ elements.get(0*j) +  "')";
+				                   					+ elements.get(26*(j-1)) +  "')";
 						      
 						      stmt.executeUpdate(sql2);
+					      }   
+						      j++;
 						      
 						      /*vedi bene, non ho usato 12,16,18 e 20*/
 					      }
-					      
-					      j++;
+
 
 					  }
-				   }
+				   
 
 				   
 					catch(SQLException se){
@@ -209,6 +257,7 @@ public class CSVreader {
 					      }//end finally try
 					   }//end try
 				   }
+			
         
 
         /*--------------------------------------------------------------------------------------------------FILE N*/
@@ -272,11 +321,11 @@ public class CSVreader {
 					      //STEP 4: Execute a query
 					      stmt = conn.createStatement();
 					      
-					      int j = 0;
+					      int j = 1;
 					      
 					      
 					  while (j < elements.size()/23){
-					      String sql = "SELECT NAME FROM SISTEMADIGALASSIE.HPfluxR WHERE GALAXYNAMEHPR='" + elements.get(0*j) +"'";
+					      String sql = "SELECT NAME FROM SISTEMADIGALASSIE.HPfluxR WHERE GALAXYNAMEHPR='" + elements.get(23*(j-1)) +"'";
 					      ResultSet rs = stmt.executeQuery(sql);
 					      
 					      //STEP 5: Extract data from result set
@@ -287,7 +336,7 @@ public class CSVreader {
 					                   					+ elements.get(2*j) + "', '"
 					                   					+ elements.get(3*j) + "', '"
 							                   			+ elements.get(1*j) + "', '"
-					                   					+ elements.get(0*j) +  "')";
+					                   					+ elements.get(23*(j-1)) +  "')";
 						      stmt.executeUpdate(sql2);
 						      
 						      sql2 = "INSERT INTO SISTEMADIGALASSIE.HPfluxR " +
@@ -296,7 +345,7 @@ public class CSVreader {
 				                   					+ elements.get(5*j) + "', '"
 				                   					+ elements.get(6*j) + "', '"
 						                   			+ elements.get(4*j) + "', '"
-				                   					+ elements.get(0*j) +  "')";
+				                   					+ elements.get(23*(j-1)) +  "')";
 					      stmt.executeUpdate(sql2);
 						      
 						      
@@ -306,7 +355,7 @@ public class CSVreader {
 			                   					+ elements.get(8*j) + "', '"
 			                   					+ elements.get(9*j) + "', '"
 					                   			+ elements.get(7*j) + "', '"
-			                   					+ elements.get(0*j) +  "')";
+			                   					+ elements.get(23*(j-1)) +  "')";
 					      stmt.executeUpdate(sql2);
 				      
 				      
@@ -315,8 +364,8 @@ public class CSVreader {
 			                   					+ "3x3" 			+ "', '"
 			                   					+ elements.get(11*j) + "', '"
 			                   					+ elements.get(12*j) + "', '"
-					                   			+ elements.get(10*j) + "', '"
-			                   					+ elements.get(0*j) +  "')";
+					                   			+ elements.get(126*(j-1)) + "', '"
+			                   					+ elements.get(23*(j-1)) +  "')";
 					      stmt.executeUpdate(sql2);
 						      
 					      sql2 = "INSERT INTO SISTEMADIGALASSIE.HPfluxR " +
@@ -325,7 +374,7 @@ public class CSVreader {
 			                   					+ elements.get(14*j) + "', '"
 			                   					+ elements.get(15*j) + "', '"
 					                   			+ elements.get(13*j) + "', '"
-			                   					+ elements.get(0*j) +  "')";
+			                   					+ elements.get(23*(j-1)) +  "')";
 					      stmt.executeUpdate(sql2);
 						      
 					      sql2 = "INSERT INTO SISTEMADIGALASSIE.HPfluxR " +
@@ -334,16 +383,16 @@ public class CSVreader {
 			                   					+ elements.get(17*j) + "', '"
 			                   					+ elements.get(18*j) + "', '"
 					                   			+ elements.get(16*j) + "', '"
-			                   					+ elements.get(0*j) +  "')";
+			                   					+ elements.get(23*(j-1)) +  "')";
 					      stmt.executeUpdate(sql2);
 						      
 					      sql2 = "INSERT INTO SISTEMADIGALASSIE.HPfluxR " +
 			                   		"VALUES ('"	+ "CII-158" 		+ "', '" 
 			                   					+ "3x3" 			+ "', '"
-			                   					+ elements.get(20*j) + "', '"
+			                   					+ elements.get(226*(j-1)) + "', '"
 			                   					+ elements.get(21*j) + "', '"
 					                   			+ elements.get(19*j) + "', '"
-			                   					+ elements.get(0*j) +  "')";
+			                   					+ elements.get(23*(j-1)) +  "')";
 					      stmt.executeUpdate(sql2);
 						      
 					      }
@@ -437,11 +486,11 @@ public class CSVreader {
 					      //STEP 4: Execute a query
 					      stmt = conn.createStatement();
 					      
-					      int j = 0;
+					      int j = 1;
 					      
 					      
 					  while (j < elements.size()/23){
-					      String sql = "SELECT NAME FROM SISTEMADIGALASSIE.HPfluxR WHERE GALAXYNAMEHPC='" + elements.get(0*j) +"'";
+					      String sql = "SELECT NAME FROM SISTEMADIGALASSIE.HPfluxR WHERE GALAXYNAMEHPC='" + elements.get(22*(j-1)) +"'";
 					      ResultSet rs = stmt.executeQuery(sql);
 					      
 					      //STEP 5: Extract data from result set
@@ -452,7 +501,7 @@ public class CSVreader {
 					                   					+ elements.get(1*j) + "', '"
 					                   					+ elements.get(2*j) + "', '"
 							                   			+ ""				+ "', '"
-					                   					+ elements.get(0*j) +  "')";
+					                   					+ elements.get(22*(j-1)) +  "')";
 						      stmt.executeUpdate(sql2);
 						      
 						      sql2 = "INSERT INTO SISTEMADIGALASSIE.HPfluxC " +
@@ -461,7 +510,7 @@ public class CSVreader {
 				                   					+ elements.get(3*j) + "', '"
 				                   					+ elements.get(4*j) + "', '"
 						                   			+ ""				+ "', '"
-				                   					+ elements.get(0*j) +  "')";
+				                   					+ elements.get(22*(j-1)) +  "')";
 					      stmt.executeUpdate(sql2);
 						      
 						      
@@ -471,7 +520,7 @@ public class CSVreader {
 			                   					+ elements.get(6*j) + "', '"
 			                   					+ elements.get(7*j) + "', '"
 					                   			+ elements.get(5*j) + "', '"
-			                   					+ elements.get(0*j) +  "')";
+			                   					+ elements.get(22*(j-1)) +  "')";
 					      stmt.executeUpdate(sql2);
 				      
 				      
@@ -479,9 +528,9 @@ public class CSVreader {
 			                   		"VALUES ('"	+ "OIII-88" 		+ "', '" 
 			                   					+ "3x3" 			+ "', '"
 			                   					+ elements.get(9*j) + "', '"
-			                   					+ elements.get(10*j) + "', '"
+			                   					+ elements.get(126*(j-1)) + "', '"
 					                   			+ elements.get(8*j) + "', '"
-			                   					+ elements.get(0*j) +  "')";
+			                   					+ elements.get(22*(j-1)) +  "')";
 					      stmt.executeUpdate(sql2);
 						      
 					      sql2 = "INSERT INTO SISTEMADIGALASSIE.HPfluxC " +
@@ -490,7 +539,7 @@ public class CSVreader {
 			                   					+ elements.get(12*j) + "', '"
 			                   					+ elements.get(13*j) + "', '"
 					                   			+ elements.get(11*j) + "', '"
-			                   					+ elements.get(0*j) +  "')";
+			                   					+ elements.get(22*(j-1)) +  "')";
 					      stmt.executeUpdate(sql2);
 						      
 					      sql2 = "INSERT INTO SISTEMADIGALASSIE.HPfluxC " +
@@ -499,7 +548,7 @@ public class CSVreader {
 			                   					+ elements.get(15*j) + "', '"
 			                   					+ elements.get(16*j) + "', '"
 					                   			+ elements.get(14*j) + "', '"
-			                   					+ elements.get(0*j) +  "')";
+			                   					+ elements.get(22*(j-1)) +  "')";
 					      stmt.executeUpdate(sql2);
 						      
 					      sql2 = "INSERT INTO SISTEMADIGALASSIE.HPfluxC " +
@@ -508,7 +557,7 @@ public class CSVreader {
 			                   					+ elements.get(18*j) + "', '"
 			                   					+ elements.get(19*j) + "', '"
 					                   			+ elements.get(17*j) + "', '"
-			                   					+ elements.get(0*j) +  "')";
+			                   					+ elements.get(22*(j-1)) +  "')";
 					      stmt.executeUpdate(sql2);
 						      
 					      }
@@ -607,11 +656,11 @@ public class CSVreader {
 					      //STEP 4: Execute a query
 					      stmt = conn.createStatement();
 					      
-					      int j = 0;
+					      int j = 1;
 					      
 					      
 					  while (j < elements.size()/30){
-					      String sql = "SELECT NAME FROM SISTEMADIGALASSIE.Spitzerflux WHERE GALAXYNAMES='" + elements.get(0*j) +"'";
+					      String sql = "SELECT NAME FROM SISTEMADIGALASSIE.Spitzerflux WHERE GALAXYNAMES='" + elements.get(29*(j-1)) +"'";
 					      ResultSet rs = stmt.executeQuery(sql);
 					      
 					      //STEP 5: Extract data from result set
@@ -622,7 +671,7 @@ public class CSVreader {
 					                   					+ elements.get(1*j) + "', '"
 					                   					+ elements.get(3*j) + "', '"
 							                   			+ elements.get(28*j)+ "', '"
-					                   					+ elements.get(0*j) +  "')";
+					                   					+ elements.get(29*(j-1)) +  "')";
 						      stmt.executeUpdate(sql2);
 						      
 						   sql2 = "INSERT INTO SISTEMADIGALASSIE.Spitzerflux " +
@@ -631,7 +680,7 @@ public class CSVreader {
 				                   					+ elements.get(6*j) + "', '"
 				                   					+ elements.get(4*j) + "', '"
 						                   			+ elements.get(28*j)+ "', '"
-				                   					+ elements.get(0*j) +  "')";
+				                   					+ elements.get(29*(j-1)) +  "')";
 					      stmt.executeUpdate(sql2);
 						      
 						      
@@ -641,16 +690,16 @@ public class CSVreader {
 			                   					+ elements.get(9*j) + "', '"
 			                   					+ elements.get(7*j) + "', '"
 					                   			+ elements.get(28*j) + "', '"
-			                   					+ elements.get(0*j) +  "')";
+			                   					+ elements.get(29*(j-1)) +  "')";
 					      stmt.executeUpdate(sql2);
 				      
 					      sql2 = "INSERT INTO SISTEMADIGALASSIE.Spitzerflux " +
 			                   		"VALUES ('"	+ "NeIII-15.6" 		+ "', '" 
 			                   					+ elements.get(11*j)+ "', '"
 			                   					+ elements.get(12*j) + "', '"
-			                   					+ elements.get(10*j) + "', '"
+			                   					+ elements.get(126*(j-1)) + "', '"
 					                   			+ elements.get(28*j) + "', '"
-			                   					+ elements.get(0*j) +  "')";
+			                   					+ elements.get(29*(j-1)) +  "')";
 					      stmt.executeUpdate(sql2);
 						      
 					      sql2 = "INSERT INTO SISTEMADIGALASSIE.Spitzerflux " +
@@ -659,7 +708,7 @@ public class CSVreader {
 			                   					+ elements.get(15*j) + "', '"
 			                   					+ elements.get(13*j) + "', '"
 					                   			+ elements.get(28*j) + "', '"
-			                   					+ elements.get(0*j)  +  "')";
+			                   					+ elements.get(29*(j-1))  +  "')";
 					      stmt.executeUpdate(sql2);
 						      
 					      sql2 = "INSERT INTO SISTEMADIGALASSIE.Spitzerflux " +
@@ -668,16 +717,16 @@ public class CSVreader {
 			                   					+ elements.get(18*j) + "', '"
 			                   					+ elements.get(16*j) + "', '"
 					                   			+ elements.get(28*j) + "', '"
-			                   					+ elements.get(0*j)  +  "')";
+			                   					+ elements.get(29*(j-1))  +  "')";
 					      stmt.executeUpdate(sql2);
 						      
 					      sql2 = "INSERT INTO SISTEMADIGALASSIE.Spitzerflux " +
 			                   		"VALUES ('"	+ "OIV-25.9" 		 + "', '" 
-			                   					+ elements.get(20*j) + "', '"
+			                   					+ elements.get(226*(j-1)) + "', '"
 			                   					+ elements.get(21*j) + "', '"
 			                   					+ elements.get(19*j) + "', '"
 					                   			+ elements.get(28*j) + "', '"
-			                   					+ elements.get(0*j)  +  "')";
+			                   					+ elements.get(29*(j-1))  +  "')";
 					      stmt.executeUpdate(sql2);
 					      
 					      sql2 = "INSERT INTO SISTEMADIGALASSIE.Spitzerflux " +
@@ -686,7 +735,7 @@ public class CSVreader {
 			                   					+ elements.get(24*j) + "', '"
 			                   					+ elements.get(22*j) + "', '"
 					                   			+ elements.get(28*j) + "', '"
-			                   					+ elements.get(0*j)  +  "')";
+			                   					+ elements.get(29*(j-1))  +  "')";
 					      stmt.executeUpdate(sql2);
 					      
 					      sql2 = "INSERT INTO SISTEMADIGALASSIE.Spitzerflux " +
@@ -695,7 +744,7 @@ public class CSVreader {
 			                   					+ elements.get(27*j) + "', '"
 			                   					+ elements.get(25*j) + "', '"
 					                   			+ elements.get(28*j) + "', '"
-			                   					+ elements.get(0*j)  +  "')";
+			                   					+ elements.get(29*(j-1))  +  "')";
 					      stmt.executeUpdate(sql2);
 						      
 					      }
@@ -742,24 +791,31 @@ public class CSVreader {
 				1-						  21- 21 A1     --        l_Foiii52  Limit flag on [OIII]52 line flux
 				2-						  23- 29 F7.2   10-17W/m2   Foiii52  Flux of the [OIII]52 line from Herschel/PACS
 				3-						  31- 36 F6.2   10-17W/m2 e_Foiii52  Flux error for [OIII]52
+				
 				4-						  38- 38 A1     --        l_Fniii57  Limit flag on [NIII]57 line flux
 				5-						  40- 46 F7.2   10-17W/m2   Fniii57  Flux of the [NIII]57 line from Herschel/PACS
 				6-						  48- 53 F6.2   10-17W/m2 e_Fniii57  Flux error for [NIII]57
+				
 				7-						  55- 55 A1     --        l_Foi63    Limit flag on [OI]63 line flux
 				8-						  57- 64 F8.2   10-17W/m2   Foi63    Flux of the [OI]63 line from Herschel/PACS
 				9-						  66- 71 F6.2   10-17W/m2 e_Foi63    Flux error for [OI]63
+				
 				10-						  73- 73 A1     --        l_Foiii88  Limit flag on [OIII]88 line flux
 				11-						  75- 81 F7.2   10-17W/m2   Foiii88  Flux of the [OIII]88 line from Herschel/PACS
 				12-						  83- 88 F6.2   10-17W/m2 e_Foiii88  Flux error for [OIII]88
+				
 				13-						  90- 90 A1     --        l_Fnii122  Limit flag on [NII]122 line flux
 				14-						  92- 98 F7.2   10-17W/m2   Fnii122  Flux of the [NII]122 line from Herschel/PACS
 				15-						 100-104 F5.2   10-17W/m2 e_Fnii122  Flux error for [NII]122
+				
 				16-						 106-106 A1     --        l_Foi145   Limit flag on [OI]145 line flux
 				17-						 108-114 F7.2   10-17W/m2   Foi145   Flux of the [OI]145 line from Herschel/PACS
 				18-						 116-121 F6.2   10-17W/m2 e_Foi145   Flux error for [OI]145
+				
 				19-						 123-123 A1     --        l_Fcii158  Limit flag on [CII]158 line flux
 				20-						 125-132 F8.2   10-17W/m2   Fcii158  Flux of the [CII]158 line from Herschel/PACS
 				21-						 134-139 F6.2   10-17W/m2 e_Fcii158  Flux error for [CII]158
+				
 				22-						 141-143 A3     --          Aper     Aperture: 'c' central spaxel, '3x3' spaxel array, and '5x5' spaxel array
 		         */
 		        
@@ -788,11 +844,11 @@ public class CSVreader {
 					      //STEP 4: Execute a query
 					      stmt = conn.createStatement();
 					      
-					      int j = 0;
+					      int j = 1;
 					      
 					      
-					  while (j < elements.size()/21){
-					      String sql = "SELECT NAME FROM SISTEMADIGALASSIE.HPfluxR WHERE GALAXYNAMEHPR='" + elements.get(0*j) +"'";
+					  while (j < elements.size()/23){
+					      String sql = "SELECT NAME FROM SISTEMADIGALASSIE.HPfluxR WHERE GALAXYNAMEHPR='" + elements.get(23*(j-1)) +"'";
 					      ResultSet rs = stmt.executeQuery(sql);
 					      
 					      //STEP 5: Extract data from result set
@@ -803,7 +859,7 @@ public class CSVreader {
 					                   					+ elements.get(1*j) + "', '"
 					                   					+ elements.get(3*j) + "', '"
 							                   			+ elements.get(22*j)+ "', '"
-					                   					+ elements.get(0*j) +  "')";
+					                   					+ elements.get(23*(j-1)) +  "')";
 						      stmt.executeUpdate(sql2);
 						      
 						   sql2 = "INSERT INTO SISTEMADIGALASSIE.Spitzerflux " +
@@ -812,7 +868,7 @@ public class CSVreader {
 				                   					+ elements.get(6*j) + "', '"
 				                   					+ elements.get(4*j) + "', '"
 						                   			+ elements.get(22*j)+ "', '"
-				                   					+ elements.get(0*j) +  "')";
+				                   					+ elements.get(23*(j-1)) +  "')";
 					      stmt.executeUpdate(sql2);
 						      
 						      
@@ -822,16 +878,16 @@ public class CSVreader {
 			                   					+ elements.get(9*j) + "', '"
 			                   					+ elements.get(7*j) + "', '"
 					                   			+ elements.get(22*j) + "', '"
-			                   					+ elements.get(0*j) +  "')";
+			                   					+ elements.get(23*(j-1)) +  "')";
 					      stmt.executeUpdate(sql2);
 				      
 					      sql2 = "INSERT INTO SISTEMADIGALASSIE.Spitzerflux " +
 			                   		"VALUES ('"	+ "OIII-88" 		+ "', '" 
 			                   					+ elements.get(11*j)+ "', '"
 			                   					+ elements.get(12*j) + "', '"
-			                   					+ elements.get(10*j) + "', '"
+			                   					+ elements.get(10*(j-1)) + "', '"
 					                   			+ elements.get(22*j) + "', '"
-			                   					+ elements.get(0*j) +  "')";
+			                   					+ elements.get(23*(j-1)) +  "')";
 					      stmt.executeUpdate(sql2);
 						      
 					      sql2 = "INSERT INTO SISTEMADIGALASSIE.Spitzerflux " +
@@ -840,7 +896,7 @@ public class CSVreader {
 			                   					+ elements.get(15*j) + "', '"
 			                   					+ elements.get(13*j) + "', '"
 					                   			+ elements.get(22*j) + "', '"
-			                   					+ elements.get(0*j)  +  "')";
+			                   					+ elements.get(23*(j-1))  +  "')";
 					      stmt.executeUpdate(sql2);
 						      
 					      sql2 = "INSERT INTO SISTEMADIGALASSIE.Spitzerflux " +
@@ -849,7 +905,7 @@ public class CSVreader {
 			                   					+ elements.get(18*j) + "', '"
 			                   					+ elements.get(16*j) + "', '"
 					                   			+ elements.get(22*j) + "', '"
-			                   					+ elements.get(0*j)  +  "')";
+			                   					+ elements.get(23*(j-1))  +  "')";
 					      stmt.executeUpdate(sql2);
 						      
 					      sql2 = "INSERT INTO SISTEMADIGALASSIE.Spitzerflux " +
@@ -858,7 +914,7 @@ public class CSVreader {
 			                   					+ elements.get(21*j) + "', '"
 			                   					+ elements.get(19*j) + "', '"
 					                   			+ elements.get(22*j) + "', '"
-			                   					+ elements.get(0*j)  +  "')";
+			                   					+ elements.get(23*(j-1))  +  "')";
 					      stmt.executeUpdate(sql2);
 					      
 
@@ -995,7 +1051,7 @@ public class CSVreader {
     }
     
 	public static void main(String[] args) throws Exception {
-		CSVreader prova = new CSVreader("/home/dandi/Downloads/Università/galassie.csv", 0);
+		new CSVreader("/home/dandi/Downloads/Università/galassie.csv", 0);
 	}
 
 }

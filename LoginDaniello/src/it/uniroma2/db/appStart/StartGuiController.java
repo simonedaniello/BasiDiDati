@@ -6,10 +6,7 @@ import javax.swing.*;
 
 public class StartGuiController {
 	
-	// JDBC driver name and database URL
-	 // JDBC driver name and database URL
 	   static final String JDBC_DRIVER = "org.postgresql.Driver";  
-	   //static final String DB_URL = "jdbc:mysql://localhost/LOCATIONS";
 	   static final String DB_URL = "jdbc:postgresql://localhost:5432/testdb";
 
 	//  Database credentials
@@ -18,7 +15,7 @@ public class StartGuiController {
 	   
 	   
 	public static void main(String[] args) {
-	MyFrame myFrm = new MyFrame();
+	new MyFrame();
 	}
 	
 	public static void listenC(String User, String Pwd){
@@ -44,7 +41,7 @@ public class StartGuiController {
 		    	  //MyFrame myFrm = new MyFrame();
 		    	}
 		      else {
-		    	  MainMenu benvenuto = new MainMenu();
+		    	  new MainMenu();
 		      }
 		      
 		      rs.close();
@@ -71,6 +68,6 @@ public class StartGuiController {
 	}
 	
 	public static void listenR(){
-		RegisInterface registrati = new RegisInterface();
+		new RegisInterface();
 	}
 }

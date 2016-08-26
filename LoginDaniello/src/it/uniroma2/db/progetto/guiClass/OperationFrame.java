@@ -36,7 +36,11 @@ public class OperationFrame extends JPanel implements ListSelectionListener
  
     /*----------------------------------------------------------------------------------------------------OPERATIONFRAME()*/
     
-    public OperationFrame(int operationNumber, String galaxyName) throws Exception {
+	/*
+	 * morelessequal -> 0 less, 1 more, 2 equals*/
+    public OperationFrame(int operationNumber, String galaxyName, 
+    		String rayn, String rayrasch, String rayrascm, String rayrascs, String raydecsign, String raydecmin, String raydecsec, String raydecdeg, 
+    		String redshift, int morelessequals) throws Exception {
     	
         super(new BorderLayout());
  
@@ -48,7 +52,7 @@ public class OperationFrame extends JPanel implements ListSelectionListener
 	    conn = DriverManager.getConnection(DB_URL, USER, PASS);
 	    stmt = conn.createStatement();
 	      
-	    String sql2;
+
 	    String sql;
 	    ResultSet rs;
 	    
@@ -81,7 +85,7 @@ public class OperationFrame extends JPanel implements ListSelectionListener
         
         if (operationNumber == 0)
         {
-	    	  System.out.println("sono dentro");
+
 	    	  
 		      sql = "SELECT NAME, DISTANCE, REDSHIFT, RASCH, RASCM, RASCS, DECSIGN, DECMIN, DECSEC, DECDEG, ABSORPTION, VALUEMET, ERRORM"
 		      	+  " FROM SISTEMADIGALASSIE.Galaxy, SISTEMADIGALASSIE.Coordinate, SISTEMADIGALASSIE.Luminosity, SISTEMADIGALASSIE.Metallicity "
@@ -106,7 +110,49 @@ public class OperationFrame extends JPanel implements ListSelectionListener
 			      listModel.addElement("Galaxy error met. :    " + rs.getString("ERRORM"));
 		      }
         }
+      
+        /*---------------------------------------------------------------------------------------------------------OPERATIONNUMBER = 2*/
+        
+        
+        if (operationNumber == 2)
+        {
         	
+        	System.out.println(redshift);
+	    	  if (morelessequals == 0)
+	    	  {
+			      sql = "SELECT NAME, REDSHIFT"
+			      	+  " FROM SISTEMADIGALASSIE.Galaxy "
+			      	+  " WHERE REDSHIFT < "+ Float.parseFloat(redshift)
+			      	+  " ORDER BY REDSHIFT;";
+			      
+	    	  }
+	    	  else if (morelessequals == 1)
+	    	  {
+			      sql = "SELECT NAME, REDSHIFT"
+			      	+  " FROM SISTEMADIGALASSIE.Galaxy "
+			      	+  " WHERE REDSHIFT > "+ Float.parseFloat(redshift)
+			      	+  " ORDER BY REDSHIFT;";
+			      
+	    	  }
+	    	  else 
+	    	  {
+			      sql = "SELECT NAME, REDSHIFT"
+			      	+  " FROM SISTEMADIGALASSIE.Galaxy "
+			      	+  " WHERE REDSHIFT = "+ Float.parseFloat(redshift)
+			      	+  " ORDER BY REDSHIFT;";
+
+			      
+	    	  }
+		      rs = stmt.executeQuery(sql);
+		      
+		      String spaces = "             ";	
+		      while(rs.next())
+		      {
+			      listModel.addElement("Galaxy name :          " + rs.getString("NAME") + spaces + "Galaxy redshift :      " + rs.getString("REDSHIFT"));
+
+		      }
+        }
+                	
         	
         //listModel.addElement("prova 1");  //SONO DA CANCELLARE, È SOLO UNA PROVA
         //listModel.addElement("prova 2");
@@ -257,6 +303,6 @@ public class OperationFrame extends JPanel implements ListSelectionListener
  
 
     public static void main(String[] args) throws Exception {
-       new OperationFrame(0, "NGC1365");
+       new OperationFrame(2, "NGC1365", null, null, null, null, null, null, null, null, "0.5", 0);
     }
 }

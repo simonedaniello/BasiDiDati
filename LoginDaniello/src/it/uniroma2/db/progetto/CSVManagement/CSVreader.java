@@ -114,7 +114,7 @@ public class CSVreader {
 					                   					+ elements.get(26*(j)) + "', '"
 					                   					+ elements.get(25+(numeroelementi*j)) + "', '"
 					                   					+ elements.get(11+(numeroelementi*j)) + "', '"
-					                   					+ elements.get(8+(numeroelementi*j)) +  "')";	
+					                   					+ Float.parseFloat(elements.get(8+(numeroelementi*j))) +  "')";	
 						      stmt.executeUpdate(sql2);
 						      
 						      System.out.println("inserted galaxy : "+ elements.get(26*(j))+ ";");

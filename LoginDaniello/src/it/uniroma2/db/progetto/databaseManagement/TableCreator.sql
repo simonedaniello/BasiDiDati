@@ -22,7 +22,7 @@ CREATE TABLE SISTEMADIGALASSIE.Galaxy (
 	NAME					VARCHAR		PRIMARY KEY,
 	ALTNAME					VARCHAR,
 	SPECTRALCLASSIFICATION	VARCHAR,
-	REDSHIFT				VARCHAR
+	REDSHIFT				FLOAT
 );
 
 /*-----------------------------Metallicity------------------------*/

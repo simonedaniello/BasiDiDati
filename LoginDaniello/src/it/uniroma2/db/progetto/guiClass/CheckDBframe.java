@@ -9,7 +9,6 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.*;
 
-import it.uniroma2.db.progetto.CSVManagement.CSVreader;
 import it.uniroma2.db.progetto.guiClass.EventListeners;
 
 @SuppressWarnings("serial")
@@ -343,7 +342,13 @@ public class CheckDBframe extends JFrame{
 				}
 				else 
 				{
-					
+					try {
+						new OperationFrame(0, tfgns.getText(), null, null, null, null, null, null, null, null, null, 0);
+						dispose();
+					} catch (Exception e1) {
+						
+						e1.printStackTrace();
+					}
 				}
 			}
 		});
@@ -360,7 +365,14 @@ public class CheckDBframe extends JFrame{
 				}
 				else 
 				{
-					
+					try {
+						new OperationFrame(1, tfgns.getText(), tfrayn.getText(), tfrayrasch.getText(), tfrayrascm.getText(), tfrayrascs.getText(), tfraydecsign.getText(),
+								tfraydecmin.getText(), tfraydecsec.getText(), tfraydecdeg.getText(), null, 0);
+						dispose();
+					} catch (Exception e1) {
+						
+						e1.printStackTrace();
+					}
 				}	
 			}
 		});
@@ -376,7 +388,36 @@ public class CheckDBframe extends JFrame{
 				}
 				else 
 				{
-					
+					if (redshiftvalue.getSelectedItem().toString().contains("more"))
+					{
+						try {
+							new OperationFrame(2, tfgns.getText(), null, null, null, null, null, null, null, null, tfrsh.getText(), 1);
+							dispose();
+						} catch (Exception e1) {
+							
+							e1.printStackTrace();
+						}
+					}
+					if (redshiftvalue.getSelectedItem().toString().contains("lower"))
+					{
+						try {
+							new OperationFrame(2, tfgns.getText(), null, null, null, null, null, null, null, null, tfrsh.getText(), 0);
+							dispose();
+						} catch (Exception e1) {
+							
+							e1.printStackTrace();
+						}
+					}
+					if (redshiftvalue.getSelectedItem().toString().contains("equals"))
+					{
+						try {
+							new OperationFrame(2, tfgns.getText(), null, null, null, null, null, null, null, null, tfrsh.getText(), 2);
+							dispose();
+						} catch (Exception e1) {
+							
+							e1.printStackTrace();
+						}
+					}
 				}
 			}
 		});

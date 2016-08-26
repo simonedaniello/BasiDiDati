@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.*;
 
+import it.uniroma2.db.progetto.CSVManagement.CSVreader;
 import it.uniroma2.db.progetto.guiClass.EventListeners;
 
 @SuppressWarnings("serial")
@@ -430,6 +431,12 @@ public class CheckDBframe extends JFrame{
 
 		
 	}
+	
+	public static void main(String[] args) throws Exception {
+
+		new CheckDBframe();
+	}
+
 	
 	
 }

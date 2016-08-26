@@ -2,6 +2,10 @@ package it.uniroma2.db.progetto.guiClass;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import javax.swing.*;
@@ -22,22 +26,90 @@ public class OperationFrame extends JPanel implements ListSelectionListener
     
     private JButton backButton;
     private JTextField tfSearch;
+    
+	static final String JDBC_DRIVER = "org.postgresql.Driver";  
+	static final String DB_URL = "jdbc:postgresql://localhost:5432/testdb";
+	   
+	//  Database credentials
+	static final String USER = "superuser";
+	static final String PASS = "password";
  
     /*----------------------------------------------------------------------------------------------------OPERATIONFRAME()*/
     
-    public OperationFrame() {
+    public OperationFrame(int operationNumber, String galaxyName) throws Exception {
     	
         super(new BorderLayout());
  
+		Connection conn = null;
+		Statement stmt = null;
+		
 
+	    Class.forName("org.postgresql.Driver");
+	    conn = DriverManager.getConnection(DB_URL, USER, PASS);
+	    stmt = conn.createStatement();
+	      
+	    String sql2;
+	    String sql;
+	    ResultSet rs;
+	    
+	    /*
+	     * numero operazione -> ritorna 
+	     * 
+	     * i = 0 			 -> nome galassia, posizione, distanza , redshift, luminosità, errore, metallicità, errore
+	     * 
+	     * i = 1			 -> nome delle prime n galassie all'interno di un raggio data una determinata posizione spaziale (ordinato rispetto al centro del raggio)
+	     * 
+	     * i = 2 			 -> nome delle prime n galassie con valore minore, maggiore o uguale a un determinato valore di redshift
+	     * 
+	     * i = 3			 -> nome della galassia con relativo flusso delle righe 
+	     * 
+	     * i = 4 			 -> nome della galassia con rapporto tra due flussi differenti (per ogni galassia)
+	     * 
+	     * i = 5			 -> media, deviazione standard, mediana e deviazione media assoluta del rapporto tra due flussi all'interno di un gruppo spettrale
+	     * 
+	     * i = 6			 -> idem i = 5 ma potendo scegliere una particolare apertura
+	     * 
+	     * i = 7			 -> nome galassia con rapporto tra flusso delle righe e flsso continuo
+	    */
         
         JFrame frame = new JFrame("Operation");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         listModel = new DefaultListModel<String>();
  
-        listModel.addElement("prova 1");  //SONO DA CANCELLARE, È SOLO UNA PROVA
-        listModel.addElement("prova 2");
+        /*---------------------------------------------------------------------------------------------------------OPERATIONNUMBER = 0*/
+        
+        if (operationNumber == 0)
+        {
+	    	  System.out.println("sono dentro");
+	    	  
+		      sql = "SELECT NAME, DISTANCE, REDSHIFT, RASCH, RASCM, RASCS, DECSIGN, DECMIN, DECSEC, DECDEG, ABSORPTION, VALUEMET, ERRORM"
+		      	+  " FROM SISTEMADIGALASSIE.Galaxy, SISTEMADIGALASSIE.Coordinate, SISTEMADIGALASSIE.Luminosity, SISTEMADIGALASSIE.Metallicity "
+		      	+  " WHERE NAME='" + galaxyName +"' AND NAME = GALAXYNAMEMET AND NAME = GALAXYNAMELUM AND NAME = GALAXYNAMECOO";
+		      
+		      rs = stmt.executeQuery(sql);
+		      if(rs.next())
+		      {
+		    	  System.out.println("sono dentro");
+			      listModel.addElement("Galaxy name :          " + rs.getString("NAME"));
+			      listModel.addElement("Galaxy distance :      " + rs.getString("DISTANCE"));
+			      listModel.addElement("Galaxy redshift :      " + rs.getString("REDSHIFT"));
+			      listModel.addElement("Galaxy RASCH :         " + rs.getString("RASCH"));
+			      listModel.addElement("Galaxy RASCM :         " + rs.getString("RASCM"));
+			      listModel.addElement("Galaxy RASCS :         " + rs.getString("RASCS"));
+			      listModel.addElement("Galaxy DECSIGN :       " + rs.getString("DECSIGN"));
+			      listModel.addElement("Galaxy DECMIN :        " + rs.getString("DECMIN"));
+			      listModel.addElement("Galaxy DECSEC :        " + rs.getString("DECSEC"));
+			      listModel.addElement("Galaxy DECDEG :        " + rs.getString("DECDEG"));
+			      listModel.addElement("Galaxy absorption :    " + rs.getString("ABSORPTION"));
+			      listModel.addElement("Galaxy value met. :    " + rs.getString("VALUEMET"));
+			      listModel.addElement("Galaxy error met. :    " + rs.getString("ERRORM"));
+		      }
+        }
+        	
+        	
+        //listModel.addElement("prova 1");  //SONO DA CANCELLARE, È SOLO UNA PROVA
+        //listModel.addElement("prova 2");
         
         //Create the list and put it in a scroll pane.
         list = new JList<String>(listModel);
@@ -184,7 +256,7 @@ public class OperationFrame extends JPanel implements ListSelectionListener
     }
  
 
-    public static void main(String[] args) {
-        new OperationFrame();
+    public static void main(String[] args) throws Exception {
+       new OperationFrame(0, "NGC1365");
     }
 }

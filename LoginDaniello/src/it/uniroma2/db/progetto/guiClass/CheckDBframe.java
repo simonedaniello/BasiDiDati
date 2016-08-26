@@ -433,7 +433,13 @@ public class CheckDBframe extends JFrame{
 				}
 				else 
 				{
-					
+					try {
+						new OperationFrame(3, tfflx.getText().replaceAll("\\s",""), null, null, null, null, null, null, null, null, null, 0);
+						dispose();
+					} catch (Exception e1) {
+						
+						e1.printStackTrace();
+					}
 				}
 			}
 		});

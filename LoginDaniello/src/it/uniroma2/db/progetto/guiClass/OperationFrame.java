@@ -80,7 +80,8 @@ public class OperationFrame extends JPanel implements ListSelectionListener
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         listModel = new DefaultListModel<String>();
- 
+	     String spaces = "             ";	
+	      
         /*---------------------------------------------------------------------------------------------------------OPERATIONNUMBER = 0*/
         
         if (operationNumber == 0)
@@ -145,13 +146,40 @@ public class OperationFrame extends JPanel implements ListSelectionListener
 	    	  }
 		      rs = stmt.executeQuery(sql);
 		      
-		      String spaces = "             ";	
+
 		      while(rs.next())
 		      {
 			      listModel.addElement("Galaxy name :          " + rs.getString("NAME") + spaces + "Galaxy redshift :      " + rs.getString("REDSHIFT"));
 
 		      }
         }
+        
+        /*---------------------------------------------------------------------------------------------------------OPERATIONNUMBER = 3*/
+        
+        if (operationNumber == 3)
+        {
+
+	    	  System.out.println("sono dentro2");
+		      sql = "SELECT NAME, NAMEHPR, PIXELR, VALUER, ERRORR, FLAGULR"
+		      	+  " FROM SISTEMADIGALASSIE.Galaxy, SISTEMADIGALASSIE.HPfluxR "
+		      	+  " WHERE NAME='" + galaxyName +"' AND NAME = GALAXYNAMEHPR ";
+		      
+		      rs = stmt.executeQuery(sql);
+		      if(rs.next())
+		      {
+		    	  System.out.println("sono dentro");
+			      listModel.addElement("Galaxy name :          " + rs.getString("NAME"));
+			      listModel.addElement("Atom :      " + rs.getString("NAMEHPR"));
+			      listModel.addElement("Pixel :      " + rs.getString("PIXELR"));
+			      listModel.addElement("Value :         " + rs.getString("VALUER"));
+			      listModel.addElement("Error :         " + rs.getString("ERRORR"));
+			      listModel.addElement("FLAG :         " + rs.getString("FLAGULR"));
+			      listModel.addElement(spaces);
+
+		      }
+        }
+      
+        /*---------------------------------------------------------------------------------------------------------OPERATIONNUMBER = N*/
                 	
         	
         //listModel.addElement("prova 1");  //SONO DA CANCELLARE, È SOLO UNA PROVA
@@ -303,6 +331,6 @@ public class OperationFrame extends JPanel implements ListSelectionListener
  
 
     public static void main(String[] args) throws Exception {
-       new OperationFrame(2, "NGC1365", null, null, null, null, null, null, null, null, "0.5", 0);
+       new OperationFrame(3, "Mrk334", null, null, null, null, null, null, null, null, "0.5", 0);
     }
 }

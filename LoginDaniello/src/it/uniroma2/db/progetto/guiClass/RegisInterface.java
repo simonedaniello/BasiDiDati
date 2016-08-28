@@ -303,7 +303,6 @@ public class RegisInterface extends JFrame implements ActionListener {
 		}
 		
 		
-	
 		if (control == 0){
 			userAdder costruttore = new userAdder();
 			costruttore.adder(tfUser.getText(), tfpwdCode.getText(), tfName.getText(), tfLastName.getText(), tfemail.getText());

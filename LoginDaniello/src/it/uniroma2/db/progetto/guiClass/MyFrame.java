@@ -14,8 +14,12 @@ import it.uniroma2.db.progetto.guiClass.EventListeners;
 import it.uniroma2.db.appStart.StartGuiController; 
 
 
-@SuppressWarnings("serial")
 public class MyFrame extends JFrame {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5792632614452216620L;
 	
 	private static final String titolo = "Login";
 	private static final JLabel user = new JLabel("Username");
@@ -35,7 +39,13 @@ public class MyFrame extends JFrame {
 		    	String nome = insNome.getText();
 		    	String password = insCognome.getText();
 		    	dispose();
-		    	StartGuiController.listenC(nome, password);
+		    	try {
+		    		StartGuiController startGui = new StartGuiController();
+					startGui.listenC(nome, password);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 		    }
 		});
 		
@@ -87,7 +97,5 @@ public class MyFrame extends JFrame {
 		this.pack();
 		this.setVisible(true);
 	}
-	
-
 	
 }

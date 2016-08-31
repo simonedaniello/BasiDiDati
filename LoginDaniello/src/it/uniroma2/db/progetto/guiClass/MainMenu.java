@@ -15,14 +15,16 @@ public class MainMenu extends JFrame {
 	private static final long serialVersionUID = 5374772073176018844L;
 
 	private static final String titolo = "Welcome!";
+	
 	private static final JButton buttonCheck = new JButton("Check Database");
 
 	private static final JButton buttonCsv = new JButton("Import .CSV file");
 
 	private static final JButton buttonExit = new JButton("Exit");
 
+	private static final JButton buttonRegister = new JButton("Register New User");
 
-	public MainMenu(){
+	public MainMenu(int UserAdmin){
 		super(titolo); 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -34,12 +36,26 @@ public class MainMenu extends JFrame {
 		gbc.gridy = 4;
 		gbc.anchor = GridBagConstraints.LINE_START;
 		this.add(buttonCheck, gbc);
-
-		gbc.gridy = 4;
-		gbc.anchor = GridBagConstraints.LINE_END;
-		this.add(buttonCsv, gbc);
-
-		gbc.gridy = 5;
+		
+		int i = 0;
+		
+		if (UserAdmin == 1)
+		{
+			gbc.gridy = 5;
+			gbc.anchor = GridBagConstraints.LINE_START;
+			this.add(buttonCsv, gbc);
+			i++;
+		}
+		
+		if (UserAdmin == 1)
+		{
+			gbc.gridy = 6;
+			gbc.anchor = GridBagConstraints.LINE_START;
+			this.add(buttonRegister, gbc);
+			i++;
+		}
+		
+		gbc.gridy = 5+i;
 		gbc.anchor = GridBagConstraints.LINE_START;
 		this.add(buttonExit, gbc);		
 
@@ -47,6 +63,14 @@ public class MainMenu extends JFrame {
 		buttonExit.addActionListener(new EventListeners() {
 			public void actionPerformed(ActionEvent e)
 			{
+				dispose();
+			}
+		});
+		
+		buttonRegister.addActionListener(new EventListeners() {
+			public void actionPerformed(ActionEvent e)
+			{
+				new RegisInterface();
 				dispose();
 			}
 		});
@@ -60,6 +84,9 @@ public class MainMenu extends JFrame {
 				{
 					File selectedFile = fileChooser.getSelectedFile();
 					System.out.println(selectedFile.getAbsolutePath());
+					
+					new CSVchooser(selectedFile.getAbsolutePath());
+					
 					JLabel panel = new JLabel("File imported");
 					JFrame frame = new JFrame("JOptionPane showMessageDialog component example");
 					JOptionPane.showMessageDialog(frame, panel, "It's all right", 1);
@@ -86,6 +113,9 @@ public class MainMenu extends JFrame {
 		this.setVisible(true);
 	}
 
-	int i = 0;
+	public static void main(String[] args) {
+		new MainMenu(1);
+	}
+	
 
 }

@@ -464,7 +464,7 @@ public class CheckDBframe extends JFrame{
 			public void actionPerformed(ActionEvent e)
 			{
 				dispose();
-				new MainMenu();
+				new MainMenu(0);
 			}
 		});
 

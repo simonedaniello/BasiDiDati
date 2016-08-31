@@ -3,7 +3,6 @@ package it.uniroma2.db.progetto.guiClass;
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -32,12 +31,6 @@ public class OperationFrame extends JPanel implements ListSelectionListener
 	private JButton backButton;
 	private JTextField tfSearch;
 
-//	static final String JDBC_DRIVER = "org.postgresql.Driver";  
-//	static final String DB_URL = "jdbc:postgresql://localhost:5432/testdb";
-
-	//  Database credentials
-//	static final String USER = "superuser";
-//	static final String PASS = "password";
 
 	/*----------------------------------------------------------------------------------------------------OPERATIONFRAME()*/
 
@@ -50,7 +43,6 @@ public class OperationFrame extends JPanel implements ListSelectionListener
 		super(new BorderLayout());
 
 		DataSource dataSource = new DataSource();
-//		Connection conn = null;
 		Statement stmt = null;
 
 //		Class.forName("org.postgresql.Driver");
@@ -78,10 +70,10 @@ public class OperationFrame extends JPanel implements ListSelectionListener
 		 * 
 		 * i = 6			 -> idem i = 5 ma potendo scegliere una particolare apertura
 		 * 
-		 * i = 7			 -> nome galassia con rapporto tra flusso delle righe e flsso continuo
+		 * i = 7			 -> nome galassia con rapporto tra flusso delle righe e fulsso continuo
 		 */
 		
-		System.out.println("New JFrame!");
+
 		JFrame frame = new JFrame("Operation");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -99,7 +91,6 @@ public class OperationFrame extends JPanel implements ListSelectionListener
 			rs = stmt.executeQuery(sql);
 			if(rs.next())
 			{
-				System.out.println("sono dentro");
 				listModel.addElement("Galaxy name :          " + rs.getString("NAME"));
 				listModel.addElement("Galaxy distance :      " + rs.getString("DISTANCE"));
 				listModel.addElement("Galaxy redshift :      " + rs.getString("REDSHIFT"));
@@ -115,6 +106,130 @@ public class OperationFrame extends JPanel implements ListSelectionListener
 				listModel.addElement("Galaxy error met. :    " + rs.getString("ERRORM"));
 			}
 		}
+		
+		
+
+		/*---------------------------------------------------------------------------------------------------------OPERATIONNUMBER = 1*/
+
+
+		if (operationNumber == 1)
+		{
+			
+			/*
+			 * come calcolare il raggio : 
+			 * 
+			 * d = arccos(sin(ra1)*sin(ra2)+cos(ra1)*cos(ra2)*cos(dec1-dec2))
+			 * dec = + or - (DD + MM/60 + SS/3600)
+			 * ra = 15 * (HH + MM/60 + SS/3600)
+			 * 
+			 * 
+					 	CREATE TABLE SISTEMADIGALASSIE.Coordinate(
+						RASCH 	VARCHAR	, 
+						RASCM	VARCHAR	,
+						RASCS	VARCHAR	,
+						DECSIGN	VARCHAR	,
+						DECMIN	VARCHAR	,
+						DECSEC	VARCHAR	,
+						DECDEG	VARCHAR	,
+						GALAXYNAMECOO 	VARCHAR
+										REFERENCES SISTEMADIGALASSIE.Galaxy(NAME),
+						PRIMARY KEY (GALAXYNAMECOO)
+					);
+
+			 */
+			
+			ArrayList<String>definitiveArray = new ArrayList<String>();
+			
+			double d;
+			double ra;
+			double ra2 = 15*(Double.parseDouble(rayrasch)+Double.parseDouble(rayrascm)/60 + Double.parseDouble(rayrascs)/3600);
+			double dec;
+			double dec2;
+			
+			if (raydecsign.contains("+"))
+			{
+				dec2 = (Double.parseDouble(raydecdeg)+Double.parseDouble(raydecmin)/60 + Double.parseDouble(raydecsec)/3600);
+			}
+			else
+			{
+				dec2 = -(Double.parseDouble(rayrasch)+Double.parseDouble(rayrascm)/60 + Double.parseDouble(rayrascs)/3600);
+			}
+			
+			System.out.println("eseguo la query");//----------------------------------------------------------------
+			
+			
+			sql = 		"SELECT GALAXYNAMECOO, RASCH, RASCM, RASCS, DECSIGN, DECMIN, DECSEC, DECDEG"
+					+  " FROM SISTEMADIGALASSIE.Coordinate";
+
+			rs = stmt.executeQuery(sql);
+			
+			System.out.println("query eseguita");//----------------------------------------------------------------
+			
+			
+			if(rs.next())
+			{
+				ra = 15*(Double.parseDouble(rs.getString("RASCH"))+Double.parseDouble(rs.getString("RASCM"))/60 + Double.parseDouble(rs.getString("RASCS"))/3600);
+				if (rs.getString("DECSIGN").contains("+"))
+				{
+					dec = (Double.parseDouble(rs.getString("DECDEG"))+Double.parseDouble(rs.getString("DECMIN"))/60 + Double.parseDouble(rs.getString("DECSEC"))/3600);
+				}
+				else
+				{
+					dec = -(Double.parseDouble(rs.getString("DECDEG"))+Double.parseDouble(rs.getString("DECMIN"))/60 + Double.parseDouble(rs.getString("DECSEC"))/3600);
+				}
+				
+				d = Math.acos(Math.sin(ra)*Math.sin(ra2)+Math.cos(ra)*Math.cos(ra2)*Math.cos(dec-dec2));
+				
+				definitiveArray.add(rs.getString("GALAXYNAMECOO"));
+				definitiveArray.add(Double.toString(d));
+				
+				
+			}
+			
+			System.out.println("inizio il bubblesort");
+			/*BUBBLESORT*/
+			
+			int i, j;
+			boolean flag = true;
+			String dimension, galaxyname;
+			while (flag == true)
+			{
+				flag = false;
+				for (j = 0; j < (definitiveArray.size()/2)-1; j++)
+				{
+					if (Float.parseFloat(definitiveArray.get(2*j+1))>Float.parseFloat(definitiveArray.get(2*j+3)))
+					{
+						dimension = definitiveArray.get(2*j+1); 
+						definitiveArray.set(2*j+1, definitiveArray.get(2*j+3));
+						definitiveArray.set(2*j+3, dimension);
+						
+						galaxyname = definitiveArray.get(2*j); 
+						definitiveArray.set(2*j, definitiveArray.get(2*j+2));
+						definitiveArray.set(2*j+2, galaxyname);
+					
+						flag = true;
+					}
+				}
+			}
+			
+			i = 0;
+			flag = false;
+			
+			while (i < Integer.parseInt(rayn) || flag == false)
+			{
+				if ((2*i + 1) < definitiveArray.size())
+				{
+				listModel.addElement("Galaxy name :        "+ definitiveArray.get(2*i) + spaces + "distance :        " + definitiveArray.get(2*i + 1)); 
+				}
+				else
+					flag = true;
+			}
+
+		}
+
+
+		
+		
 
 		/*---------------------------------------------------------------------------------------------------------OPERATIONNUMBER = 2*/
 
@@ -163,7 +278,6 @@ public class OperationFrame extends JPanel implements ListSelectionListener
 		if (operationNumber == 3)
 		{
 
-			System.out.println("sono dentro2");
 			sql = "SELECT NAME, NAMEHPR, PIXELR, VALUER, ERRORR, FLAGULR"
 					+  " FROM SISTEMADIGALASSIE.Galaxy, SISTEMADIGALASSIE.HPfluxR "
 					+  " WHERE NAME='" + galaxyName +"' AND NAME = GALAXYNAMEHPR ";
@@ -171,7 +285,7 @@ public class OperationFrame extends JPanel implements ListSelectionListener
 			rs = stmt.executeQuery(sql);
 			if(rs.next())
 			{
-				System.out.println("sono dentro");
+
 				listModel.addElement("Galaxy name :          " + rs.getString("NAME"));
 				listModel.addElement("Atom :      " + rs.getString("NAMEHPR"));
 				listModel.addElement("Pixel :      " + rs.getString("PIXELR"));
@@ -240,6 +354,8 @@ public class OperationFrame extends JPanel implements ListSelectionListener
 				frame.dispose();
 			}
 		});
+	
+	
 
 	}
 
@@ -326,8 +442,17 @@ public class OperationFrame extends JPanel implements ListSelectionListener
 		}
 	}
 
+	
+	/*public OperationFrame(int operationNumber, String galaxyName, 
+			String rayn, String rayrasch, String rayrascm, String rayrascs, String raydecsign, String raydecmin, String raydecsec, String raydecdeg, 
+			String redshift, int morelessequals) throws Exception {*/
 
 	public static void main(String[] args) throws Exception {
-		new OperationFrame(3, "Mrk334", null, null, null, null, null, null, null, null, "0.5", 0);
+		//new OperationFrame(3, "Mrk334", null, null, null, null, null, null, null, null, "0.5", 0);
+		
+		new OperationFrame(1, null, "15", "1", "1", "1", "+", "1", "1", "1", null, 0);
+
 	}
+
+
 }

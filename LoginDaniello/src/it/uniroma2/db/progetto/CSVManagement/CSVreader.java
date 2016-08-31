@@ -13,10 +13,8 @@ import java.util.Scanner;
 
 public class CSVreader {
 	
-	// JDBC driver name and database URL
-	// JDBC driver name and database URL
+
 	static final String JDBC_DRIVER = "org.postgresql.Driver";  
-	//static final String DB_URL = "jdbc:mysql://localhost/LOCATIONS";
 	static final String DB_URL = "jdbc:postgresql://localhost:5432/testdb";
 	   
 	//  Database credentials
@@ -1076,11 +1074,11 @@ public class CSVreader {
     
 	public static void main(String[] args) throws Exception {
 		/*I NOMI NON SONO INTUITIVI PER NIENTE, CAMBIALI*/
-		new CSVreader("/home/mauro/workspace/BasiDiDati/LoginDaniello/src/it/uniroma2/db/progetto/fileCSV/generical.csv", 0);
-		new CSVreader("/home/mauro/workspace/BasiDiDati/LoginDaniello/src/it/uniroma2/db/progetto/fileCSV/HP1.csv", 1);
-		new CSVreader("/home/mauro/workspace/BasiDiDati/LoginDaniello/src/it/uniroma2/db/progetto/fileCSV/HP2.csv", 2);
-		new CSVreader("/home/mauro/workspace/BasiDiDati/LoginDaniello/src/it/uniroma2/db/progetto/fileCSV/spitzer.csv", 3);
-		new CSVreader("/home/mauro/workspace/BasiDiDati/LoginDaniello/src/it/uniroma2/db/progetto/fileCSV/HP3.csv", 4);
+		new CSVreader("/home/dandi/git/BasiDiDati/LoginDaniello/src/it/uniroma2/db/progetto/fileCSV/generical.csv", 0);
+		new CSVreader("/home/dandi/git/BasiDiDati/LoginDaniello/src/it/uniroma2/db/progetto/fileCSV/HP1.csv", 1);
+		new CSVreader("/home/dandi/git/BasiDiDati/LoginDaniello/src/it/uniroma2/db/progetto/fileCSV/HP2.csv", 2);
+		new CSVreader("/home/dandi/git/BasiDiDati/LoginDaniello/src/it/uniroma2/db/progetto/fileCSV/spitzer.csv", 3);
+		new CSVreader("/home/dandi/git/BasiDiDati/LoginDaniello/src/it/uniroma2/db/progetto/fileCSV/HP3.csv", 4);
 	}
 
 }

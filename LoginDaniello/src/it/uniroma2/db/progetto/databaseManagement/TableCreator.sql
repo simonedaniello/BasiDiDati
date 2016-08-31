@@ -1,10 +1,4 @@
 
-/*creazione del database*/
-
-
-
-
-
 /*creazione delle tabelle*/
 
 DROP SCHEMA IF EXISTS SISTEMADIGALASSIE CASCADE;
@@ -105,4 +99,20 @@ CREATE TABLE SISTEMADIGALASSIE.User(
 	AMMINISTRATORE	VARCHAR				,
 	PRIMARY KEY (USERID, PASSWORD)
 );
+
+INSERT INTO SISTEMADIGALASSIE.User VALUES ('Simone', 'DAniello', 'Simone', 'Daniello', 'emailsimone', 'TRUE' );
+INSERT INTO SISTEMADIGALASSIE.User VALUES ('Mauro', 'Filanti', 'Mauro', 'Filanti', 'emailmauro', 'TRUE' );
+
+
+
+
+
+
+
+
+
+
+
+
+
 

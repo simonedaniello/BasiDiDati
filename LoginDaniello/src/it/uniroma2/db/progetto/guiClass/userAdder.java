@@ -6,10 +6,9 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 public class userAdder {
-	 // JDBC driver name and database URL
-	 // JDBC driver name and database URL
+
+
 	   static final String JDBC_DRIVER = "org.postgresql.Driver";  
-	   //static final String DB_URL = "jdbc:mysql://localhost/LOCATIONS";
 	   static final String DB_URL = "jdbc:postgresql://localhost:5432/testdb";
 	   
 	   //  Database credentials
@@ -19,7 +18,7 @@ public class userAdder {
 	   JLabel panel;
 	   JFrame frame;
 	   
-	   public void adder(String user, String pwd, String nome, String cognome, String email) {
+	   public void adder(String user, String cs, String nome, String cognome, String email) {
 		   Connection conn = null;
 		   Statement stmt = null;
 		   try{
@@ -37,7 +36,7 @@ public class userAdder {
 		      //STEP 5: Extract data from result set
 		      if (!rs.next() ) {    
 			      String sql2 = "INSERT INTO SISTEMADIGALASSIE.User " +
-		                   		"VALUES ('"+ nome +"', '" +cognome + "', '"+ user + "', '" + pwd + "', '"+ email + "', FALSE )";
+		                   		"VALUES ('"+ nome +"', '" +cognome + "', '"+ user + "', '" + cs + "', '"+ email + "', FALSE )";
 			      stmt.executeUpdate(sql2);
 		    	  panel = new JLabel("You have been registered !!");
 		    	  frame = new JFrame("JOptionPane showMessageDialog component example");

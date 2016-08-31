@@ -12,10 +12,14 @@ import it.uniroma2.db.progetto.guiClass.EventListeners;
 import it.uniroma2.db.progetto.guiClass.userAdder; 
 
 
-@SuppressWarnings("serial")
+
 public class RegisInterface extends JFrame implements ActionListener {
 	
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JLabel lName;
 	private JTextField tfName;
 	private JLabel lNameError;
@@ -33,10 +37,10 @@ public class RegisInterface extends JFrame implements ActionListener {
 	private JLabel lUserError;
 
 	private JLabel lpwdCode;
-	private JTextField tfpwdCode;
+	private JPasswordField tfpwdCode;
 	private JLabel lpwdCodeError;
 	
-	private JTextField tfrepwdCode;
+	private JPasswordField tfrepwdCode;
 	private JLabel lrepwdCodeError;
 	private JLabel lrepwdCodeError2;
 
@@ -161,7 +165,7 @@ public class RegisInterface extends JFrame implements ActionListener {
 		this.add(this.lpwdCode, gbc);
 
 
-		this.tfpwdCode = new JTextField(15);
+		this.tfpwdCode = new JPasswordField(15);
 		gbc.gridx = 1;
 		gbc.gridy = 6;
 		gbc.anchor = GridBagConstraints.LINE_START;
@@ -188,7 +192,7 @@ public class RegisInterface extends JFrame implements ActionListener {
 		this.add(this.lpwdCode, gbc);
 
 
-		this.tfrepwdCode = new JTextField(15);
+		this.tfrepwdCode = new JPasswordField(15);
 		gbc.gridx = 1;
 		gbc.gridy = 7;
 		gbc.anchor = GridBagConstraints.LINE_START;
@@ -239,7 +243,7 @@ public class RegisInterface extends JFrame implements ActionListener {
 			public void actionPerformed(ActionEvent e)
 			{
 				dispose();
-				new MyFrame();
+				new UserInterface();
 			}
 		});
 		
@@ -284,19 +288,19 @@ public class RegisInterface extends JFrame implements ActionListener {
 			lUserError.setVisible(true);
 			control = 1;
 		}
-		if (tfpwdCode.getText().equals(""))
+		if (tfpwdCode.getPassword().equals(""))
 		{
 			lpwdCodeError.setVisible(true);
 			control = 1;
 		}
 		
-		if (tfrepwdCode.getText().equals(""))
+		if (tfrepwdCode.getPassword().equals(""))
 		{
 			lrepwdCodeError.setVisible(true);
 			control = 1;
 		}
 		
-		if (!tfrepwdCode.getText().equals(tfpwdCode.getText()) && !tfrepwdCode.getText().equals(""))
+		if (!tfrepwdCode.getPassword().equals(tfpwdCode.getPassword()) && !tfrepwdCode.getPassword().equals(""))
 		{
 			lrepwdCodeError2.setVisible(true);
 			control = 1;
@@ -305,9 +309,9 @@ public class RegisInterface extends JFrame implements ActionListener {
 		
 		if (control == 0){
 			userAdder costruttore = new userAdder();
-			costruttore.adder(tfUser.getText(), tfpwdCode.getText(), tfName.getText(), tfLastName.getText(), tfemail.getText());
+			costruttore.adder(tfUser.getText(), tfpwdCode.getPassword().toString(), tfName.getText(), tfLastName.getText(), tfemail.getText());
 			dispose();
-			new MyFrame();
+			new UserInterface();
 		}
 	}
 

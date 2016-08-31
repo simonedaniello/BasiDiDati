@@ -154,19 +154,15 @@ public class OperationFrame extends JPanel implements ListSelectionListener
 			{
 				dec2 = -(Double.parseDouble(rayrasch)+Double.parseDouble(rayrascm)/60 + Double.parseDouble(rayrascs)/3600);
 			}
-			
-			System.out.println("eseguo la query");//----------------------------------------------------------------
-			
+						
 			
 			sql = 		"SELECT GALAXYNAMECOO, RASCH, RASCM, RASCS, DECSIGN, DECMIN, DECSEC, DECDEG"
 					+  " FROM SISTEMADIGALASSIE.Coordinate";
 
 			rs = stmt.executeQuery(sql);
+						
 			
-			System.out.println("query eseguita");//----------------------------------------------------------------
-			
-			
-			if(rs.next())
+			while(rs.next())
 			{
 				ra = 15*(Double.parseDouble(rs.getString("RASCH"))+Double.parseDouble(rs.getString("RASCM"))/60 + Double.parseDouble(rs.getString("RASCS"))/3600);
 				if (rs.getString("DECSIGN").contains("+"))
@@ -186,7 +182,6 @@ public class OperationFrame extends JPanel implements ListSelectionListener
 				
 			}
 			
-			System.out.println("inizio il bubblesort");
 			/*BUBBLESORT*/
 			
 			int i, j;
@@ -207,22 +202,28 @@ public class OperationFrame extends JPanel implements ListSelectionListener
 						definitiveArray.set(2*j, definitiveArray.get(2*j+2));
 						definitiveArray.set(2*j+2, galaxyname);
 					
+						
 						flag = true;
 					}
 				}
 			}
 			
+						
+			
 			i = 0;
 			flag = false;
 			
-			while (i < Integer.parseInt(rayn) || flag == false)
+			while (i < Integer.parseInt(rayn) && flag == false)
 			{
 				if ((2*i + 1) < definitiveArray.size())
 				{
-				listModel.addElement("Galaxy name :        "+ definitiveArray.get(2*i) + spaces + "distance :        " + definitiveArray.get(2*i + 1)); 
+					listModel.addElement("Galaxy name :        "+ definitiveArray.get(2*i) + spaces + "distance :        " + definitiveArray.get(2*i + 1)); 
 				}
 				else
+				{
 					flag = true;
+				}
+				i++;
 			}
 
 		}
@@ -450,7 +451,7 @@ public class OperationFrame extends JPanel implements ListSelectionListener
 	public static void main(String[] args) throws Exception {
 		//new OperationFrame(3, "Mrk334", null, null, null, null, null, null, null, null, "0.5", 0);
 		
-		new OperationFrame(1, null, "15", "1", "1", "1", "+", "1", "1", "1", null, 0);
+		new OperationFrame(1, null, "5", "1", "1", "1", "+", "1", "1", "1", null, 0);
 
 	}
 

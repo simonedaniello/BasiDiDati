@@ -10,8 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import it.uniroma2.db.progetto.guiClass.EventListeners;
-import it.uniroma2.db.appStart.StartGuiController; 
+import it.uniroma2.db.progetto.guiClass.EventListeners; 
 
 
 public class MyFrame extends JFrame {
@@ -40,8 +39,8 @@ public class MyFrame extends JFrame {
 		    	String password = insCognome.getText();
 		    	dispose();
 		    	try {
-		    		StartGuiController startGui = new StartGuiController();
-					startGui.listenC(nome, password);
+		    		GuiController startGui = new GuiController();
+					startGui.loginUserController(nome, password);
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -53,7 +52,7 @@ public class MyFrame extends JFrame {
 			public void actionPerformed(ActionEvent e)
 			{
 				dispose();
-				StartGuiController.listenR();
+				GuiController.listenR();
 			}
 		});
 		

@@ -1,4 +1,4 @@
-package it.uniroma2.db.progetto.guiClass;
+package it.uniroma2.db.Boundary;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -11,7 +11,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import it.uniroma2.db.progetto.guiClass.EventListeners;
-import it.uniroma2.db.appStart.StartGuiController; 
+import it.uniroma2.db.progetto.guiClass.GuiController; 
 
 
 public class AdminInterface extends JFrame {
@@ -38,8 +38,8 @@ public class AdminInterface extends JFrame {
 		    	String password = insCognome.getText();
 		    	dispose();
 		    	try {
-		    		StartGuiController startGui = new StartGuiController();
-					startGui.listenCAdmin(nome, password);
+		    		GuiController startGui = new GuiController();
+					startGui.loginAdminController(nome, password);
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}

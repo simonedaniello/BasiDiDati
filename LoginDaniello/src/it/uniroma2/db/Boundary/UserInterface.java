@@ -1,4 +1,4 @@
-package it.uniroma2.db.progetto.guiClass;
+package it.uniroma2.db.Boundary;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -11,11 +11,15 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import it.uniroma2.db.progetto.guiClass.EventListeners;
-import it.uniroma2.db.appStart.StartGuiController; 
+import it.uniroma2.db.progetto.guiClass.GuiController; 
 
 
-@SuppressWarnings("serial")
 public class UserInterface extends JFrame {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7193850415434472203L;
 	
 	private static final String titolo = "Login";
 	private static final JLabel user = new JLabel("Username");
@@ -36,8 +40,8 @@ public class UserInterface extends JFrame {
 		    	String password = insCognome.getText();
 		    	dispose();
 		    	try {
-		    		StartGuiController startGui = new StartGuiController();
-					startGui.listenC(nome, password);
+		    		GuiController startGui = new GuiController();
+					startGui.loginUserController(nome, password);
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -84,9 +88,9 @@ public class UserInterface extends JFrame {
 		this.setVisible(true);
 	}
 	
-	public static void main(String[] args) {
-		new UserInterface();
-	}
+//	public static void main(String[] args) {
+//		new UserInterface();
+//	}
 	
 }
 

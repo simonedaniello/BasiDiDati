@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+import it.uniroma2.db.Boundary.UserInterface;
 import it.uniroma2.db.progetto.guiClass.EventListeners;
 import it.uniroma2.db.progetto.guiClass.userAdder; 
 

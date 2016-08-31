@@ -1,4 +1,4 @@
-package it.uniroma2.db.progetto.guiClass;
+package it.uniroma2.db.Boundary;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+
 import it.uniroma2.db.progetto.guiClass.EventListeners;
 
 
@@ -28,11 +29,17 @@ public class StartFrame extends JFrame{
 	
 	
 	
+//	**** MAIN START ****
+	public static void main(String[] args) {
+		new StartFrame();
+	}
+	
+	
 	public StartFrame() {
-		
 		super(titolo);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+//		ADMIN
 		buttonAdmin.addActionListener(new EventListeners() {
 		    public void actionPerformed(ActionEvent e)
 		    {
@@ -41,11 +48,12 @@ public class StartFrame extends JFrame{
 		    }
 		});
 		
+//		USER
 		buttonUser.addActionListener(new EventListeners() {
 			public void actionPerformed(ActionEvent e)
 			{
-				dispose();
 				new UserInterface();
+				dispose();
 			}
 		});
 		
@@ -57,7 +65,6 @@ public class StartFrame extends JFrame{
 		gbc.gridy = 0;
 		gbc.anchor = GridBagConstraints.FIRST_LINE_START;
 		this.add(buttonAdmin, gbc);
-		
 
 		gbc.gridx = 1;
 		gbc.gridy = 0;
@@ -68,22 +75,13 @@ public class StartFrame extends JFrame{
 		gbc.gridy = 2;
 		gbc.anchor = GridBagConstraints.FIRST_LINE_START;
 		
-		gbc.gridx = 1;
-		gbc.gridy = 3;
-		gbc.anchor = GridBagConstraints.FIRST_LINE_END;
-		this.add(buttonExit, gbc);
-		
-
+//		gbc.gridx = 1;
+//		gbc.gridy = 3;
+//		gbc.anchor = GridBagConstraints.FIRST_LINE_END;
+//		this.add(buttonExit, gbc);
 		
 		this.pack();
 		this.setVisible(true);
-	}
-	
-		
-	public static void main(String[] args) {
-		new StartFrame();
-	}
-	
-		
+	}		
 	
 }

@@ -42,7 +42,7 @@ public class OperationFrame extends JPanel implements ListSelectionListener
 
 		super(new BorderLayout());
 
-		DataSource dataSource = new DataSource();
+		DataSource dataSource = DataSource.getDataSourceInstance();
 		Statement stmt = null;
 
 //		Class.forName("org.postgresql.Driver");

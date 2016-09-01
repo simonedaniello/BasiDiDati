@@ -80,7 +80,7 @@ public class CheckDBframe extends JFrame{
 	/*--------------------------------------------------------------------------------------------------*/
 
 
-	public CheckDBframe(){
+	public CheckDBframe(int adminuser){
 
 		super(titolo);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -309,6 +309,7 @@ public class CheckDBframe extends JFrame{
 		gbc.anchor = GridBagConstraints.FIRST_LINE_START;
 		fgns.add(tfrr2, gbc);
 
+
 		gbc.gridx = 1;
 		gbc.gridy = 20;
 		gbc.anchor = GridBagConstraints.FIRST_LINE_START;
@@ -343,7 +344,7 @@ public class CheckDBframe extends JFrame{
 				else 
 				{
 					try {
-						new OperationFrame(0, tfgns.getText(), null, null, null, null, null, null, null, null, null, 0);
+						new OperationFrame(0, tfgns.getText(), null, null, null, null, null, null, null, null, null, 0, adminuser, null, null, null);
 						dispose();
 					} catch (Exception e1) {
 
@@ -367,7 +368,7 @@ public class CheckDBframe extends JFrame{
 				{
 					try {
 						new OperationFrame(1, tfgns.getText(), tfrayn.getText(), tfrayrasch.getText(), tfrayrascm.getText(), tfrayrascs.getText(), tfraydecsign.getText(),
-								tfraydecmin.getText(), tfraydecsec.getText(), tfraydecdeg.getText(), null, 0);
+								tfraydecmin.getText(), tfraydecsec.getText(), tfraydecdeg.getText(), null, 0, adminuser, null, null, null);
 						dispose();
 					} catch (Exception e1) {
 
@@ -391,7 +392,7 @@ public class CheckDBframe extends JFrame{
 					if (redshiftvalue.getSelectedItem().toString().contains("more"))
 					{
 						try {
-							new OperationFrame(2, tfgns.getText(), null, null, null, null, null, null, null, null, tfrsh.getText(), 1);
+							new OperationFrame(2, tfgns.getText(), null, null, null, null, null, null, null, null, tfrsh.getText(), 1, adminuser, null, null, null);
 							dispose();
 						} catch (Exception e1) {
 
@@ -401,7 +402,7 @@ public class CheckDBframe extends JFrame{
 					if (redshiftvalue.getSelectedItem().toString().contains("lower"))
 					{
 						try {
-							new OperationFrame(2, tfgns.getText(), null, null, null, null, null, null, null, null, tfrsh.getText(), 0);
+							new OperationFrame(2, tfgns.getText(), null, null, null, null, null, null, null, null, tfrsh.getText(), 0, adminuser, null, null, null);
 							dispose();
 						} catch (Exception e1) {
 
@@ -411,7 +412,7 @@ public class CheckDBframe extends JFrame{
 					if (redshiftvalue.getSelectedItem().toString().contains("equals"))
 					{
 						try {
-							new OperationFrame(2, tfgns.getText(), null, null, null, null, null, null, null, null, tfrsh.getText(), 2);
+							new OperationFrame(2, tfgns.getText(), null, null, null, null, null, null, null, null, tfrsh.getText(), 2, adminuser, null, null, null);
 							dispose();
 						} catch (Exception e1) {
 
@@ -434,7 +435,7 @@ public class CheckDBframe extends JFrame{
 				else 
 				{
 					try {
-						new OperationFrame(3, tfflx.getText().replaceAll("\\s",""), null, null, null, null, null, null, null, null, null, 0);
+						new OperationFrame(3, tfflx.getText().replaceAll("\\s",""), null, null, null, null, null, null, null, null, null, 0, adminuser, null, null, null);
 						dispose();
 					} catch (Exception e1) {
 
@@ -455,7 +456,13 @@ public class CheckDBframe extends JFrame{
 				}
 				else 
 				{
-					// TODO
+					try {
+						new OperationFrame(4, null, null, null, null, null, null, null, null, null, null, 0, adminuser, tfrr1.getText().replaceAll("\\s","") ,tfrr2.getText().replaceAll("\\s",""), null);
+						dispose();
+					} catch (Exception e1) {
+
+						e1.printStackTrace();
+					}
 				}
 			}
 		});
@@ -464,7 +471,12 @@ public class CheckDBframe extends JFrame{
 			public void actionPerformed(ActionEvent e)
 			{
 				dispose();
-				new MainMenu(0);
+				if (adminuser == 0)
+				{
+					new MainMenu(0);
+				}
+				else
+					new MainMenu(1);
 			}
 		});
 
@@ -476,7 +488,7 @@ public class CheckDBframe extends JFrame{
 	}
 
 	public static void main(String[] args) throws Exception {
-		new CheckDBframe();
+		new CheckDBframe(1);
 	}
 
 }

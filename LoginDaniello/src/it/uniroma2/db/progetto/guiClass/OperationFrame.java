@@ -38,7 +38,9 @@ public class OperationFrame extends JPanel implements ListSelectionListener
 	 * morelessequal -> 0 less, 1 more, 2 equals*/
 	public OperationFrame(int operationNumber, String galaxyName, 
 			String rayn, String rayrasch, String rayrascm, String rayrascs, String raydecsign, String raydecmin, String raydecsec, String raydecdeg, 
-			String redshift, int morelessequals) throws Exception {
+			String redshift, int morelessequals, 
+			int userAdmin, 
+			String fluxname1, String fluxname2, String pixel) throws Exception {
 
 		super(new BorderLayout());
 
@@ -56,13 +58,13 @@ public class OperationFrame extends JPanel implements ListSelectionListener
 		/*
 		 * numero operazione -> ritorna 
 		 * 
-		 * i = 0 			 -> nome galassia, posizione, distanza , redshift, luminosità, errore, metallicità, errore
+		 * i = 0 v 			 -> nome galassia, posizione, distanza , redshift, luminosità, errore, metallicità, errore
 		 * 
-		 * i = 1			 -> nome delle prime n galassie all'interno di un raggio data una determinata posizione spaziale (ordinato rispetto al centro del raggio)
+		 * i = 1 v			 -> nome delle prime n galassie all'interno di un raggio data una determinata posizione spaziale (ordinato rispetto al centro del raggio)
 		 * 
-		 * i = 2 			 -> nome delle prime n galassie con valore minore, maggiore o uguale a un determinato valore di redshift
+		 * i = 2 v			 -> nome delle prime n galassie con valore minore, maggiore o uguale a un determinato valore di redshift
 		 * 
-		 * i = 3			 -> nome della galassia con relativo flusso delle righe 
+		 * i = 3 v			 -> nome della galassia con relativo flusso delle righe 
 		 * 
 		 * i = 4 			 -> nome della galassia con rapporto tra due flussi differenti (per ogni galassia)
 		 * 
@@ -74,7 +76,41 @@ public class OperationFrame extends JPanel implements ListSelectionListener
 		 */
 		
 
-		JFrame frame = new JFrame("Operation");
+		String maintitle;
+		if (operationNumber == 0)
+		{
+			maintitle = "Generic Galaxy Search";
+		}
+		else if (operationNumber == 1)
+		{
+			maintitle = "Search by Distance";
+		}
+		else if (operationNumber == 2)
+		{
+			maintitle = "Search by redshift";
+		}
+		else if (operationNumber == 3)
+		{
+			maintitle = "Search Raw Flux";
+		}
+		else if (operationNumber == 4)
+		{
+			maintitle = "Ratio between fluxes";
+		}
+		else if (operationNumber == 5)
+		{
+			maintitle = "Specific Flux Search";
+		}
+		else if (operationNumber == 6)
+		{
+			maintitle = "Specific Flux Search";
+		}
+		else
+		{
+			maintitle = "Ratio between fluxes";
+		}
+		
+		JFrame frame = new JFrame(maintitle);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		listModel = new DefaultListModel<String>();
@@ -297,8 +333,82 @@ public class OperationFrame extends JPanel implements ListSelectionListener
 
 			}
 		}
+		
+		/*---------------------------------------------------------------------------------------------------------OPERATIONNUMBER = 4*/
 
-		/*---------------------------------------------------------------------------------------------------------OPERATIONNUMBER = N*/
+		/*
+		CREATE TABLE SISTEMADIGALASSIE.HPfluxR(
+			NAMEHPR			VARCHAR, 
+			PIXELR 			VARCHAR,
+			VALUER			VARCHAR,
+			ERRORR			VARCHAR,
+			FLAGULR			VARCHAR,
+			GALAXYNAMEHPR 	VARCHAR
+							REFERENCES SISTEMADIGALASSIE.Galaxy(NAME),
+			PRIMARY KEY(NAMEHPR, PIXELR, GALAXYNAMEHPR)
+		)
+	*/
+		if (operationNumber == 4)
+		{
+
+			sql = "SELECT HP1.GALAXYNAMEHPR as gn1, HP1.NAMEHPR as hp1, HP2.NAMEHPR as hp2, HP1.VALUER as v1, HP2.VALUER as v2, HP1.FLAGULR as f1, HP2.FLAGULR as f2"
+					+  " FROM SISTEMADIGALASSIE.HPfluxR as HP1, SISTEMADIGALASSIE.HPfluxR as HP2 "
+					+  " WHERE HP1.GALAXYNAMEHPR = HP2.GALAXYNAMEHPR AND HP1.NAMEHPR = '" + fluxname1 +"' AND HP2.NAMEHPR = '" + fluxname2 +"' AND HP1.VALUER <> '' AND HP2.VALUER <> ''";
+
+			rs = stmt.executeQuery(sql);
+			
+
+			
+			while(rs.next())
+			{
+
+				listModel.addElement("Galaxy name :          " + rs.getString("gn1"));
+				listModel.addElement("First Atom :      " + rs.getString("hp1"));
+				listModel.addElement("Second Atom :      " + rs.getString("hp2"));				
+				
+				listModel.addElement("Ratio :         " + Float.parseFloat(rs.getString("v1"))/Float.parseFloat(rs.getString("v2")));
+				if (rs.getString("f1").contains("<"))
+				{
+					listModel.addElement("the value of the first flux is an upper bound");
+				}
+				if (rs.getString("f2").contains("<"))
+				{
+					listModel.addElement("the value of the second flux is an upper bound");
+				}
+				listModel.addElement(spaces);
+
+			}
+		}
+		
+		
+		/*---------------------------------------------------------------------------------------------------------OPERATIONNUMBER = 5*/
+
+		if (operationNumber == 5)
+		{
+			
+			ArrayList<Float> numbers = new ArrayList<Float>();
+
+			sql = "SELECT VALUER"
+					+  " FROM SISTEMADIGALASSIE.HPfluxR "
+					+  " WHERE GALAXYNAMEHPR='" + fluxname1 +"' AND PIXELR = '"+ pixel +"'";
+
+			rs = stmt.executeQuery(sql);
+			
+			while(rs.next())
+			{
+				numbers.add(Float.parseFloat(rs.getString("VALUER")));
+			}
+			listModel.addElement("Atom name            :        " + fluxname1);
+			listModel.addElement("Pixels               :        " + pixel);
+			listModel.addElement("Average              :        " + average(numbers));
+			listModel.addElement("Standard Deviation   :        " + standardDeviation(numbers));
+			listModel.addElement("MAD				   :        " + standardDeviation(numbers)*0.6745);
+			//listModel.addElement("Median   			   :        " + median(numbers));
+			listModel.addElement(spaces);
+
+		}
+
+		/*---------------------------------------------------------------------------------------------------------FINE OPERAZIONI*/
 
 		//Create the list and put it in a scroll pane.
 		list = new JList<String>(listModel);
@@ -351,7 +461,7 @@ public class OperationFrame extends JPanel implements ListSelectionListener
 		backButton.addActionListener(new EventListeners() {
 			public void actionPerformed(ActionEvent e)
 			{
-				new CheckDBframe();
+				new CheckDBframe(userAdmin);
 				frame.dispose();
 			}
 		});
@@ -442,6 +552,80 @@ public class OperationFrame extends JPanel implements ListSelectionListener
 			}
 		}
 	}
+	
+	
+	/*----------------------------------------------------MEDIA*/
+
+	public float average(ArrayList <Float> numbers)
+	{
+		int size = numbers.size();
+		int j ;
+		float average = 0;
+		for (j = 0; j < size; j++)
+		{
+			average += numbers.get(j);
+		}
+		return average/size;
+		
+	}
+	
+	/*---------------------------------------------DEVIAZIONE STANDARD*/
+
+	/*ricorda che la deviazione media assoluta è uguale a 
+	  			
+	  			MAD = square*0.6745
+	
+	*/
+	
+	public float standardDeviation(ArrayList <Float> numbers)
+	{
+		float average = average(numbers);
+		int size = numbers.size(), j;
+		float var = 0;
+		float square, power;
+		for(j = 0; j < size; j++)
+		{
+			power =(float) Math.pow((numbers.get(j)-average), 2); 
+			var += power;
+		}
+		square = (float) Math.pow(var/size, 1/2);
+		return square;
+	}
+	
+	/*--------------------------------------------------MEDIANA*/
+	public float median(ArrayList <Float> numbers)
+	{
+		
+		/*BUBBLESORT*/
+		
+		int j, size = numbers.size();
+		boolean flag = true;
+		float dimension;
+		while (flag == true)
+		{
+			flag = false;
+			for (j = 0; j < size-1; j++)
+			{
+				if (numbers.get(j)>numbers.get(j+1))
+				{
+					dimension = numbers.get(j+1); 
+					numbers.set(j+1, numbers.get(j));
+					numbers.set(j, dimension);
+					
+					flag = true;
+				}
+			}
+		}
+		
+		if (size % 2 == 0)
+		{
+			return numbers.get(size/2-1);
+		}
+		else 
+		{
+			return numbers.get((size+1)/2 -1);
+		}
+	}
 
 	
 	/*public OperationFrame(int operationNumber, String galaxyName, 
@@ -451,7 +635,8 @@ public class OperationFrame extends JPanel implements ListSelectionListener
 	public static void main(String[] args) throws Exception {
 		//new OperationFrame(3, "Mrk334", null, null, null, null, null, null, null, null, "0.5", 0);
 		
-		new OperationFrame(1, null, "5", "1", "1", "1", "+", "1", "1", "1", null, 0);
+		new OperationFrame(5, null, "5", "1", "1", "1", "+", "1", "1", "1", null, 0, 1, "CII-158", "OI-63", "3x3");
+
 
 	}
 

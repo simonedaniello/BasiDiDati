@@ -3,7 +3,6 @@ import java.sql.*;
 
 import it.uniroma2.db.Boundary.StartFrame;
 import it.uniroma2.db.progetto.databaseManagement.DataSource;
-import it.uniroma2.db.progetto.guiClass.*;
 import javax.swing.*;
 
 

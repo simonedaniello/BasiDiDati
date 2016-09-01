@@ -103,7 +103,7 @@ public class MainMenu extends JFrame {
 		buttonCheck.addActionListener(new EventListeners() {
 			public void actionPerformed(ActionEvent e)
 			{
-				new CheckDBframe();
+				new CheckDBframe(UserAdmin);
 				dispose();
 			}
 		});

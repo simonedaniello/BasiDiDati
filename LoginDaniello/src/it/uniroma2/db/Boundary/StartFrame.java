@@ -21,9 +21,6 @@ public class StartFrame extends JFrame{
 
 	private static final String titolo = "Welcome";
 
-	
-	private static final JButton buttonExit= new JButton("Exit");
-
 	private static final JButton buttonUser= new JButton("User Area");
 	private static final JButton buttonAdmin= new JButton("Administrator Area");
 	

@@ -40,7 +40,8 @@ public class OperationFrame extends JPanel implements ListSelectionListener
 			String rayn, String rayrasch, String rayrascm, String rayrascs, String raydecsign, String raydecmin, String raydecsec, String raydecdeg, 
 			String redshift, int morelessequals, 
 			int userAdmin, 
-			String fluxname1, String fluxname2, String pixel) throws Exception {
+			String fluxname1, String fluxname2, String pixel, 
+			String spectralClassification) throws Exception {
 
 		super(new BorderLayout());
 
@@ -66,11 +67,11 @@ public class OperationFrame extends JPanel implements ListSelectionListener
 		 * 
 		 * i = 3 v			 -> nome della galassia con relativo flusso delle righe 
 		 * 
-		 * i = 4 			 -> nome della galassia con rapporto tra due flussi differenti (per ogni galassia)
+		 * i = 4 v			 -> nome della galassia con rapporto tra due flussi differenti (per ogni galassia)
 		 * 
-		 * i = 5			 -> media, deviazione standard, mediana e deviazione media assoluta del rapporto tra due flussi all'interno di un gruppo spettrale
+		 * i = 5 			 -> media, deviazione standard, mediana e deviazione media assoluta del rapporto tra due flussi all'interno di un gruppo spettrale
 		 * 
-		 * i = 6			 -> idem i = 5 ma potendo scegliere una particolare apertura
+		 * i = 6 v			 -> idem i = 5 ma potendo scegliere una particolare apertura (unito al 5, magari unasre una combobox ???)
 		 * 
 		 * i = 7			 -> nome galassia con rapporto tra flusso delle righe e fulsso continuo
 		 */
@@ -381,33 +382,153 @@ public class OperationFrame extends JPanel implements ListSelectionListener
 		}
 		
 		
+		
+		
 		/*---------------------------------------------------------------------------------------------------------OPERATIONNUMBER = 5*/
 
 		if (operationNumber == 5)
 		{
 			
+
+			ArrayList<Float> numbers = new ArrayList<Float>();
+			ArrayList<String> atomname = new ArrayList<String>();
+			
+
+			sql = 		"SELECT NAMEHPR"
+					+  " FROM SISTEMADIGALASSIE.HPfluxR , SISTEMADIGALASSIE.Galaxy "
+					+  " WHERE GALAXYNAMEHPR = NAME AND SPECTRALCLASSIFICATION= '"+ spectralClassification +"'"
+					+  " GROUP BY NAMEHPR";
+
+			rs = stmt.executeQuery(sql);
+			while (rs.next())
+			{
+				atomname.add(rs.getString("NAMEHPR"));
+			}
+			int j;
+			
+			
+
+			for(j = 0; j < atomname.size(); j++)
+			{
+
+				sql = 		"SELECT VALUER, PIXELR, NAMEHPR"
+						+  " FROM SISTEMADIGALASSIE.HPfluxR , SISTEMADIGALASSIE.Galaxy "
+						+  " WHERE GALAXYNAMEHPR = NAME AND NAMEHPR = '" + atomname.get(j) + "' AND SPECTRALCLASSIFICATION= '"+ spectralClassification +"'" ;
+
+				rs = stmt.executeQuery(sql);
+				while(rs.next())
+				{
+					if (!rs.getString("VALUER").equals(""))
+					{
+						numbers.add(Float.parseFloat(rs.getString("VALUER")));
+					}
+				}		
+
+				listModel.addElement("Atom name            :        " + atomname.get(j));
+				listModel.addElement("Average              :        " + average(numbers));
+				listModel.addElement("Standard Deviation   :        " + standardDeviation(numbers));
+				listModel.addElement("MAD				   :        " + standardDeviation(numbers)*0.6745);
+				listModel.addElement("Median   			   :        " + median(numbers));
+				listModel.addElement(spaces);	
+				
+
+				numbers.clear();
+			}
+			
+		}
+		/*---------------------------------------------------------------------------------------------------------OPERATIONNUMBER = 6*/
+
+		if (operationNumber == 6)
+		{
+			
 			ArrayList<Float> numbers = new ArrayList<Float>();
 
-			sql = "SELECT VALUER"
+			sql = 		"SELECT VALUER"
 					+  " FROM SISTEMADIGALASSIE.HPfluxR "
-					+  " WHERE GALAXYNAMEHPR='" + fluxname1 +"' AND PIXELR = '"+ pixel +"'";
+					+  " WHERE NAMEHPR='" + fluxname1 +"' AND PIXELR = '"+ pixel +"'";
 
 			rs = stmt.executeQuery(sql);
 			
 			while(rs.next())
 			{
-				numbers.add(Float.parseFloat(rs.getString("VALUER")));
-			}
+				if (!rs.getString("VALUER").equals(""))
+				{
+					numbers.add(Float.parseFloat(rs.getString("VALUER")));
+				}
+			}			
 			listModel.addElement("Atom name            :        " + fluxname1);
 			listModel.addElement("Pixels               :        " + pixel);
 			listModel.addElement("Average              :        " + average(numbers));
 			listModel.addElement("Standard Deviation   :        " + standardDeviation(numbers));
 			listModel.addElement("MAD				   :        " + standardDeviation(numbers)*0.6745);
-			//listModel.addElement("Median   			   :        " + median(numbers));
+			listModel.addElement("Median   			   :        " + median(numbers));
 			listModel.addElement(spaces);
 
 		}
 
+		
+		
+		
+		/*---------------------------------------------------------------------------------------------------------OPERATIONNUMBER = 7*/
+
+		/*
+		CREATE TABLE SISTEMADIGALASSIE.HPfluxR(
+			NAMEHPR			VARCHAR, 
+			PIXELR 			VARCHAR,
+			VALUER			VARCHAR,
+			ERRORR			VARCHAR,
+			FLAGULR			VARCHAR,
+			GALAXYNAMEHPR 	VARCHAR
+							REFERENCES SISTEMADIGALASSIE.Galaxy(NAME),
+			PRIMARY KEY(NAMEHPR, PIXELR, GALAXYNAMEHPR)
+		)
+		
+		
+		CREATE TABLE SISTEMADIGALASSIE.HPfluxC(
+			NAMEHPC			VARCHAR, 
+			PIXELC 			VARCHAR,
+			VALUEC			VARCHAR,
+			ERRORC			VARCHAR,
+			FLAGULC			VARCHAR,
+			GALAXYNAMEHPC 	VARCHAR
+							REFERENCES SISTEMADIGALASSIE.Galaxy(NAME),
+			PRIMARY KEY(NAMEHPC, PIXELc, GALAXYNAMEHPC)
+		);
+
+	*/
+		if (operationNumber == 7)
+		{
+
+			sql = "SELECT HP1.GALAXYNAMEHPR as gn1, HP1.NAMEHPR as hp1, HP2.NAMEHPC as hp2, HP1.VALUER as v1, HP2.VALUEC as v2, HP1.FLAGULR as f1, HP2.FLAGULC as f2"
+					+  " FROM SISTEMADIGALASSIE.HPfluxR as HP1, SISTEMADIGALASSIE.HPfluxC as HP2 "
+					+  " WHERE HP1.GALAXYNAMEHPR = HP2.GALAXYNAMEHPC AND HP1.NAMEHPR = '" + fluxname1 +"' AND HP2.NAMEHPC = '" + fluxname2 +"' AND HP1.VALUER <> '' AND HP2.VALUEC <> ''";
+
+			rs = stmt.executeQuery(sql);
+			
+
+			
+			while(rs.next())
+			{
+
+				listModel.addElement("Galaxy name :          " + rs.getString("gn1"));
+				listModel.addElement("First Atom :      " + rs.getString("hp1"));
+				listModel.addElement("Second Atom :      " + rs.getString("hp2"));				
+				
+				listModel.addElement("Ratio :         " + Float.parseFloat(rs.getString("v1"))/Float.parseFloat(rs.getString("v2")));
+				if (rs.getString("f1").contains("<"))
+				{
+					listModel.addElement("the value of the first flux is an upper bound");
+				}
+				if (rs.getString("f2").contains("<"))
+				{
+					listModel.addElement("the value of the second flux is an upper bound");
+				}
+				listModel.addElement(spaces);
+
+			}
+		}
+		
+		
 		/*---------------------------------------------------------------------------------------------------------FINE OPERAZIONI*/
 
 		//Create the list and put it in a scroll pane.
@@ -569,7 +690,7 @@ public class OperationFrame extends JPanel implements ListSelectionListener
 		
 	}
 	
-	/*---------------------------------------------DEVIAZIONE STANDARD*/
+	/*---------------------------------------------DEVIAZIONE STANDARD*/  //RICONTROLLA, FA SEMPRE 1
 
 	/*ricorda che la deviazione media assoluta è uguale a 
 	  			
@@ -635,8 +756,7 @@ public class OperationFrame extends JPanel implements ListSelectionListener
 	public static void main(String[] args) throws Exception {
 		//new OperationFrame(3, "Mrk334", null, null, null, null, null, null, null, null, "0.5", 0);
 		
-		new OperationFrame(5, null, "5", "1", "1", "1", "+", "1", "1", "1", null, 0, 1, "CII-158", "OI-63", "3x3");
-
+		new OperationFrame(5, null, "5", "1", "1", "1", "+", "1", "1", "1", null, 0, 1, "NIII-57", "NII-122", "3x3", "S2");
 
 	}
 

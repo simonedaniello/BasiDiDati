@@ -1,7 +1,6 @@
 package it.uniroma2.db.progetto.guiClass;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -80,10 +79,14 @@ public class CheckDBframe extends JFrame{
 	/*--------------------------------------------------------------------------------------------------*/
 
 
-	public CheckDBframe(int adminuser){
+	public CheckDBframe(int adminuser, JFrame mainWindow){
 
-		super(titolo);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		mainWindow.getContentPane().removeAll();
+		mainWindow.getContentPane().repaint();
+		mainWindow.setTitle(titolo);
+		mainWindow.setSize(700, 700);
+		mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 
 
 		JPanel fgns = new JPanel();
@@ -324,11 +327,10 @@ public class CheckDBframe extends JFrame{
 		/*-------------------------------------------------------------------------------------------------------*/
 
 		JScrollPane scrollPane = new JScrollPane(fgns);
-		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		//scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		scrollPane.setBounds(50, 30, 300, 50);
-		this.setPreferredSize(new Dimension(700,500));
-		this.add(scrollPane);
+		mainWindow.add(scrollPane);
 
 		/*-------------------------------------------------------------------------------------------------------*/
 
@@ -344,7 +346,8 @@ public class CheckDBframe extends JFrame{
 				else 
 				{
 					try {
-						new OperationFrame(0, tfgns.getText(), null, null, null, null, null, null, null, null, null, 0, adminuser, null, null, null, null);
+						new OperationFrame(0, tfgns.getText(), null, null, null, null, null, null, null, 
+								null, null, 0, adminuser, null, null, null, null, mainWindow);
 						dispose();
 					} catch (Exception e1) {
 
@@ -368,7 +371,7 @@ public class CheckDBframe extends JFrame{
 				{
 					try {
 						new OperationFrame(1, tfgns.getText(), tfrayn.getText(), tfrayrasch.getText(), tfrayrascm.getText(), tfrayrascs.getText(), tfraydecsign.getText(),
-								tfraydecmin.getText(), tfraydecsec.getText(), tfraydecdeg.getText(), null, 0, adminuser, null, null, null, null);
+								tfraydecmin.getText(), tfraydecsec.getText(), tfraydecdeg.getText(), null, 0, adminuser, null, null, null, null, mainWindow);
 						dispose();
 					} catch (Exception e1) {
 
@@ -392,7 +395,8 @@ public class CheckDBframe extends JFrame{
 					if (redshiftvalue.getSelectedItem().toString().contains("more"))
 					{
 						try {
-							new OperationFrame(2, tfgns.getText(), null, null, null, null, null, null, null, null, tfrsh.getText(), 1, adminuser, null, null, null, null);
+							new OperationFrame(2, tfgns.getText(), null, null, null, null, null, null, null,
+									null, tfrsh.getText(), 1, adminuser, null, null, null, null, mainWindow);
 							dispose();
 						} catch (Exception e1) {
 
@@ -402,7 +406,8 @@ public class CheckDBframe extends JFrame{
 					if (redshiftvalue.getSelectedItem().toString().contains("lower"))
 					{
 						try {
-							new OperationFrame(2, tfgns.getText(), null, null, null, null, null, null, null, null, tfrsh.getText(), 0, adminuser, null, null, null, null);
+							new OperationFrame(2, tfgns.getText(), null, null, null, null, null, null, null,
+									null, tfrsh.getText(), 0, adminuser, null, null, null, null, mainWindow);
 							dispose();
 						} catch (Exception e1) {
 
@@ -412,7 +417,8 @@ public class CheckDBframe extends JFrame{
 					if (redshiftvalue.getSelectedItem().toString().contains("equals"))
 					{
 						try {
-							new OperationFrame(2, tfgns.getText(), null, null, null, null, null, null, null, null, tfrsh.getText(), 2, adminuser, null, null, null, null);
+							new OperationFrame(2, tfgns.getText(), null, null, null, null, null, null, 
+									null, null, tfrsh.getText(), 2, adminuser, null, null, null, null, mainWindow);
 							dispose();
 						} catch (Exception e1) {
 
@@ -435,7 +441,8 @@ public class CheckDBframe extends JFrame{
 				else 
 				{
 					try {
-						new OperationFrame(3, tfflx.getText().replaceAll("\\s",""), null, null, null, null, null, null, null, null, null, 0, adminuser, null, null, null, null);
+						new OperationFrame(3, tfflx.getText().replaceAll("\\s",""), null, null, null, null, 
+								null, null, null, null, null, 0, adminuser, null, null, null, null, mainWindow);
 						dispose();
 					} catch (Exception e1) {
 
@@ -457,7 +464,8 @@ public class CheckDBframe extends JFrame{
 				else 
 				{
 					try {
-						new OperationFrame(4, null, null, null, null, null, null, null, null, null, null, 0, adminuser, tfrr1.getText().replaceAll("\\s","") ,tfrr2.getText().replaceAll("\\s",""), null, null);
+						new OperationFrame(4, null, null, null, null, null, null, null, null, null, null, 0, adminuser,
+								tfrr1.getText().replaceAll("\\s","") ,tfrr2.getText().replaceAll("\\s",""), null, null, mainWindow);
 						dispose();
 					} catch (Exception e1) {
 
@@ -473,22 +481,24 @@ public class CheckDBframe extends JFrame{
 				dispose();
 				if (adminuser == 0)
 				{
-					new MainMenu(0);
+					new MainMenu(0, mainWindow);
 				}
 				else
-					new MainMenu(1);
+					new MainMenu(1, mainWindow);
 			}
 		});
 
 		/*-------------------------------------------------------------------------------------------------------*/
 
-		this.pack();
-		this.setVisible(true);
+		mainWindow.setVisible(true);
 
 	}
-
-	public static void main(String[] args) throws Exception {
-		new CheckDBframe(1);
+	
+	public static void main(String[] args) {
+		
+		JFrame mainWindow = new JFrame();
+		new CheckDBframe(1, mainWindow);
 	}
+
 
 }

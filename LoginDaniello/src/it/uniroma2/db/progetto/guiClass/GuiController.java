@@ -10,12 +10,12 @@ public class GuiController {
 	
 	private DataSource dataSource;
 
-	public GuiController(){
+	public GuiController(JFrame mainWindow){
 		dataSource = DataSource.getDataSourceInstance();
 	}
 	
 //	CONTROLLER USER LOGIN
-	public void loginUserController(String User, String Pwd) throws Exception{
+	public void loginUserController(String User, String Pwd, JFrame mainWindow) throws Exception{
 		Statement stmt = null;
 		
 		try{
@@ -28,13 +28,11 @@ public class GuiController {
 			ResultSet rs = stmt.executeQuery(sql);
 			
 			if (!rs.next() ) {    
-				JLabel panel = new JLabel("User Not Found");
-				JFrame frame = new JFrame("JOptionPane showMessageDialog component example");
-				JOptionPane.showMessageDialog(frame, panel, "Ops!", 0);
+				//SCOPRI COME FARE IL MESSAGGIO DI ERRORE. I JOPTIONPANE FANNO UN CASINO ALLUCINANTE
 				System.exit(0);
 			}
 			else {
-				new MainMenu(0);
+				new MainMenu(0, mainWindow);
 			}
 
 			rs.close();
@@ -51,7 +49,7 @@ public class GuiController {
 	}
 	
 //	CONTROLLER ADMIN LOGIN
-	public void loginAdminController(String User, String Pwd) throws Exception{
+	public void loginAdminController(String User, String Pwd, JFrame mainWindow) throws Exception{
 		Statement stmt = null;
 		
 		try{
@@ -65,13 +63,11 @@ public class GuiController {
 			ResultSet rs = stmt.executeQuery(sql);
 			
 			if (!rs.next() ) {    
-				JLabel panel = new JLabel("User Not Found"); 
-				JFrame frame = new JFrame("JOptionPane showMessageDialog component example");
-				JOptionPane.showMessageDialog(frame, panel, "Ops!", 0);
+				//SCOPRI COME FARE IL MESSAGGIO DI ERRORE. I JOPTIONPANE FANNO UN CASINO ALLUCINANTE
 				new StartFrame();
 			}
 			else {
-				new MainMenu(1);
+				new MainMenu(1, mainWindow);
 			}
 
 			rs.close();
@@ -88,8 +84,8 @@ public class GuiController {
 	}
 	
 //	CONTROLLER SIGN IN
-	public static void listenR(){
-		new RegisInterface();
-	}
+	/*public static void listenR(){
+		new RegisInterface(mainWindow);
+	}*/
 
 }

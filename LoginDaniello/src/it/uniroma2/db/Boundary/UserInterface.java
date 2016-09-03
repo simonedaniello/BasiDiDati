@@ -29,9 +29,12 @@ public class UserInterface extends JFrame {
 	private static final JButton button= new JButton("OK");
 	//private static final JButton buttonR= new JButton("Registrati");
 	
-	public UserInterface() {
-		super(titolo);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	public UserInterface(JFrame mainWindow) {
+		mainWindow.getContentPane().removeAll();
+		mainWindow.getContentPane().repaint();
+		mainWindow.setTitle(titolo);
+		mainWindow.setSize(400, 300);
+		mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		button.addActionListener(new EventListeners() {
 		    public void actionPerformed(ActionEvent e)
@@ -40,8 +43,8 @@ public class UserInterface extends JFrame {
 		    	String password = insCognome.getText();
 		    	dispose();
 		    	try {
-		    		GuiController startGui = new GuiController();
-					startGui.loginUserController(nome, password);
+		    		GuiController startGui = new GuiController(mainWindow);
+					startGui.loginUserController(nome, password, mainWindow);
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -50,20 +53,20 @@ public class UserInterface extends JFrame {
 		});
 		
 		
-		this.setLayout(new GridBagLayout());
+		mainWindow.setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.insets = new Insets(10, 10, 10, 10);
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		gbc.anchor = GridBagConstraints.FIRST_LINE_START;
-		this.add(user, gbc);
+		mainWindow.add(user, gbc);
 		
 
 		gbc.gridx = 1;
 		gbc.gridy = 0;
 		gbc.anchor = GridBagConstraints.CENTER;
-		this.add(insNome, gbc);
+		mainWindow.add(insNome, gbc);
 		
 		gbc.gridx = 0;
 		gbc.gridy = 2;
@@ -72,20 +75,19 @@ public class UserInterface extends JFrame {
 		gbc.gridx = 0;
 		gbc.gridy = 3;
 		gbc.anchor = GridBagConstraints.FIRST_LINE_START;
-		this.add(pwd, gbc);
+		mainWindow.add(pwd, gbc);
 		
 		gbc.gridx = 1;
 		gbc.gridy = 3;
 		gbc.anchor = GridBagConstraints.CENTER;
-		this.add(insCognome, gbc);
+		mainWindow.add(insCognome, gbc);
 		
 		gbc.gridy = 4;
 		gbc.anchor = GridBagConstraints.CENTER;
-		this.add(button, gbc);
+		mainWindow.add(button, gbc);
 		
 		
-		this.pack();
-		this.setVisible(true);
+		mainWindow.setVisible(true);
 	}
 	
 //	public static void main(String[] args) {

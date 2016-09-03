@@ -2,6 +2,7 @@ package it.uniroma2.db.progetto.guiClass;
 
 import javax.swing.*;
 
+import it.uniroma2.db.Boundary.StartFrame;
 import it.uniroma2.db.progetto.guiClass.EventListeners;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -9,9 +10,7 @@ import java.io.File;
 
 public class MainMenu extends JFrame {
 
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 5374772073176018844L;
 
 	private static final String titolo = "Welcome!";
@@ -24,18 +23,23 @@ public class MainMenu extends JFrame {
 
 	private static final JButton buttonRegister = new JButton("Register New User");
 
-	public MainMenu(int UserAdmin){
-		super(titolo); 
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	public MainMenu(int UserAdmin, JFrame mainWindow){
+		
+		mainWindow.getContentPane().removeAll();
+		mainWindow.getContentPane().repaint();
+		mainWindow.setTitle(titolo);
+		mainWindow.setSize(300, 300);
+		mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		this.setLayout(new GridBagLayout());
+
+		mainWindow.setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.insets = new Insets(15, 15, 15, 15);
 
 
 		gbc.gridy = 4;
 		gbc.anchor = GridBagConstraints.LINE_START;
-		this.add(buttonCheck, gbc);
+		mainWindow.add(buttonCheck, gbc);
 		
 		int i = 0;
 		
@@ -43,7 +47,7 @@ public class MainMenu extends JFrame {
 		{
 			gbc.gridy = 5;
 			gbc.anchor = GridBagConstraints.LINE_START;
-			this.add(buttonCsv, gbc);
+			mainWindow.add(buttonCsv, gbc);
 			i++;
 		}
 		
@@ -51,27 +55,32 @@ public class MainMenu extends JFrame {
 		{
 			gbc.gridy = 6;
 			gbc.anchor = GridBagConstraints.LINE_START;
-			this.add(buttonRegister, gbc);
+			mainWindow.add(buttonRegister, gbc);
 			i++;
 		}
 		
 		gbc.gridy = 5+i;
 		gbc.anchor = GridBagConstraints.LINE_START;
-		this.add(buttonExit, gbc);		
+		mainWindow.add(buttonExit, gbc);		
 
 
 		buttonExit.addActionListener(new EventListeners() {
 			public void actionPerformed(ActionEvent e)
 			{
-				dispose();
+				mainWindow.getContentPane().removeAll();
+				mainWindow.getContentPane().repaint();
+		    	mainWindow.setVisible(false);
+		    	new StartFrame();
 			}
 		});
 		
 		buttonRegister.addActionListener(new EventListeners() {
 			public void actionPerformed(ActionEvent e)
 			{
-				new RegisInterface();
-				dispose();
+				mainWindow.getContentPane().removeAll();
+				mainWindow.getContentPane().repaint();
+		    	mainWindow.setVisible(false);
+				new RegisInterface(mainWindow);
 			}
 		});
 
@@ -79,23 +88,31 @@ public class MainMenu extends JFrame {
 			public void actionPerformed(ActionEvent e)
 			{
 				JFileChooser fileChooser = new JFileChooser();
+				
 				int returnValue = fileChooser.showOpenDialog(null);
 				if (returnValue == JFileChooser.APPROVE_OPTION) 
 				{
 					File selectedFile = fileChooser.getSelectedFile();
-					System.out.println(selectedFile.getAbsolutePath());
+					if (selectedFile != null)
+					{
+						mainWindow.getContentPane().removeAll();
+						mainWindow.getContentPane().repaint();
+				    	mainWindow.setVisible(false);
+				    	
+						new CSVchooser(selectedFile.getAbsolutePath(), mainWindow);
+					}
+					else 
+					{
+						mainWindow.getContentPane().removeAll();
+						mainWindow.getContentPane().repaint();
+				    	mainWindow.setVisible(false);
+						new MainMenu(UserAdmin, mainWindow);
+					}
 					
-					new CSVchooser(selectedFile.getAbsolutePath());
-					
-					JLabel panel = new JLabel("File imported");
-					JFrame frame = new JFrame("JOptionPane showMessageDialog component example");
-					JOptionPane.showMessageDialog(frame, panel, "It's all right", 1);
 				}
 				else
 				{
-					JLabel panel = new JLabel("error");
-					JFrame frame = new JFrame("JOptionPane showMessageDialog component example");
-					JOptionPane.showMessageDialog(frame, panel, "Hey!", 0);
+					//BISOGNA ASSOLUTAMENTE CAPIRE COME METTERE UN MESSAGGIO DI ERRORE
 				}
 			}
 		});
@@ -103,19 +120,21 @@ public class MainMenu extends JFrame {
 		buttonCheck.addActionListener(new EventListeners() {
 			public void actionPerformed(ActionEvent e)
 			{
-				new CheckDBframe(UserAdmin);
-				dispose();
+				mainWindow.getContentPane().removeAll();
+				mainWindow.getContentPane().repaint();
+		    	mainWindow.setVisible(false);
+		    	mainWindow.dispose();
+		    	JFrame newWindow = new JFrame();
+		    	newWindow.setSize(700, 700);
+				Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+				newWindow.setLocation(dim.width/2-newWindow.getSize().width/2, dim.height/2-newWindow.getSize().height/2);
+				new CheckDBframe(UserAdmin, newWindow);
 			}
 		});
 
-
-		this.pack();
-		this.setVisible(true);
+		mainWindow.setVisible(true);
 	}
 
-	public static void main(String[] args) {
-		new MainMenu(1);
-	}
-	
+
 
 }

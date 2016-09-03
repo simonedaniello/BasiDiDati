@@ -17,9 +17,6 @@ import it.uniroma2.db.progetto.guiClass.EventListeners;
 public class OperationFrame extends JPanel implements ListSelectionListener 
 {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -6450089667541569250L;
 
 	private JList<String> list;
@@ -41,9 +38,14 @@ public class OperationFrame extends JPanel implements ListSelectionListener
 			String redshift, int morelessequals, 
 			int userAdmin, 
 			String fluxname1, String fluxname2, String pixel, 
-			String spectralClassification) throws Exception {
-
-		super(new BorderLayout());
+			String spectralClassification,
+			JFrame mainWindow) throws Exception {
+		
+		mainWindow.getContentPane().removeAll();
+		mainWindow.getContentPane().repaint();
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		mainWindow.setLocation(dim.width/2-mainWindow.getSize().width/2, dim.height/2-mainWindow.getSize().height/2);
+		mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		DataSource dataSource = DataSource.getDataSourceInstance();
 		Statement stmt = null;
@@ -111,8 +113,8 @@ public class OperationFrame extends JPanel implements ListSelectionListener
 			maintitle = "Ratio between fluxes";
 		}
 		
-		JFrame frame = new JFrame(maintitle);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		mainWindow.setTitle(maintitle);
+		mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		listModel = new DefaultListModel<String>();
 		String spaces = "             ";	
@@ -275,7 +277,6 @@ public class OperationFrame extends JPanel implements ListSelectionListener
 		if (operationNumber == 2)
 		{
 
-			System.out.println(redshift);
 			if (morelessequals == 0)
 			{
 				sql = "SELECT NAME, REDSHIFT"
@@ -567,23 +568,25 @@ public class OperationFrame extends JPanel implements ListSelectionListener
 		buttonPane.add(SearchButton);
 		buttonPane.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
 
-		frame.add(listScrollPane, BorderLayout.CENTER);
-		frame.add(buttonPane, BorderLayout.PAGE_END);
+		mainWindow.add(listScrollPane, BorderLayout.CENTER);
+		mainWindow.add(buttonPane, BorderLayout.PAGE_END);
 
 		//Create and set up the content pane.
 		/*  JComponent newContentPane = new OperationFrame();
         newContentPane.setOpaque(true); //content panes must be opaque
-        frame.setContentPane(newContentPane);*/
+        mainWindow.setContentPane(newContentPane);*/
 
 		//Display the window.
-		frame.pack();
-		frame.setVisible(true);
+		mainWindow.pack();
+		mainWindow.setVisible(true);
 
 		backButton.addActionListener(new EventListeners() {
 			public void actionPerformed(ActionEvent e)
 			{
-				new CheckDBframe(userAdmin);
-				frame.dispose();
+				mainWindow.getContentPane().removeAll();
+				mainWindow.getContentPane().repaint();
+		    	mainWindow.setVisible(false);
+				new CheckDBframe(userAdmin, mainWindow);
 			}
 		});
 	
@@ -709,7 +712,7 @@ public class OperationFrame extends JPanel implements ListSelectionListener
 			power =(float) Math.pow((numbers.get(j)-average), 2); 
 			var += power;
 		}
-		square = (float) Math.pow(var/size, 1/2);
+		square = (float) Math.pow(var/size, 0.5);
 		return square;
 	}
 	
@@ -749,14 +752,27 @@ public class OperationFrame extends JPanel implements ListSelectionListener
 	}
 
 	
-	/*public OperationFrame(int operationNumber, String galaxyName, 
+	/*
+	 * 	public OperationFrame(int operationNumber, String galaxyName, 
 			String rayn, String rayrasch, String rayrascm, String rayrascs, String raydecsign, String raydecmin, String raydecsec, String raydecdeg, 
-			String redshift, int morelessequals) throws Exception {*/
+			String redshift, int morelessequals, 
+			int userAdmin, 
+			String fluxname1, String fluxname2, String pixel, 
+			String spectralClassification) throws Exception 
+	 */
 
 	public static void main(String[] args) throws Exception {
-		//new OperationFrame(3, "Mrk334", null, null, null, null, null, null, null, null, "0.5", 0);
 		
-		new OperationFrame(5, null, "5", "1", "1", "1", "+", "1", "1", "1", null, 0, 1, "NIII-57", "NII-122", "3x3", "S2");
+		JFrame mainWindow = new JFrame();
+		//new OperationFrame(0, "Mrk334", "5", "1", "1", "1", "+", "1", "1", "1", "1", 0, 1, "NIII-57", "NII-122", "3x3", "S2");
+		//new OperationFrame(1, "Mrk334", "5", "1", "1", "1", "+", "1", "1", "1", "1", 0, 1, "NIII-57", "NII-122", "3x3", "S2");
+		//new OperationFrame(2, "Mrk334", "5", "1", "1", "1", "+", "1", "1", "1", "1", 0, 1, "NIII-57", "NII-122", "3x3", "S2");
+		//new OperationFrame(3, "Mrk334", "5", "1", "1", "1", "+", "1", "1", "1", "1", 0, 1, "NIII-57", "NII-122", "3x3", "S2");
+		//new OperationFrame(4, "Mrk334", "5", "1", "1", "1", "+", "1", "1", "1", "1", 0, 1, "NIII-57", "NII-122", "3x3", "S2");
+		//new OperationFrame(5, "Mrk334", "5", "1", "1", "1", "+", "1", "1", "1", "1", 0, 1, "NIII-57", "NII-122", "3x3", "S2");
+		//new OperationFrame(6, "Mrk334", "5", "1", "1", "1", "+", "1", "1", "1", "1", 0, 1, "NIII-57", "NII-122", "3x3", "S2");
+		new OperationFrame(7, "Mrk334", "5", "1", "1", "1", "+", "1", "1", "1", "1", 0, 1, "NIII-57", "NII-122", "3x3", "S2", mainWindow);
+
 
 	}
 

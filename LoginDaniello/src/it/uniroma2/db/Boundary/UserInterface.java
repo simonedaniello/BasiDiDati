@@ -43,7 +43,7 @@ public class UserInterface extends JFrame {
 		    	String password = insCognome.getText();
 		    	dispose();
 		    	try {
-		    		GuiController startGui = new GuiController(mainWindow);
+		    		GuiController startGui = GuiController.getGuiControllerInstance(mainWindow);
 					startGui.loginUserController(nome, password, mainWindow);
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block

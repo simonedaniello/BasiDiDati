@@ -9,10 +9,20 @@ import javax.swing.*;
 public class GuiController {
 	
 	private DataSource dataSource;
-
-	public GuiController(JFrame mainWindow){
+	private static GuiController controllerInstance = null;
+	
+	private GuiController(JFrame mainWindow){
 		dataSource = DataSource.getDataSourceInstance();
+		
 	}
+	
+	public static GuiController getGuiControllerInstance(JFrame mainWindow){
+		if( controllerInstance == null) {
+			controllerInstance = new GuiController(mainWindow);
+		}
+		return controllerInstance;
+	}
+	
 	
 //	CONTROLLER USER LOGIN
 	public void loginUserController(String User, String Pwd, JFrame mainWindow) throws Exception{
@@ -29,7 +39,11 @@ public class GuiController {
 			
 			if (!rs.next() ) {    
 				//SCOPRI COME FARE IL MESSAGGIO DI ERRORE. I JOPTIONPANE FANNO UN CASINO ALLUCINANTE
-				System.exit(0);
+				//System.exit(0);
+				JOptionPane.showMessageDialog(mainWindow,
+					    "User not found!",
+					    "Login error",
+					    JOptionPane.ERROR_MESSAGE);
 			}
 			else {
 				new MainMenu(0, mainWindow);

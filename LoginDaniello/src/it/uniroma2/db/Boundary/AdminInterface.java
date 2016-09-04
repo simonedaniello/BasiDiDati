@@ -39,7 +39,7 @@ public class AdminInterface extends JFrame {
 		    	String nome = insNome.getText();
 		    	String password = insCognome.getText();
 		    	try {
-		    		GuiController startGui = new GuiController(mainWindow);
+		    		GuiController startGui = GuiController.getGuiControllerInstance(mainWindow);
 					startGui.loginAdminController(nome, password, mainWindow);
 				} catch (Exception e1) {
 					e1.printStackTrace();

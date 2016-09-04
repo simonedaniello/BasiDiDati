@@ -43,7 +43,7 @@ public class MainMenu extends JFrame {
 		
 		int i = 0;
 		
-		if (UserAdmin == 1)
+		if (UserAdmin == 0)
 		{
 			gbc.gridy = 5;
 			gbc.anchor = GridBagConstraints.LINE_START;

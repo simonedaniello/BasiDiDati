@@ -8,9 +8,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.File;
 
+
 public class MainMenu extends JFrame {
-
-
+	
 	private static final long serialVersionUID = 5374772073176018844L;
 
 	private static final String titolo = "Welcome!";
@@ -43,7 +43,7 @@ public class MainMenu extends JFrame {
 		
 		int i = 0;
 		
-		if (UserAdmin == 0)
+		if (UserAdmin == 1)
 		{
 			gbc.gridy = 5;
 			gbc.anchor = GridBagConstraints.LINE_START;
@@ -128,7 +128,9 @@ public class MainMenu extends JFrame {
 		    	newWindow.setSize(700, 700);
 				Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 				newWindow.setLocation(dim.width/2-newWindow.getSize().width/2, dim.height/2-newWindow.getSize().height/2);
-				new CheckDBframe(UserAdmin, newWindow);
+				
+				CheckDBframe dbFrame = CheckDBframe.getCheckDBControllerInstance();
+				dbFrame.controllerCheckDBframe(UserAdmin, newWindow);
 			}
 		});
 

@@ -78,8 +78,20 @@ public class CheckDBframe extends JFrame{
 
 	/*--------------------------------------------------------------------------------------------------*/
 
+	private static CheckDBframe checkDBControllerInstance = null;
 
-	public CheckDBframe(int adminuser, JFrame mainWindow){
+	private CheckDBframe(){
+//		System.out.println("00");
+	}
+
+	public static CheckDBframe getCheckDBControllerInstance(){
+		if( checkDBControllerInstance == null ){
+			checkDBControllerInstance = new CheckDBframe();
+		}
+		return checkDBControllerInstance;
+	}
+
+	public void controllerCheckDBframe(int adminuser, JFrame mainWindow){
 
 		mainWindow.getContentPane().removeAll();
 		mainWindow.getContentPane().repaint();
@@ -478,13 +490,20 @@ public class CheckDBframe extends JFrame{
 		buttonBack.addActionListener(new EventListeners() {
 			public void actionPerformed(ActionEvent e)
 			{
-				dispose();
+				//dispose();
 				if (adminuser == 0)
-				{
+				{	
+					mainWindow.getContentPane().removeAll();
+					mainWindow.getContentPane().repaint();
+					mainWindow.setVisible(false);
 					new MainMenu(0, mainWindow);
 				}
-				else
+				else{
+					mainWindow.getContentPane().removeAll();
+					mainWindow.getContentPane().repaint();
+					mainWindow.setVisible(false);
 					new MainMenu(1, mainWindow);
+				}
 			}
 		});
 
@@ -493,11 +512,12 @@ public class CheckDBframe extends JFrame{
 		mainWindow.setVisible(true);
 
 	}
-	
+
 	public static void main(String[] args) {
-		
+
 		JFrame mainWindow = new JFrame();
-		new CheckDBframe(1, mainWindow);
+		CheckDBframe dbFrame = getCheckDBControllerInstance();
+		dbFrame.controllerCheckDBframe(1, mainWindow);
 	}
 
 

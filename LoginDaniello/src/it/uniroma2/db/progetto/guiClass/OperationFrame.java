@@ -586,7 +586,9 @@ public class OperationFrame extends JPanel implements ListSelectionListener
 				mainWindow.getContentPane().removeAll();
 				mainWindow.getContentPane().repaint();
 		    	mainWindow.setVisible(false);
-				new CheckDBframe(userAdmin, mainWindow);
+		    	
+		    	CheckDBframe checkDBFrame = CheckDBframe.getCheckDBControllerInstance();
+				checkDBFrame.controllerCheckDBframe(userAdmin, mainWindow);
 			}
 		});
 	

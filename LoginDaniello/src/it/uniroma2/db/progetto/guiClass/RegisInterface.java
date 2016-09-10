@@ -5,6 +5,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 
 import javax.swing.*;
 
@@ -41,6 +42,7 @@ public class RegisInterface extends JFrame implements ActionListener {
 	private JPasswordField tfpwdCode;
 	private JLabel lpwdCodeError;
 	
+	private JLabel lrepwdCode;
 	private JPasswordField tfrepwdCode;
 	private JLabel lrepwdCodeError;
 	private JLabel lrepwdCodeError2;
@@ -191,12 +193,12 @@ public class RegisInterface extends JFrame implements ActionListener {
 /*---------------------------------------------------------------------------*/
 		
 
-		lpwdCode = new JLabel("re-insert password");
+		lrepwdCode = new JLabel("re-insert password");
 		gbc.gridx = 0;
 		gbc.gridy = 7;
 		gbc.anchor = GridBagConstraints.LINE_END;
 		gbc.insets = new Insets(10, 0, 0, 10);
-		mainWindow.add(lpwdCode, gbc);
+		mainWindow.add(lrepwdCode, gbc);
 
 
 		tfrepwdCode = new JPasswordField(15);
@@ -268,19 +270,20 @@ public class RegisInterface extends JFrame implements ActionListener {
 					lUserError.setVisible(true);
 					control = 1;
 				}
-				if (tfpwdCode.getPassword().equals(""))
+				if (tfpwdCode.getPassword().length == 0)
 				{
 					lpwdCodeError.setVisible(true);
 					control = 1;
 				}
 				
-				if (tfrepwdCode.getPassword().equals(""))
+				if (tfrepwdCode.getPassword().length == 0)
 				{
+					//commento di prova
 					lrepwdCodeError.setVisible(true);
 					control = 1;
 				}
 				
-				if (!tfrepwdCode.getPassword().equals(tfpwdCode.getPassword()) && !tfrepwdCode.getPassword().equals(""))
+				if (!Arrays.equals(tfrepwdCode.getPassword(),tfpwdCode.getPassword()) && (tfrepwdCode.getPassword().length != 0))
 				{
 					lrepwdCodeError2.setVisible(true);
 					control = 1;
@@ -289,7 +292,7 @@ public class RegisInterface extends JFrame implements ActionListener {
 				
 				if (control == 0){
 					userAdder costruttore = new userAdder();
-					costruttore.adder(tfUser.getText(), tfpwdCode.getPassword().toString(), tfName.getText(), tfLastName.getText(), tfemail.getText());
+					costruttore.adder(tfUser.getText(), String.valueOf(tfpwdCode.getPassword()), tfName.getText(), tfLastName.getText(), tfemail.getText());
 					mainWindow.getContentPane().removeAll();
 					mainWindow.getContentPane().repaint();
 			    	mainWindow.setVisible(false);
@@ -397,7 +400,7 @@ public class RegisInterface extends JFrame implements ActionListener {
 		}
 	}*/
 
-	
+
 }
 
 	

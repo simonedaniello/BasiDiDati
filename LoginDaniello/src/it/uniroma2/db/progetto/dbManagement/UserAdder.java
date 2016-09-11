@@ -1,11 +1,11 @@
-package it.uniroma2.db.progetto.guiClass;
+package it.uniroma2.db.progetto.dbManagement;
 import java.sql.*;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-public class userAdder {
+public class UserAdder {
 
 
 	   static final String JDBC_DRIVER = "org.postgresql.Driver";  

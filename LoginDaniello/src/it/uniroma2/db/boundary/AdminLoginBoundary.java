@@ -1,4 +1,4 @@
-package it.uniroma2.db.Boundary;
+package it.uniroma2.db.boundary;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -10,11 +10,11 @@ import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import it.uniroma2.db.progetto.guiClass.EventListeners;
-import it.uniroma2.db.progetto.guiClass.GuiController; 
+import it.uniroma2.db.controller.LoginController;
+import it.uniroma2.db.progetto.guiClass.EventListeners; 
 
 
-public class AdminInterface extends JFrame {
+public class AdminLoginBoundary extends JFrame {
 	
 
 	private static final long serialVersionUID = 5792632614452216620L;
@@ -26,7 +26,7 @@ public class AdminInterface extends JFrame {
 	private static final JTextField insCognome = new JPasswordField(20);
 	private static final JButton button= new JButton("OK");
 	
-	public AdminInterface(JFrame mainWindow) {
+	public AdminLoginBoundary(JFrame mainWindow) {
 		mainWindow.getContentPane().removeAll();
 		mainWindow.getContentPane().repaint();
 		mainWindow.setTitle(titolo);
@@ -39,7 +39,7 @@ public class AdminInterface extends JFrame {
 		    	String nome = insNome.getText();
 		    	String password = insCognome.getText();
 		    	try {
-		    		GuiController startGui = GuiController.getGuiControllerInstance(mainWindow);
+		    		LoginController startGui = LoginController.getGuiControllerInstance(mainWindow);
 					startGui.loginAdminController(nome, password, mainWindow);
 				} catch (Exception e1) {
 					e1.printStackTrace();

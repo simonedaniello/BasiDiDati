@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.*;
 
+import it.uniroma2.db.boundary.MainMenuBoundary;
 import it.uniroma2.db.progetto.guiClass.EventListeners;
 
 public class CheckDBframe extends JFrame{
@@ -490,19 +491,19 @@ public class CheckDBframe extends JFrame{
 		buttonBack.addActionListener(new EventListeners() {
 			public void actionPerformed(ActionEvent e)
 			{
-				//dispose();
+				dispose();
 				if (adminuser == 0)
 				{	
-					mainWindow.getContentPane().removeAll();
-					mainWindow.getContentPane().repaint();
-					mainWindow.setVisible(false);
-					new MainMenu(0, mainWindow);
+//					mainWindow.getContentPane().removeAll();
+//					mainWindow.getContentPane().repaint();
+//					mainWindow.setVisible(false);
+					new MainMenuBoundary(0, mainWindow);
 				}
 				else{
 					mainWindow.getContentPane().removeAll();
 					mainWindow.getContentPane().repaint();
 					mainWindow.setVisible(false);
-					new MainMenu(1, mainWindow);
+					new MainMenuBoundary(1, mainWindow);
 				}
 			}
 		});

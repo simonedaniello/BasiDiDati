@@ -1,67 +1,85 @@
-package it.uniroma2.db.progetto.guiClass;
+package it.uniroma2.db.controller;
 import java.sql.*;
 
-import it.uniroma2.db.Boundary.StartFrame;
-import it.uniroma2.db.progetto.databaseManagement.DataSource;
+import it.uniroma2.db.boundary.MainMenuBoundary;
+import it.uniroma2.db.boundary.RegBoundary;
+import it.uniroma2.db.boundary.StartBoundary;
+import it.uniroma2.db.entity.User;
+import it.uniroma2.db.entity.UserRepository;
+import it.uniroma2.db.progetto.dbManagement.DataSource;
+
 import javax.swing.*;
 
 
-public class GuiController {
+public class LoginController {
 	
 	private DataSource dataSource;
-	private static GuiController controllerInstance = null;
+	private static LoginController controllerInstance = null;
 	
-	private GuiController(JFrame mainWindow){
+//	Singleton class
+	private LoginController(JFrame mainWindow){
 		dataSource = DataSource.getDataSourceInstance();	
 	}
 	
-	public static GuiController getGuiControllerInstance(JFrame mainWindow){
+	public static LoginController getGuiControllerInstance(JFrame mainWindow){
 		if( controllerInstance == null) {
-			controllerInstance = new GuiController(mainWindow);
+			controllerInstance = new LoginController(mainWindow);
 		}
 		return controllerInstance;
 	}
 	
 	
-//	CONTROLLER USER LOGIN
-	public void loginUserController(String User, String Pwd, JFrame mainWindow) throws Exception{
-		Statement stmt = null;
-		
-		try{
-//			Class.forName("org.postgresql.Driver");
-//			conn = DriverManager.getConnection(DB_URL, USER, PASS);
-			Connection connection = this.dataSource.getConnection();
-			stmt = connection.createStatement();
-			
-			String sql = "SELECT USERID, PASSWORD  FROM SISTEMADIGALASSIE.User WHERE USERID='" + User + "' AND PASSWORD='" + Pwd +"'" ;
-			ResultSet rs = stmt.executeQuery(sql);
-			
-			if (!rs.next() ) {    
-				//SCOPRI COME FARE IL MESSAGGIO DI ERRORE. I JOPTIONPANE FANNO UN CASINO ALLUCINANTE
-				//System.exit(0);
+//	Controller user login
+	public User loginUserController(String username, String password) throws Exception{
+//		Statement stmt = null;
+//
+//			Connection connection = this.dataSource.getConnection();
+//			stmt = connection.createStatement();
+//			
+//			String sql = "SELECT USERID, PASSWORD  FROM SISTEMADIGALASSIE.User WHERE USERID='" + User + "' AND PASSWORD='" + Pwd +"'" ;
+//			ResultSet rs = stmt.executeQuery(sql);
+//			
+//			if (!rs.next() ) {    
+//				//SCOPRI COME FARE IL MESSAGGIO DI ERRORE. I JOPTIONPANE FANNO UN CASINO ALLUCINANTE
 //				JOptionPane.showMessageDialog(mainWindow,
 //					    "User not found!",
 //					    "Login error",
 //					    JOptionPane.ERROR_MESSAGE);
+//			}
+//			else {
+//				new MainMenuBoundary(0, mainWindow);
+//			}
+//			
+//
+//			rs.close();
+//		}catch(Exception e){
+//			e.printStackTrace();
+//			System.err.println("**** Error with the statement! ****");
+//		}finally{
+//			try{
+//				if(stmt!=null)
+//					stmt.close();
+//			}catch(SQLException se){
+//			}
+//		}
+			
+			UserRepository rep = new UserRepository();
+			User savedUser = rep.findByPrimaryKey(username);
+			if( savedUser == null){
+				System.err.println("Something wrong on username");
+				throw new Exception();
 			}
-			else {
-				new MainMenu(0, mainWindow);
+			if( password.equals(savedUser.getPassword())){
+				return savedUser;
 			}
-
-			rs.close();
-		}catch(Exception e){
-			e.printStackTrace();
-			System.err.println("**** Error with the statement! ****");
-		}finally{
-			try{
-				if(stmt!=null)
-					stmt.close();
-			}catch(SQLException se){
+			else{
+				System.err.println("Something wrong on password");
+				throw new Exception();
 			}
-		}
+			
 	}
 	
-//	CONTROLLER ADMIN LOGIN
+//	Controller admin login
 	public void loginAdminController(String User, String Pwd, JFrame mainWindow) throws Exception{
 		Statement stmt = null;
 		
@@ -77,10 +95,10 @@ public class GuiController {
 			
 			if (!rs.next() ) {    
 				//SCOPRI COME FARE IL MESSAGGIO DI ERRORE. I JOPTIONPANE FANNO UN CASINO ALLUCINANTE
-				new StartFrame();
+				new StartBoundary();
 			}
 			else {
-				new MainMenu(1, mainWindow);
+				new MainMenuBoundary(1, mainWindow);
 			}
 
 			rs.close();
@@ -97,8 +115,8 @@ public class GuiController {
 	}
 	
 //	CONTROLLER SIGN IN
-	/*public static void listenR(){
-		new RegisInterface(mainWindow);
-	}*/
+	public static void listenR(JFrame mainWindow){
+		new RegBoundary(mainWindow);
+	}
 
 }

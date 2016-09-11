@@ -1,4 +1,4 @@
-package it.uniroma2.db.progetto.CSVManagement;
+package it.uniroma2.db.progetto.csvManagement;
 
 import java.io.File;
 import java.io.FileNotFoundException;

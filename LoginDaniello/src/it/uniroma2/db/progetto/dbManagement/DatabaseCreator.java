@@ -1,4 +1,4 @@
-package it.uniroma2.db.progetto.databaseManagement;
+package it.uniroma2.db.progetto.dbManagement;
 
 //METODO PER CREARE UNA NUOVA TABELLA NEL DATABASE
 

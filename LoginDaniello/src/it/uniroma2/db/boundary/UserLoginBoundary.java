@@ -1,4 +1,4 @@
-package it.uniroma2.db.Boundary;
+package it.uniroma2.db.boundary;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -10,11 +10,12 @@ import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import it.uniroma2.db.progetto.guiClass.EventListeners;
-import it.uniroma2.db.progetto.guiClass.GuiController; 
+import it.uniroma2.db.controller.LoginController;
+import it.uniroma2.db.entity.User;
+import it.uniroma2.db.progetto.guiClass.EventListeners; 
 
 
-public class UserInterface extends JFrame {
+public class UserLoginBoundary extends JFrame {
 	
 	/**
 	 * 
@@ -26,32 +27,15 @@ public class UserInterface extends JFrame {
 	private static final JLabel pwd = new JLabel("Password"); 
 	private static final JTextField insNome = new JTextField(20);
 	private static final JTextField insCognome = new JPasswordField(20);
-	private static final JButton button= new JButton("OK");
+	private static final JButton btnConfirm = new JButton("OK");
 	//private static final JButton buttonR= new JButton("Registrati");
 	
-	public UserInterface(JFrame mainWindow) {
+	public UserLoginBoundary(JFrame mainWindow) {
 		mainWindow.getContentPane().removeAll();
-		mainWindow.getContentPane().repaint();
+//		mainWindow.getContentPane().repaint();
 		mainWindow.setTitle(titolo);
 		mainWindow.setSize(400, 300);
-		mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-		button.addActionListener(new EventListeners() {
-		    public void actionPerformed(ActionEvent e)
-		    {
-		    	String nome = insNome.getText();
-		    	String password = insCognome.getText();
-		    	dispose();
-		    	try {
-		    		GuiController startGui = GuiController.getGuiControllerInstance(mainWindow);
-					startGui.loginUserController(nome, password, mainWindow);
-				} catch (Exception e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-		    }
-		});
-		
+		mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);		
 		
 		mainWindow.setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
@@ -84,15 +68,28 @@ public class UserInterface extends JFrame {
 		
 		gbc.gridy = 4;
 		gbc.anchor = GridBagConstraints.CENTER;
-		mainWindow.add(button, gbc);
+		mainWindow.add(btnConfirm, gbc);
 		
+		btnConfirm.addActionListener(new EventListeners() {
+		    public void actionPerformed(ActionEvent e)
+		    {	
+		    	LoginController loginController = LoginController.getGuiControllerInstance(mainWindow);
+				String username = insNome.getText();
+		    	String password = insCognome.getText();
+//		    	dispose();
+		    	
+		    	try {
+		    		User userLogin = loginController.loginUserController(username, password);
+		    		new MainMenuBoundary(userLogin.getAccountType(), mainWindow);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+		    }
+		});
 		
 		mainWindow.setVisible(true);
 	}
-	
-//	public static void main(String[] args) {
-//		new UserInterface();
-//	}
 	
 }
 

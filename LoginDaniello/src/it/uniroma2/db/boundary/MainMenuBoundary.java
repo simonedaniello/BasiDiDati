@@ -1,15 +1,17 @@
-package it.uniroma2.db.progetto.guiClass;
+package it.uniroma2.db.boundary;
 
 import javax.swing.*;
 
-import it.uniroma2.db.Boundary.StartFrame;
+import it.uniroma2.db.progetto.guiClass.CSVchooser;
+import it.uniroma2.db.progetto.guiClass.CheckDBframe;
 import it.uniroma2.db.progetto.guiClass.EventListeners;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.File;
 
 
-public class MainMenu extends JFrame {
+public class MainMenuBoundary extends JFrame {
 	
 	private static final long serialVersionUID = 5374772073176018844L;
 
@@ -23,7 +25,7 @@ public class MainMenu extends JFrame {
 
 	private static final JButton buttonRegister = new JButton("Register New User");
 
-	public MainMenu(int UserAdmin, JFrame mainWindow){
+	public MainMenuBoundary(int UserAdmin, JFrame mainWindow){
 		
 		mainWindow.getContentPane().removeAll();
 		mainWindow.getContentPane().repaint();
@@ -70,7 +72,7 @@ public class MainMenu extends JFrame {
 				mainWindow.getContentPane().removeAll();
 				mainWindow.getContentPane().repaint();
 		    	mainWindow.setVisible(false);
-		    	new StartFrame();
+		    	new StartBoundary();
 			}
 		});
 		
@@ -80,7 +82,7 @@ public class MainMenu extends JFrame {
 				mainWindow.getContentPane().removeAll();
 				mainWindow.getContentPane().repaint();
 		    	mainWindow.setVisible(false);
-				new RegisInterface(mainWindow);
+				new RegBoundary(mainWindow);
 			}
 		});
 
@@ -106,7 +108,7 @@ public class MainMenu extends JFrame {
 						mainWindow.getContentPane().removeAll();
 						mainWindow.getContentPane().repaint();
 				    	mainWindow.setVisible(false);
-						new MainMenu(UserAdmin, mainWindow);
+						new MainMenuBoundary(UserAdmin, mainWindow);
 					}
 					
 				}
@@ -122,8 +124,10 @@ public class MainMenu extends JFrame {
 			{
 				mainWindow.getContentPane().removeAll();
 				mainWindow.getContentPane().repaint();
-		    	mainWindow.setVisible(false);
+		    	
+				mainWindow.setVisible(false);
 		    	mainWindow.dispose();
+		    	
 		    	JFrame newWindow = new JFrame();
 		    	newWindow.setSize(700, 700);
 				Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();

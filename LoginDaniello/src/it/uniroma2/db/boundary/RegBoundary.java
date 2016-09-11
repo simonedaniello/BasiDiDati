@@ -1,4 +1,4 @@
-package it.uniroma2.db.progetto.guiClass;
+package it.uniroma2.db.boundary;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -9,13 +9,12 @@ import java.util.Arrays;
 
 import javax.swing.*;
 
-import it.uniroma2.db.Boundary.StartFrame;
-import it.uniroma2.db.progetto.guiClass.EventListeners;
-import it.uniroma2.db.progetto.guiClass.userAdder; 
+import it.uniroma2.db.progetto.dbManagement.UserAdder;
+import it.uniroma2.db.progetto.guiClass.EventListeners; 
 
 
 
-public class RegisInterface extends JFrame implements ActionListener {
+public class RegBoundary extends JFrame implements ActionListener {
 	
 
 
@@ -51,7 +50,7 @@ public class RegisInterface extends JFrame implements ActionListener {
 	private JButton backButton;
 
 	
-	public RegisInterface(JFrame mainWindow) {
+	public RegBoundary(JFrame mainWindow) {
 		
 		mainWindow.getContentPane().removeAll();
 		mainWindow.getContentPane().repaint();
@@ -291,12 +290,12 @@ public class RegisInterface extends JFrame implements ActionListener {
 				
 				
 				if (control == 0){
-					userAdder costruttore = new userAdder();
+					UserAdder costruttore = new UserAdder();
 					costruttore.adder(tfUser.getText(), String.valueOf(tfpwdCode.getPassword()), tfName.getText(), tfLastName.getText(), tfemail.getText());
 					mainWindow.getContentPane().removeAll();
 					mainWindow.getContentPane().repaint();
 			    	mainWindow.setVisible(false);
-			    	new StartFrame();
+			    	new StartBoundary();
 				}
 			}
 		});
@@ -318,7 +317,7 @@ public class RegisInterface extends JFrame implements ActionListener {
 				mainWindow.getContentPane().removeAll();
 				mainWindow.getContentPane().repaint();
 		    	mainWindow.setVisible(false);
-				new StartFrame();
+				new StartBoundary();
 			}
 		});
 		
@@ -335,7 +334,7 @@ public class RegisInterface extends JFrame implements ActionListener {
 	
 	public static void main(String[] args) {
 		JFrame mainWindow = new JFrame(); 
-		new RegisInterface(mainWindow);
+		new RegBoundary(mainWindow);
 	}
 
 /*---------------------------------------------------------------------------*/

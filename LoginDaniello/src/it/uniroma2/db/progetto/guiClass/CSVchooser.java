@@ -3,7 +3,8 @@ package it.uniroma2.db.progetto.guiClass;
 
 import javax.swing.*;
 
-import it.uniroma2.db.progetto.CSVManagement.CSVreader;
+import it.uniroma2.db.boundary.MainMenuBoundary;
+import it.uniroma2.db.progetto.csvManagement.CSVreader;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -137,7 +138,7 @@ public class CSVchooser extends JFrame{
 				mainWindow.getContentPane().removeAll();
 				mainWindow.getContentPane().repaint();
 		    	mainWindow.setVisible(false);
-		    	new MainMenu(1, mainWindow); //----------------------------------------------------------------------------DA CAMBIARE ASSOLUTAMENTE
+		    	new MainMenuBoundary(1, mainWindow); //----------------------------------------------------------------------------DA CAMBIARE ASSOLUTAMENTE
 		    }
 		});
 		

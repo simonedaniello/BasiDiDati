@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.event.*;
 
-import it.uniroma2.db.progetto.databaseManagement.DataSource;
+import it.uniroma2.db.progetto.dbManagement.DataSource;
 import it.uniroma2.db.progetto.guiClass.EventListeners;
 
 /* ListDemo.java requires no other files. */

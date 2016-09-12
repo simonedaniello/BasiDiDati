@@ -61,21 +61,11 @@ public class CheckDBframe extends JFrame{
 
 	/*------------------------------------------------------------------------------------------------FN8*/
 
-	private static final JButton buttonflx= new JButton("Search");
-	private static final JLabel flx = new JLabel("Search flux");
-	private static final JLabel hflx = new JLabel("name of galaxy");
-	private static final JTextField tfflx = new JTextField(20);	
+
 
 	/*------------------------------------------------------------------------------------------------FN9*/
 
-	private static final JButton buttonrr= new JButton("Calculate");
-	private static final JLabel rr1 = new JLabel("first flux");
-	private static final JLabel rr2 = new JLabel("second flux");
-	private static final JLabel rrgn = new JLabel("Galaxy name");
-	private static final JLabel hr = new JLabel("Ratio between fluxes");
-	private static final JTextField tfrr1 = new JTextField(5);
-	private static final JTextField tfrr2 = new JTextField(5);
-	private static final JTextField tfrrgr = new JTextField(20);
+
 
 	/*--------------------------------------------------------------------------------------------------*/
 
@@ -264,75 +254,8 @@ public class CheckDBframe extends JFrame{
 
 		/*-------------------------------------------------------------------------------------------------------*/
 
-		flx.setForeground(Color.BLUE);
-
-		gbc.gridx = 0;
-		gbc.gridy = 13;
-		gbc.anchor = GridBagConstraints.PAGE_START;
-		fgns.add(flx, gbc);
-
-		gbc.gridx = 0;
-		gbc.gridy = 14;
-		gbc.anchor = GridBagConstraints.FIRST_LINE_START;
-		fgns.add(hflx, gbc);
-
-		gbc.gridx = 1;
-		gbc.gridy = 14;
-		gbc.anchor = GridBagConstraints.FIRST_LINE_START;
-		fgns.add(tfflx, gbc);
-
-		gbc.gridx = 1;
-		gbc.gridy = 15;
-		gbc.anchor = GridBagConstraints.FIRST_LINE_START;
-		fgns.add(buttonflx, gbc);
-
-		/*-------------------------------------------------------------------------------------------------------*/
-
-		hr.setForeground(Color.BLUE);
-
-		gbc.gridx = 0;
-		gbc.gridy = 16;
-		gbc.anchor = GridBagConstraints.PAGE_START;
-		fgns.add(hr, gbc);
-
-		gbc.gridx = 0;
-		gbc.gridy = 17;
-		gbc.anchor = GridBagConstraints.FIRST_LINE_START;
-		fgns.add(rrgn, gbc);
-
-		gbc.gridx = 1;
-		gbc.gridy = 17;
-		gbc.anchor = GridBagConstraints.FIRST_LINE_START;
-		fgns.add(tfrrgr, gbc);
-
-		gbc.gridx = 0;
-		gbc.gridy = 18;
-		gbc.anchor = GridBagConstraints.FIRST_LINE_START;
-		fgns.add(rr1, gbc);
-
-		gbc.gridx = 1;
-		gbc.gridy = 18;
-		gbc.anchor = GridBagConstraints.FIRST_LINE_START;
-		fgns.add(tfrr1, gbc);
-
-		gbc.gridx = 0;
-		gbc.gridy = 19;
-		gbc.anchor = GridBagConstraints.FIRST_LINE_START;
-		fgns.add(rr2, gbc);
-
-		gbc.gridx = 1;
-		gbc.gridy = 19;
-		gbc.anchor = GridBagConstraints.FIRST_LINE_START;
-		fgns.add(tfrr2, gbc);
-
-
-		gbc.gridx = 1;
-		gbc.gridy = 20;
-		gbc.anchor = GridBagConstraints.FIRST_LINE_START;
-		fgns.add(buttonrr, gbc);
-
 		gbc.gridx = 4;
-		gbc.gridy = 20;
+		gbc.gridy = 12;
 		gbc.anchor = GridBagConstraints.FIRST_LINE_END;
 		fgns.add(buttonBack, gbc);
 
@@ -442,51 +365,6 @@ public class CheckDBframe extends JFrame{
 			}
 		});
 
-		buttonflx.addActionListener(new EventListeners() {
-			public void actionPerformed(ActionEvent e)
-			{
-				if (tfflx.getText().equals(""))
-				{
-					JLabel panel = new JLabel("You have to insert a String");
-					JFrame frame = new JFrame("JOptionPane showMessageDialog component example");
-					JOptionPane.showMessageDialog(frame, panel, "Hey!", 0);
-				}
-				else 
-				{
-					try {
-						new OperationFrame(3, tfflx.getText().replaceAll("\\s",""), null, null, null, null, 
-								null, null, null, null, null, 0, adminuser, null, null, null, null, mainWindow);
-						dispose();
-					} catch (Exception e1) {
-
-						e1.printStackTrace();
-					}
-				}
-			}
-		});
-
-		buttonrr.addActionListener(new EventListeners() {
-			public void actionPerformed(ActionEvent e)
-			{
-				if (tfrr1.getText().equals("") || tfrr2.getText().equals("") || tfrrgr.getText().equals(""))
-				{
-					JLabel panel = new JLabel("You have to insert a String");
-					JFrame frame = new JFrame("JOptionPane showMessageDialog component example");
-					JOptionPane.showMessageDialog(frame, panel, "Hey!", 0);
-				}
-				else 
-				{
-					try {
-						new OperationFrame(4, null, null, null, null, null, null, null, null, null, null, 0, adminuser,
-								tfrr1.getText().replaceAll("\\s","") ,tfrr2.getText().replaceAll("\\s",""), null, null, mainWindow);
-						dispose();
-					} catch (Exception e1) {
-
-						e1.printStackTrace();
-					}
-				}
-			}
-		});
 
 		buttonBack.addActionListener(new EventListeners() {
 			public void actionPerformed(ActionEvent e)

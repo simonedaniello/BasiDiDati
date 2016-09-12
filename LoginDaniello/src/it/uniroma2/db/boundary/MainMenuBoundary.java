@@ -3,8 +3,8 @@ package it.uniroma2.db.boundary;
 import javax.swing.*;
 
 import it.uniroma2.db.progetto.guiClass.CSVchooser;
-import it.uniroma2.db.progetto.guiClass.CheckDBframe;
 import it.uniroma2.db.progetto.guiClass.EventListeners;
+import it.uniroma2.db.progetto.guiClass.KindOfOp;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -126,15 +126,17 @@ public class MainMenuBoundary extends JFrame {
 				mainWindow.getContentPane().repaint();
 		    	
 				mainWindow.setVisible(false);
-		    	mainWindow.dispose();
+				
+				
+		    	/*dispose();
 		    	
 		    	JFrame newWindow = new JFrame();
 		    	newWindow.setSize(700, 700);
 				Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 				newWindow.setLocation(dim.width/2-newWindow.getSize().width/2, dim.height/2-newWindow.getSize().height/2);
+				*/
 				
-				CheckDBframe dbFrame = CheckDBframe.getCheckDBControllerInstance();
-				dbFrame.controllerCheckDBframe(UserAdmin, newWindow);
+				new KindOfOp(UserAdmin, mainWindow);
 			}
 		});
 

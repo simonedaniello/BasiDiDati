@@ -56,7 +56,7 @@ public class UserRepository {
 		User user = null;
 		ResultSet result = null;
 		
-		String sql = "SELECT USERID, PASSWORD  FROM SISTEMADIGALASSIE.User WHERE USERID='" + userUsername +"'" ;
+		String sql = "SELECT *  FROM SISTEMADIGALASSIE.User WHERE USERID='" + userUsername +"'" ;
 
 		try{		
 			
@@ -67,12 +67,12 @@ public class UserRepository {
 			if (result.next()) {
 				if (user == null) {
 					user = new User();
-					user.setFirstName(result.getString("userID"));
-					user.setLastName(result.getString("password"));
-					user.setUsername(result.getString("nome"));
-					user.setPassword(result.getString("lastName"));
-					user.setAccountType(result.getInt("accountType"));
-					user.setEmail(result.getString("mail"));
+					user.setFirstName(result.getString("USERID"));
+					user.setLastName(result.getString("PASSWORD"));
+					user.setUsername(result.getString("NOME"));
+					user.setPassword(result.getString("COGNOME"));
+					user.setAccountType(0);
+					user.setEmail(result.getString("EMAIL"));
 				}
 			} else {
 				return null;

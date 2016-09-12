@@ -71,11 +71,11 @@ public class OperationFrame extends JPanel implements ListSelectionListener
 		 * 
 		 * i = 4 v			 -> nome della galassia con rapporto tra due flussi differenti (per ogni galassia)
 		 * 
-		 * i = 5 			 -> media, deviazione standard, mediana e deviazione media assoluta del rapporto tra due flussi all'interno di un gruppo spettrale
+		 * i = 5 v			 -> media, deviazione standard, mediana e deviazione media assoluta del rapporto tra due flussi all'interno di un gruppo spettrale
 		 * 
-		 * i = 6 v			 -> idem i = 5 ma potendo scegliere una particolare apertura (unito al 5, magari unasre una combobox ???)
+		 * i = 6 v			 -> idem i = 5 ma potendo scegliere una particolare apertura (unito al 5, magari usare una combobox ???)
 		 * 
-		 * i = 7			 -> nome galassia con rapporto tra flusso delle righe e fulsso continuo
+		 * i = 7 v			 -> nome galassia con rapporto tra flusso delle righe e flusso continuo
 		 */
 		
 

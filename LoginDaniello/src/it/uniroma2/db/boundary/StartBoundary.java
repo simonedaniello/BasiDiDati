@@ -9,7 +9,6 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 import it.uniroma2.db.progetto.guiClass.EventListeners;
 
@@ -55,9 +54,9 @@ public class StartBoundary extends JFrame{
 //		    	mainWindow.setVisible(false);
 //		    	new AdminInterface(mainWindow);
 		    	
-		    	getContentPane().removeAll();
-				getContentPane().repaint();
-		    	setVisible(false);
+		    	mainWindow.getContentPane().removeAll();
+				mainWindow.getContentPane().repaint();
+		    	mainWindow.setVisible(false);
 		    	new AdminLoginBoundary(mainWindow);
 		    }
 		});
@@ -66,6 +65,9 @@ public class StartBoundary extends JFrame{
 		buttonUser.addActionListener(new EventListeners() {
 			public void actionPerformed(ActionEvent e)
 			{
+		    	mainWindow.getContentPane().removeAll();
+				mainWindow.getContentPane().repaint();
+		    	mainWindow.setVisible(false);
 				new UserLoginBoundary(mainWindow);
 			}
 		});

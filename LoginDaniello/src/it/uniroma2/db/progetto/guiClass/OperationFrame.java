@@ -533,6 +533,8 @@ public class OperationFrame extends JPanel implements ListSelectionListener
 		/*---------------------------------------------------------------------------------------------------------FINE OPERAZIONI*/
 
 		//Create the list and put it in a scroll pane.
+		
+		System.out.println("1");
 		list = new JList<String>(listModel);
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		list.addListSelectionListener(this);
@@ -568,8 +570,21 @@ public class OperationFrame extends JPanel implements ListSelectionListener
 		buttonPane.add(SearchButton);
 		buttonPane.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
 
-		mainWindow.add(listScrollPane, BorderLayout.CENTER);
-		mainWindow.add(buttonPane, BorderLayout.PAGE_END);
+		mainWindow.setLayout(new GridBagLayout());
+		GridBagConstraints gbc = new GridBagConstraints();
+		gbc.insets = new Insets(15, 15, 15, 15);
+		
+		gbc.gridy = 4;
+		gbc.anchor = GridBagConstraints.LINE_START;
+		mainWindow.add(listScrollPane, gbc);
+		
+		gbc.gridy = 5;
+		gbc.anchor = GridBagConstraints.LINE_START;
+		mainWindow.add(buttonPane, gbc);
+		
+		
+		//mainWindow.add(listScrollPane, BorderLayout.CENTER);
+		//mainWindow.add(buttonPane, BorderLayout.PAGE_END);
 
 		//Create and set up the content pane.
 		/*  JComponent newContentPane = new OperationFrame();

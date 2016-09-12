@@ -282,9 +282,9 @@ public class CheckDBframe extends JFrame{
 				else 
 				{
 					try {
+
 						new OperationFrame(0, tfgns.getText(), null, null, null, null, null, null, null, 
 								null, null, 0, adminuser, null, null, null, null, mainWindow);
-						dispose();
 					} catch (Exception e1) {
 
 						e1.printStackTrace();
@@ -299,17 +299,27 @@ public class CheckDBframe extends JFrame{
 				if (tfrayn.getText().equals("") || tfrayrasch.getText().equals("") || tfrayrascm.getText().equals("") || tfrayrascs.getText().equals("") || 
 						tfraydecsign.getText().equals("") || tfraydecmin.getText().equals("") || tfraydecsec.getText().equals("") || tfraydecdeg.getText().equals(""))
 				{
-					JLabel panel = new JLabel("You have to insert a String");
-					JFrame frame = new JFrame("JOptionPane showMessageDialog component example");
-					JOptionPane.showMessageDialog(frame, panel, "Hey!", 0);
+	
+							JLabel panel = new JLabel("You have to insert a String");
+							JFrame frame = new JFrame("JOptionPane showMessageDialog component example");
+							JOptionPane.showMessageDialog(frame, panel, "Hey!", 0);
 				}
+				
 				else 
 				{
 					try {
-						new OperationFrame(1, tfgns.getText(), tfrayn.getText(), tfrayrasch.getText(), tfrayrascm.getText(), tfrayrascs.getText(), tfraydecsign.getText(),
-								tfraydecmin.getText(), tfraydecsec.getText(), tfraydecdeg.getText(), null, 0, adminuser, null, null, null, null, mainWindow);
-						dispose();
-					} catch (Exception e1) {
+						if (isInteger(tfrayn.getText()) && isInteger(tfrayrasch.getText()) && isInteger(tfrayrascm.getText()) 
+								&& isInteger(tfrayrascs.getText()) && isInteger(tfraydecmin.getText()) && isInteger(tfraydecsec.getText()) && isInteger(tfraydecdeg.getText()))
+						{
+							new OperationFrame(1, tfgns.getText(), tfrayn.getText(), tfrayrasch.getText(), tfrayrascm.getText(), tfrayrascs.getText(), tfraydecsign.getText(),
+									tfraydecmin.getText(), tfraydecsec.getText(), tfraydecdeg.getText(), null, 0, adminuser, null, null, null, null, mainWindow);
+						} 
+						else {
+							JLabel panel = new JLabel("You have to insert a Number");
+							JFrame frame = new JFrame("JOptionPane showMessageDialog component example");
+							JOptionPane.showMessageDialog(frame, panel, "Hey!", 0);
+						}
+						}catch (Exception e1) {
 
 						e1.printStackTrace();
 					}
@@ -320,9 +330,9 @@ public class CheckDBframe extends JFrame{
 		buttonrsh.addActionListener(new EventListeners() {
 			public void actionPerformed(ActionEvent e)
 			{
-				if (tfrsh.getText().equals(""))
+				if (tfrsh.getText().equals("") || !(isInteger(tfrsh.getText())))
 				{
-					JLabel panel = new JLabel("You have to insert a String");
+					JLabel panel = new JLabel("You have to insert a number");
 					JFrame frame = new JFrame("JOptionPane showMessageDialog component example");
 					JOptionPane.showMessageDialog(frame, panel, "Hey!", 0);
 				}
@@ -333,7 +343,6 @@ public class CheckDBframe extends JFrame{
 						try {
 							new OperationFrame(2, tfgns.getText(), null, null, null, null, null, null, null,
 									null, tfrsh.getText(), 1, adminuser, null, null, null, null, mainWindow);
-							dispose();
 						} catch (Exception e1) {
 
 							e1.printStackTrace();
@@ -355,7 +364,6 @@ public class CheckDBframe extends JFrame{
 						try {
 							new OperationFrame(2, tfgns.getText(), null, null, null, null, null, null, 
 									null, null, tfrsh.getText(), 2, adminuser, null, null, null, null, mainWindow);
-							dispose();
 						} catch (Exception e1) {
 
 							e1.printStackTrace();
@@ -400,4 +408,19 @@ public class CheckDBframe extends JFrame{
 	}
 
 
+	
+	public static boolean isInteger(final String strInput) {
+	    boolean ret = true;
+	    try {
+	        Integer.parseInt(strInput);
+	    } catch (final NumberFormatException e) {
+	        ret = false;
+	    }
+	    return ret;
+	}
+	
+	
 }
+
+
+

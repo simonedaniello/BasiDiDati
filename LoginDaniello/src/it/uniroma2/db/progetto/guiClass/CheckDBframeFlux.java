@@ -230,30 +230,30 @@ public class CheckDBframeFlux extends JFrame{
 		fgns.add(tfspec, gbc);
 		
 		gbc.gridx = 0;
-		gbc.gridy = 14;
+		gbc.gridy = 15;
 		gbc.anchor = GridBagConstraints.FIRST_LINE_START;
 		fgns.add(hap, gbc);
 
 		gbc.gridx = 1;
-		gbc.gridy = 14;
+		gbc.gridy = 15;
 		gbc.anchor = GridBagConstraints.FIRST_LINE_START;
 		fgns.add(tfap, gbc);
 
 		gbc.gridx = 1;
-		gbc.gridy = 15;
+		gbc.gridy = 16;
 		gbc.anchor = GridBagConstraints.FIRST_LINE_START;
 		fgns.add(buttonSpec, gbc);
 		
 		
 		gbc.gridx = 4;
-		gbc.gridy = 15;
+		gbc.gridy = 16;
 		gbc.anchor = GridBagConstraints.FIRST_LINE_END;
 		fgns.add(buttonBack, gbc);
 
 		/*-------------------------------------------------------------------------------------------------------*/
 
 		JScrollPane scrollPane = new JScrollPane(fgns);
-		//scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		scrollPane.setBounds(50, 30, 300, 50);
 		mainWindow.add(scrollPane);
@@ -273,9 +273,14 @@ public class CheckDBframeFlux extends JFrame{
 				else 
 				{
 					try {
+						mainWindow.getContentPane().removeAll();
+						mainWindow.getContentPane().repaint();
+						mainWindow.invalidate();
+						mainWindow.setVisible(false);
+						mainWindow.validate();
 						new OperationFrame(3, tfflx.getText().replaceAll("\\s",""), null, null, null, null, 
 								null, null, null, null, null, 0, adminuser, null, null, null, null, mainWindow);
-						dispose();
+						
 					} catch (Exception e1) {
 
 						e1.printStackTrace();
@@ -296,9 +301,9 @@ public class CheckDBframeFlux extends JFrame{
 				else 
 				{
 					try {
+						
 						new OperationFrame(7, null, null, null, null, null, null, null, null, null, null, 0, adminuser,
 								tfJLi7.getText().replaceAll("\\s","") ,tfJLi72.getText().replaceAll("\\s",""), null, null, mainWindow);
-						dispose();
 					} catch (Exception e1) {
 
 						e1.printStackTrace();
@@ -319,9 +324,11 @@ public class CheckDBframeFlux extends JFrame{
 				else 
 				{
 					try {
+						mainWindow.getContentPane().removeAll();
+						mainWindow.getContentPane().repaint();
+						mainWindow.setVisible(false);
 						new OperationFrame(4, null, null, null, null, null, null, null, null, null, null, 0, adminuser,
 								tfrr1.getText().replaceAll("\\s","") ,tfrr2.getText().replaceAll("\\s",""), null, null, mainWindow);
-						dispose();
 					} catch (Exception e1) {
 
 						e1.printStackTrace();
@@ -342,9 +349,11 @@ public class CheckDBframeFlux extends JFrame{
 				else if(tfap.getText().equals(""))
 				{
 					try {
+						mainWindow.getContentPane().removeAll();
+						mainWindow.getContentPane().repaint();
+						mainWindow.setVisible(false);
 						new OperationFrame(5, null, null, null, null, null, null, null, null, null, null, 0, adminuser,
 								null ,null, null, tfspec.getText(), mainWindow);
-						dispose();
 					} catch (Exception e1) {
 
 						e1.printStackTrace();
@@ -353,9 +362,11 @@ public class CheckDBframeFlux extends JFrame{
 				else 
 				{
 					try {
+						mainWindow.getContentPane().removeAll();
+						mainWindow.getContentPane().repaint();
+						mainWindow.setVisible(false);
 						new OperationFrame(6, null, null, null, null, null, null, null, null, null, null, 0, adminuser,
 								null ,null, tfap.getText(), tfspec.getText(), mainWindow);
-						dispose();
 					} catch (Exception e1) {
 
 						e1.printStackTrace();
@@ -367,22 +378,16 @@ public class CheckDBframeFlux extends JFrame{
 		buttonBack.addActionListener(new EventListeners() {
 			public void actionPerformed(ActionEvent e)
 			{
-				dispose();
-				if (adminuser == 0)
-				{	
-//					mainWindow.getContentPane().removeAll();
-//					mainWindow.getContentPane().repaint();
-//					mainWindow.setVisible(false);
-					new MainMenuBoundary(0, mainWindow);
-				}
-				else{
-					mainWindow.getContentPane().removeAll();
-					mainWindow.getContentPane().repaint();
-					mainWindow.setVisible(false);
-					new MainMenuBoundary(1, mainWindow);
-				}
+				mainWindow.getContentPane().removeAll();
+				mainWindow.getContentPane().repaint();
+				mainWindow.setVisible(false);
+				new MainMenuBoundary(adminuser, mainWindow);
+
 			}
 		});
+		/*					mainWindow.getContentPane().removeAll();
+					mainWindow.getContentPane().repaint();
+					mainWindow.setVisible(false);*/
 
 		/*-------------------------------------------------------------------------------------------------------*/
 
@@ -397,5 +402,13 @@ public class CheckDBframeFlux extends JFrame{
 		dbFrame.controllerCheckDBframe(1, mainWindow);
 	}
 
-
+	public static boolean isInteger(final String strInput) {
+	    boolean ret = true;
+	    try {
+	        Integer.parseInt(strInput);
+	    } catch (final NumberFormatException e) {
+	        ret = false;
+	    }
+	    return ret;
+	}
 }

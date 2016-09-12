@@ -26,44 +26,7 @@ public KindOfOp(int userAdmin, JFrame window) {
 		window.setTitle(titolo);
 		window.setSize(400,300);
 
-//		ADMIN
-		buttonGalaxy.addActionListener(new EventListeners() {
-		    public void actionPerformed(ActionEvent e)
-		    {
-//				window.getContentPane().removeAll();
-//				window.getContentPane().repaint();
-//		    	window.setVisible(false);
-//		    	new AdminInterface(window);
-		    	
-		    	window.getContentPane().removeAll();
-				window.getContentPane().repaint();
-		    	window.setVisible(false);
-				CheckDBframe dbFrame = CheckDBframe.getCheckDBControllerInstance();
-				dbFrame.controllerCheckDBframe(userAdmin, window);		    
-		    }});
-		
-//		USER
-		buttonFlux.addActionListener(new EventListeners() {
-			public void actionPerformed(ActionEvent e)
-			{
-		    	window.getContentPane().removeAll();
-				window.getContentPane().repaint();
-		    	window.setVisible(false);
-				CheckDBframeFlux dbFrame = CheckDBframeFlux.getCheckDBControllerInstance();
-				dbFrame.controllerCheckDBframe(userAdmin, window);		    
 
-			}
-		});
-		
-		buttonExit.addActionListener(new EventListeners() {
-			public void actionPerformed(ActionEvent e)
-			{
-				window.getContentPane().removeAll();
-				window.getContentPane().repaint();
-		    	window.setVisible(false);
-				new MainMenuBoundary(userAdmin, window);
-			}
-		});
 		
 		window.setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
@@ -88,10 +51,56 @@ public KindOfOp(int userAdmin, JFrame window) {
 		gbc.anchor = GridBagConstraints.FIRST_LINE_END;
 		window.add(buttonExit, gbc);
 		
+//		ADMIN
+		buttonGalaxy.addActionListener(new EventListeners() {
+		    public void actionPerformed(ActionEvent e)
+		    {
+//				window.getContentPane().removeAll();
+//				window.getContentPane().repaint();
+//		    	window.setVisible(false);
+//		    	new AdminInterface(window);
+		    	
+		    	window.getContentPane().removeAll();
+				window.getContentPane().repaint();
+		    	window.setVisible(false);
+				CheckDBframe dbFrame = CheckDBframe.getCheckDBControllerInstance();
+				dbFrame.controllerCheckDBframe(userAdmin, window);		    
+		    }});
+		
+//		USER
+		buttonFlux.addActionListener(new EventListeners() {
+			public void actionPerformed(ActionEvent e)
+			{
+		    	window.getContentPane().removeAll();
+				window.getContentPane().repaint();
+		    	window.setVisible(false);
+		    	JFrame.setDefaultLookAndFeelDecorated(true);
+				CheckDBframeFlux dbFrame = CheckDBframeFlux.getCheckDBControllerInstance();
+				dbFrame.controllerCheckDBframe(userAdmin, window);		    
+
+			}
+		});
+		
+		buttonExit.addActionListener(new EventListeners() {
+			public void actionPerformed(ActionEvent e)
+			{
+				window.getContentPane().removeAll();
+				window.getContentPane().repaint();
+		    	window.setVisible(false);
+				new MainMenuBoundary(userAdmin, window);
+			}
+		});
+		
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		window.setLocation(dim.width/2-window.getSize().width/2, dim.height/2-window.getSize().height/2);
 		window.setVisible(true);
 	}		
+
+public static void main(String[] args) {
+	JFrame window = new JFrame();
+	new KindOfOp(0, window);
+	
+}
 	
 	
 }

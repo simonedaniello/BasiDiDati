@@ -11,7 +11,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import it.uniroma2.db.controller.LoginController;
-import it.uniroma2.db.entity.User;
+//import it.uniroma2.db.entity.User;
 import it.uniroma2.db.progetto.guiClass.EventListeners; 
 
 
@@ -79,8 +79,8 @@ public class UserLoginBoundary extends JFrame {
 //		    	dispose();
 		    	
 		    	try {
-		    		User userLogin = loginController.loginUserController(username, password);
-		    		new MainMenuBoundary(userLogin.getAccountType(), mainWindow);
+		    		loginController.loginUserController(username, password, mainWindow);
+		    		//new MainMenuBoundary(userLogin.getAccountType(), mainWindow);
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

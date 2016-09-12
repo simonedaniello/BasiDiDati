@@ -25,6 +25,8 @@ public class AdminLoginBoundary extends JFrame {
 	private static final JTextField insNome = new JTextField(20);
 	private static final JTextField insCognome = new JPasswordField(20);
 	private static final JButton button= new JButton("OK");
+	private static final JButton buttonBack= new JButton("Back");
+
 	
 	public AdminLoginBoundary(JFrame mainWindow) {
 		mainWindow.getContentPane().removeAll();
@@ -36,16 +38,29 @@ public class AdminLoginBoundary extends JFrame {
 		button.addActionListener(new EventListeners() {
 		    public void actionPerformed(ActionEvent e)
 		    {
-		    	String nome = insNome.getText();
-		    	String password = insCognome.getText();
-		    	try {
-		    		LoginController startGui = LoginController.getGuiControllerInstance(mainWindow);
-					startGui.loginAdminController(nome, password, mainWindow);
-				} catch (Exception e1) {
-					e1.printStackTrace();
-				}
+		    	if (!(insNome.getText().equals("") || insCognome.getText().equals(""))){
+			    	String nome = insNome.getText();
+			    	String password = insCognome.getText();
+			    	try {
+			    		LoginController startGui = LoginController.getGuiControllerInstance(mainWindow);
+						startGui.loginAdminController(nome, password, mainWindow);
+					} catch (Exception e1) {
+						e1.printStackTrace();
+					}
+			    }
+			}
+		});
+		
+		buttonBack.addActionListener(new EventListeners() {
+		    public void actionPerformed(ActionEvent e)
+		    {
+				mainWindow.getContentPane().removeAll();
+				mainWindow.getContentPane().repaint();
+		    	mainWindow.setVisible(false);
+		    	new StartBoundary();
 		    }
 		});
+
 
 		
 		mainWindow.setLayout(new GridBagLayout());
@@ -77,9 +92,15 @@ public class AdminLoginBoundary extends JFrame {
 		gbc.anchor = GridBagConstraints.CENTER;
 		mainWindow.add(insCognome, gbc);
 		
+		gbc.gridx = 0;
 		gbc.gridy = 4;
-		gbc.anchor = GridBagConstraints.CENTER;
+		gbc.anchor = GridBagConstraints.FIRST_LINE_START;
 		mainWindow.add(button, gbc);
+		
+		gbc.gridx = 1;
+		gbc.gridy = 4;
+		gbc.anchor = GridBagConstraints.FIRST_LINE_END;
+		mainWindow.add(buttonBack, gbc);
 			
 		mainWindow.setVisible(true);
 	}

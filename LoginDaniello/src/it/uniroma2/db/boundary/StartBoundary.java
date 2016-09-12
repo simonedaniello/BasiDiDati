@@ -27,7 +27,7 @@ public class StartBoundary extends JFrame{
 
 	private static final JButton buttonUser= new JButton("User Area");
 	private static final JButton buttonAdmin= new JButton("Administrator Area");
-	private static final JButton buttonRegister = new JButton("Register");
+	//private static final JButton buttonRegister = new JButton("Register");
 	
 	
 	
@@ -41,7 +41,7 @@ public class StartBoundary extends JFrame{
 	public StartBoundary() {
 		
 		setTitle(titolo);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 //		mainWindow.setTitle(titolo);
 //		mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -72,15 +72,16 @@ public class StartBoundary extends JFrame{
 			}
 		});
 		
-		buttonRegister.addActionListener(new EventListeners() {
+		/*buttonRegister.addActionListener(new EventListeners() {
 			public void actionPerformed(ActionEvent e)
 			{
+				
 				mainWindow.getContentPane().removeAll();
 				mainWindow.getContentPane().repaint();
 		    	mainWindow.setVisible(false);
 				new RegBoundary(mainWindow);
 			}
-		});
+		});*/
 		
 		mainWindow.setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
@@ -100,10 +101,10 @@ public class StartBoundary extends JFrame{
 		gbc.gridy = 2;
 		gbc.anchor = GridBagConstraints.FIRST_LINE_START;
 		
-		gbc.gridx = 1;
+		/*gbc.gridx = 1;
 		gbc.gridy = 3;
 		gbc.anchor = GridBagConstraints.FIRST_LINE_END;
-		mainWindow.add(buttonRegister, gbc);
+		mainWindow.add(buttonRegister, gbc);*/
 		
 //		mainWindow.setResizable(true);
 		setResizable(true);

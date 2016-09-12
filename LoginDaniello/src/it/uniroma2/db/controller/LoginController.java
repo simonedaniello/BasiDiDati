@@ -4,8 +4,9 @@ import java.sql.*;
 import it.uniroma2.db.boundary.MainMenuBoundary;
 import it.uniroma2.db.boundary.RegBoundary;
 import it.uniroma2.db.boundary.StartBoundary;
-import it.uniroma2.db.entity.User;
-import it.uniroma2.db.entity.UserRepository;
+//import it.uniroma2.db.entity.User;
+//import it.uniroma2.db.entity.User;
+//import it.uniroma2.db.entity.UserRepository;
 import it.uniroma2.db.progetto.dbManagement.DataSource;
 
 import javax.swing.*;
@@ -30,38 +31,31 @@ public class LoginController {
 	
 	
 //	Controller user login
-	public User loginUserController(String username, String password) throws Exception{
-//		Statement stmt = null;
-//
-//			Connection connection = this.dataSource.getConnection();
-//			stmt = connection.createStatement();
-//			
-//			String sql = "SELECT USERID, PASSWORD  FROM SISTEMADIGALASSIE.User WHERE USERID='" + User + "' AND PASSWORD='" + Pwd +"'" ;
-//			ResultSet rs = stmt.executeQuery(sql);
-//			
-//			if (!rs.next() ) {    
-//				//SCOPRI COME FARE IL MESSAGGIO DI ERRORE. I JOPTIONPANE FANNO UN CASINO ALLUCINANTE
-//				JOptionPane.showMessageDialog(mainWindow,
-//					    "User not found!",
-//					    "Login error",
-//					    JOptionPane.ERROR_MESSAGE);
-//			}
-//			else {
-//				new MainMenuBoundary(0, mainWindow);
-//			}
-//			
-//
-//			rs.close();
-//		}catch(Exception e){
-//			e.printStackTrace();
-//			System.err.println("**** Error with the statement! ****");
-//		}finally{
-//			try{
-//				if(stmt!=null)
-//					stmt.close();
-//			}catch(SQLException se){
-//			}
-//		}
+	public void loginUserController(String username, String password, JFrame mainWindow) throws Exception{
+		Statement stmt = null;/*
+
+			Connection connection = this.dataSource.getConnection();
+			stmt = connection.createStatement();
+			
+			String sql = "SELECT USERID, PASSWORD  FROM SISTEMADIGALASSIE.User WHERE USERID='" + username + "' AND PASSWORD='" + password +"'" ;
+			ResultSet rs = stmt.executeQuery(sql);
+			
+			if (!rs.next() ) {    
+				//SCOPRI COME FARE IL MESSAGGIO DI ERRORE. I JOPTIONPANE FANNO UN CASINO ALLUCINANTE
+				JOptionPane.showMessageDialog(mainWindow,
+					    "User not found!",
+					    "Login error",
+					    JOptionPane.ERROR_MESSAGE);
+			}
+			else {
+				new MainMenuBoundary(0, mainWindow);
+			}
+			
+
+			rs.close();
+			stmt.close();
+
+		}
 			
 			UserRepository rep = new UserRepository();
 			User savedUser = rep.findByPrimaryKey(username);
@@ -75,9 +69,43 @@ public class LoginController {
 			else{
 				System.err.println("Something wrong on password");
 				throw new Exception();
-			}
+			} */
+		
+		
+		try{
+			Connection connection = dataSource.getConnection();
 			
-	}
+			stmt = connection.createStatement();
+			
+			String sql = "SELECT USERID, PASSWORD  FROM SISTEMADIGALASSIE.User WHERE USERID='" + username + "' AND PASSWORD='" + password +
+					"' AND AMMINISTRATORE = 'false'" ;
+			
+			ResultSet rs = stmt.executeQuery(sql);
+			
+			if (!rs.next() ) {    
+				//SCOPRI COME FARE IL MESSAGGIO DI ERRORE. I JOPTIONPANE FANNO UN CASINO ALLUCINANTE
+				mainWindow.getContentPane().removeAll();
+				mainWindow.getContentPane().repaint();
+		    	mainWindow.setVisible(false);
+				new StartBoundary();
+			}
+			else {
+				new MainMenuBoundary(0, mainWindow);
+			}
+
+			rs.close();
+		}catch(Exception e){
+			e.printStackTrace();
+			System.err.println("**** Error with the statement! ****");
+		}finally{
+			try{
+				if(stmt!=null)
+					stmt.close();
+			}catch(SQLException se){
+			}
+		}
+			
+}
 	
 //	Controller admin login
 	public void loginAdminController(String User, String Pwd, JFrame mainWindow) throws Exception{
@@ -95,9 +123,15 @@ public class LoginController {
 			
 			if (!rs.next() ) {    
 				//SCOPRI COME FARE IL MESSAGGIO DI ERRORE. I JOPTIONPANE FANNO UN CASINO ALLUCINANTE
+				mainWindow.getContentPane().removeAll();
+				mainWindow.getContentPane().repaint();
+		    	mainWindow.setVisible(false);
 				new StartBoundary();
 			}
 			else {
+				mainWindow.getContentPane().removeAll();
+				mainWindow.getContentPane().repaint();
+		    	mainWindow.setVisible(false);
 				new MainMenuBoundary(1, mainWindow);
 			}
 

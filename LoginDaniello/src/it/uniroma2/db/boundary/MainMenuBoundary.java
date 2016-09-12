@@ -3,6 +3,7 @@ package it.uniroma2.db.boundary;
 import javax.swing.*;
 
 import it.uniroma2.db.progetto.guiClass.CSVchooser;
+import it.uniroma2.db.progetto.guiClass.CheckDBframeFlux;
 import it.uniroma2.db.progetto.guiClass.EventListeners;
 import it.uniroma2.db.progetto.guiClass.KindOfOp;
 
@@ -124,9 +125,9 @@ public class MainMenuBoundary extends JFrame {
 			{
 				mainWindow.getContentPane().removeAll();
 				mainWindow.getContentPane().repaint();
-		    	
+		    	mainWindow.revalidate();
 				mainWindow.setVisible(false);
-				
+				mainWindow.setSize(800, 800);
 				
 		    	/*dispose();
 		    	
@@ -141,6 +142,12 @@ public class MainMenuBoundary extends JFrame {
 		});
 
 		mainWindow.setVisible(true);
+	}
+	
+	public static void main(String[] args) {
+
+		JFrame mainWindow = new JFrame();
+		MainMenuBoundary dbFrame = new MainMenuBoundary(0, mainWindow);
 	}
 
 

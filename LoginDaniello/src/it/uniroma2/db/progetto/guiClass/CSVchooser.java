@@ -29,10 +29,10 @@ public class CSVchooser extends JFrame{
 	
 	private static final JButton buttonExit = new JButton("Back");
 
-	public CSVchooser(String filename, JFrame mainWindow){
+	public CSVchooser(int useradmin, String filename, JFrame mainWindow){
 		mainWindow.setTitle(titolo); 
 		mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+		mainWindow.setSize(500,200);
 		mainWindow.setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.insets = new Insets(15, 15, 15, 15);
@@ -77,6 +77,8 @@ public class CSVchooser extends JFrame{
 					mainWindow.getContentPane().repaint();
 			    	mainWindow.setVisible(false);
 					new CSVreader(filename, 0);
+			    	new MainMenuBoundary(useradmin, mainWindow); //----------------------------------------------------------------------------DA CAMBIARE ASSOLUTAMENTE
+
 				} 
 		    	catch (FileNotFoundException e1) {
 					e1.printStackTrace();
@@ -93,6 +95,8 @@ public class CSVchooser extends JFrame{
 					mainWindow.getContentPane().repaint();
 			    	mainWindow.setVisible(false);
 					new CSVreader(filename, 1);
+			    	new MainMenuBoundary(useradmin, mainWindow); //----------------------------------------------------------------------------DA CAMBIARE ASSOLUTAMENTE
+
 				} 
 		    	catch (FileNotFoundException e1) {
 					e1.printStackTrace();
@@ -109,6 +113,8 @@ public class CSVchooser extends JFrame{
 					mainWindow.getContentPane().repaint();
 			    	mainWindow.setVisible(false);
 					new CSVreader(filename, 2);
+			    	new MainMenuBoundary(useradmin, mainWindow); //----------------------------------------------------------------------------DA CAMBIARE ASSOLUTAMENTE
+
 				} 
 		    	catch (FileNotFoundException e1) {
 					e1.printStackTrace();
@@ -125,6 +131,8 @@ public class CSVchooser extends JFrame{
 					mainWindow.getContentPane().repaint();
 			    	mainWindow.setVisible(false);
 					new CSVreader(filename, 3);
+			    	new MainMenuBoundary(useradmin, mainWindow); //----------------------------------------------------------------------------DA CAMBIARE ASSOLUTAMENTE
+
 				} 
 		    	catch (FileNotFoundException e1) {
 					e1.printStackTrace();
@@ -138,7 +146,7 @@ public class CSVchooser extends JFrame{
 				mainWindow.getContentPane().removeAll();
 				mainWindow.getContentPane().repaint();
 		    	mainWindow.setVisible(false);
-		    	new MainMenuBoundary(1, mainWindow); //----------------------------------------------------------------------------DA CAMBIARE ASSOLUTAMENTE
+		    	new MainMenuBoundary(useradmin, mainWindow); //----------------------------------------------------------------------------DA CAMBIARE ASSOLUTAMENTE
 		    }
 		});
 		

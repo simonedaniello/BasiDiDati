@@ -534,7 +534,6 @@ public class OperationFrame extends JPanel implements ListSelectionListener
 
 		//Create the list and put it in a scroll pane.
 		
-		System.out.println("1");
 		list = new JList<String>(listModel);
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		list.addListSelectionListener(this);

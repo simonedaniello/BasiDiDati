@@ -1,9 +1,9 @@
 package it.uniroma2.db.boundary;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import it.uniroma2.db.progetto.guiClass.CSVchooser;
-import it.uniroma2.db.progetto.guiClass.CheckDBframeFlux;
 import it.uniroma2.db.progetto.guiClass.EventListeners;
 import it.uniroma2.db.progetto.guiClass.KindOfOp;
 
@@ -91,8 +91,11 @@ public class MainMenuBoundary extends JFrame {
 			public void actionPerformed(ActionEvent e)
 			{
 				JFileChooser fileChooser = new JFileChooser();
+				FileNameExtensionFilter filter = new FileNameExtensionFilter(".csv" , "csv");
+				fileChooser.setFileFilter(filter);
 				
-				int returnValue = fileChooser.showOpenDialog(null);
+				
+				int returnValue = fileChooser.showOpenDialog(mainWindow);
 				if (returnValue == JFileChooser.APPROVE_OPTION) 
 				{
 					File selectedFile = fileChooser.getSelectedFile();
@@ -102,7 +105,7 @@ public class MainMenuBoundary extends JFrame {
 						mainWindow.getContentPane().repaint();
 				    	mainWindow.setVisible(false);
 				    	
-						new CSVchooser(selectedFile.getAbsolutePath(), mainWindow);
+						new CSVchooser(UserAdmin, selectedFile.getAbsolutePath(), mainWindow);
 					}
 					else 
 					{
@@ -147,7 +150,7 @@ public class MainMenuBoundary extends JFrame {
 	public static void main(String[] args) {
 
 		JFrame mainWindow = new JFrame();
-		MainMenuBoundary dbFrame = new MainMenuBoundary(0, mainWindow);
+		new MainMenuBoundary(1, mainWindow);
 	}
 
 

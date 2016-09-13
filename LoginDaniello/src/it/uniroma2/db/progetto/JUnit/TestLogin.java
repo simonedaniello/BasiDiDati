@@ -10,4 +10,6 @@ public class TestLogin {
 	public void testLogin(){
 		LoginController loginCtrl = LoginController.getGuiControllerInstance(null);
 	}
+	
+
 }
